@@ -52,7 +52,7 @@ class User extends Authenticatable
     public function getPhoneAttribute($value): string
     {
         try {
-            return phone($value)->formatForCountry('VN');
+            return phone($value)->formatForMobileDialingInCountry('VN');
         } catch (CountryCodeException $e) {
             return $value;
         }
