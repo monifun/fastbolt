@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Propaganistas\LaravelPhone\Exceptions\CountryCodeException;
 
 class User extends Authenticatable
 {
@@ -19,7 +20,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
+        'email_verified_at'
     ];
 
     /**
@@ -40,4 +43,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function setPhoneAttribute($value): string
+    {
+        return $this->attributes['phone'] = (string) phone($value, 'VN');
+    }
+
+    public function getPhoneAttribute($value): string
+    {
+        try {
+            return phone($value)->formatForCountry('VN');
+        } catch (CountryCodeException $e) {
+            return $value;
+        }
+    }
+
+    public function scopeWherePhone($query, $phone)
+    {
+        $number = (string) phone($phone, 'VN');
+        return $query->where('phone', $number);
+    }
 }
