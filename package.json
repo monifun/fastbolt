@@ -16,6 +16,8 @@
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.1.0",
         "axios": "^0.21",
+        "eslint": "^7.19.0",
+        "eslint-plugin-vue": "^7.5.0",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.2.1",
