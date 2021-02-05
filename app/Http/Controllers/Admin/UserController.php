@@ -19,7 +19,8 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Users/Index', [
-            'users' => fn () => User::get(),
+            'filters' => request()->all('search'),
+            'users' => fn () => User::filter(request()->all('search'))->orderByDesc('created_at')->paginate(),
         ]);
     }
 
