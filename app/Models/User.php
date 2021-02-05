@@ -52,7 +52,7 @@ class User extends Authenticatable
     public function getPhoneAttribute($value): string
     {
         try {
-            return phone($value)->formatForMobileDialingInCountry('VN');
+            return (string) phone($value)->formatForMobileDialingInCountry('VN');
         } catch (CountryCodeException $e) {
             return $value;
         }
@@ -62,5 +62,14 @@ class User extends Authenticatable
     {
         $number = (string) phone($phone, 'VN');
         return $query->where('phone', $number);
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($query, $search) {
+            $query->where('name', 'like', '%'.$search.'%')
+                ->orWhere('email', 'like', '%'.$search.'%')
+                ->orWhere('phone', 'like', '%'.$search.'%');
+        });
     }
 }
