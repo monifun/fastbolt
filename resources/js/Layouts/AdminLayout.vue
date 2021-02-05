@@ -26,6 +26,18 @@
                             >
                                 Người dùng
                             </nav-link>
+                            <nav-link
+                                :href="route('admin.markets.index')"
+                                :active="route().current('admin.markets.*')"
+                            >
+                                Markets
+                            </nav-link>
+                            <nav-link
+                                :href="route('admin.vendors.index')"
+                                :active="route().current('admin.vendors.*')"
+                            >
+                                Vendors
+                            </nav-link>
                         </div>
                     </div>
 
