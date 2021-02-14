@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         return Inertia::render('Admin/Users/Index', [
             'filters' => request()->all('search'),
-            'users' => fn () => User::filter(request()->all('search'))->orderByDesc('created_at')->paginate(),
+            'users' => fn () => User::withCount('orders')->filter(request()->all('search'))->orderByDesc('created_at')->paginate(),
         ]);
     }
 
@@ -70,7 +70,9 @@ class UserController extends Controller
     public function show($id)
     {
         return Inertia::render('Admin/Users/Show', [
-            'user' => User::findOrFail($id)
+            'user' => User::with(['orders' => function ($query) {
+                return $query->orderByDesc('created_at')->limit(10);
+            }])->findOrFail($id)
         ]);
     }
 

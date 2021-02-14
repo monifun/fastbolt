@@ -68,9 +68,73 @@
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">
                                     Đơn hàng
                                 </h3>
+                                <p class="mt-1 text-sm text-gray-500">
+                                    Danh sách đơn hàng được tạo gần đây
+                                </p>
                             </div>
-                            <div class="px-4 py-5 sm:p-6">
-                                <p>Chưa có thông tin đơn hàng</p>
+                            <div>
+                                <div
+                                    v-if="user.orders.length > 0"
+                                    class="overflow-hidden overflow-x-auto relative"
+                                >
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                            <tr>
+                                                <th
+                                                    scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                                >
+                                                    Mã đơn
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                                >
+                                                    Trạng thái
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                                >
+                                                    Ngày tạo
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    class="relative px-6 py-3 whitespace-nowrap"
+                                                >
+                                                    <span class="sr-only">Thao tác</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr
+                                                v-for="order in user.orders"
+                                                :key="order.id"
+                                            >
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    {{ order.id }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                                    {{ order.status.description }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-right tabular-nums">
+                                                    {{ new Date(order.created_at) | date }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                    <inertia-link
+                                                        :href="route('admin.orders.show', order)"
+                                                        class="text-indigo-600 hover:text-indigo-900"
+                                                    >
+                                                        Chi tiết
+                                                    </inertia-link>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p v-else>
+                                    Chưa có thông tin đơn hàng
+                                </p>
                             </div>
                         </div>
 

@@ -44,6 +44,12 @@
                                         </th>
                                         <th
                                             scope="col"
+                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                        >
+                                            Đơn hàng
+                                        </th>
+                                        <th
+                                            scope="col"
                                             class="relative px-6 py-3"
                                         >
                                             <span class="sr-only">Edit</span>
@@ -110,6 +116,9 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap tabular-nums">
                                             {{ user.phone }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap tabular-nums text-center">
+                                            {{ user.orders_count }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <inertia-link
@@ -183,7 +192,7 @@
                                             v-for="link in users.links.slice(1, -1)"
                                         >
                                             <inertia-link
-                                                :href="link.url"
+                                                :href="link.url || ''"
                                                 class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
                                                 :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': link.active}"
                                             >

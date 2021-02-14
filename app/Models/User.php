@@ -72,4 +72,9 @@ class User extends Authenticatable
                 ->orWhere('phone', 'like', '%'.$search.'%');
         });
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
