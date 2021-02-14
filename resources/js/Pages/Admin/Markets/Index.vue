@@ -147,7 +147,7 @@
                                             v-for="link in markets.links.slice(1, -1)"
                                         >
                                             <inertia-link
-                                                :href="link.url"
+                                                :href="link.url || ''"
                                                 class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
                                                 :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': link.active}"
                                             >
