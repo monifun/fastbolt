@@ -18,13 +18,13 @@
                                 :href="route('admin.dashboard')"
                                 :active="route().current('admin.dashboard')"
                             >
-                                Bảng điều khiển
+                                Dashboard
                             </nav-link>
                             <nav-link
                                 :href="route('admin.users.index')"
                                 :active="route().current('admin.users.*')"
                             >
-                                Người dùng
+                                Users
                             </nav-link>
                             <nav-link
                                 :href="route('admin.markets.index')"
