@@ -38,6 +38,12 @@
                             >
                                 Vendors
                             </nav-link>
+                            <nav-link
+                                :href="route('admin.orders.index')"
+                                :active="route().current('admin.orders.*')"
+                            >
+                                Orders
+                            </nav-link>
                         </div>
                     </div>
 
@@ -135,8 +141,8 @@
             >
                 <div class="pt-2 pb-3 space-y-1">
                     <responsive-nav-link
-                        :href="route('dashboard')"
-                        :active="route().current('dashboard')"
+                        :href="route('admin.dashboard')"
+                        :active="route().current('admin.dashboard')"
                     >
                         Bảng điều khiển
                     </responsive-nav-link>
