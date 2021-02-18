@@ -132,9 +132,9 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <p v-else>
+                                <div v-else class="px-4 py-5 sm:p-6">
                                     Chưa có thông tin đơn hàng
-                                </p>
+                                </div>
                             </div>
                         </div>
 
