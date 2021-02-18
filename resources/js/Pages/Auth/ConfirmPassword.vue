@@ -1,8 +1,8 @@
 <template>
-    <breeze-authentication-card>
+    <bolt-authentication-card>
         <template #logo>
             <inertia-link href="/">
-                <breeze-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <bolt-application-logo class="w-20 h-20 fill-current text-gray-500" />
             </inertia-link>
         </template>
 
@@ -10,39 +10,39 @@
             This is a secure area of the application. Please confirm your password before continuing.
         </div>
 
-        <breeze-validation-errors class="mb-4" />
+        <bolt-validation-errors class="mb-4" />
 
         <form @submit.prevent="submit">
             <div>
-                <breeze-label for="password" value="Password" />
-                <breeze-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" autofocus />
+                <bolt-label for="password" value="Password" />
+                <bolt-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" autofocus />
             </div>
 
             <div class="flex justify-end mt-4">
-                <breeze-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <bolt-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Confirm
-                </breeze-button>
+                </bolt-button>
             </div>
         </form>
-    </breeze-authentication-card>
+    </bolt-authentication-card>
 </template>
 
 <script>
-    import BreezeAuthenticationCard from '@/Components/AuthenticationCard'
-    import BreezeApplicationLogo from '@/Components/ApplicationLogo'
-    import BreezeButton from '@/Components/Button'
-    import BreezeInput from '@/Components/Input'
-    import BreezeLabel from '@/Components/Label'
-    import BreezeValidationErrors from '@/Components/ValidationErrors'
+    import BoltAuthenticationCard from '@/Components/AuthenticationCard'
+    import BoltApplicationLogo from '@/Components/ApplicationMark'
+    import BoltButton from '@/Components/PrimaryButton'
+    import BoltInput from '@/Components/Input'
+    import BoltLabel from '@/Components/Label'
+    import BoltValidationErrors from '@/Components/ValidationErrors'
 
     export default {
         components: {
-            BreezeAuthenticationCard,
-            BreezeApplicationLogo,
-            BreezeButton,
-            BreezeInput,
-            BreezeLabel,
-            BreezeValidationErrors,
+            BoltAuthenticationCard,
+            BoltApplicationLogo,
+            BoltButton,
+            BoltInput,
+            BoltLabel,
+            BoltValidationErrors,
         },
 
         data() {

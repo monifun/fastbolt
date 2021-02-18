@@ -1,8 +1,8 @@
 <template>
-    <breeze-authentication-card>
+    <bolt-authentication-card>
         <template #logo>
             <inertia-link href="/">
-                <breeze-application-logo />
+                <bolt-application-logo />
             </inertia-link>
         </template>
 
@@ -16,26 +16,26 @@
 
         <form @submit.prevent="submit">
             <div class="mt-4 flex items-center justify-between">
-                <breeze-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                <bolt-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Resend Verification Email
-                </breeze-button>
+                </bolt-button>
 
                 <inertia-link :href="route('logout')" method="post" as="button" class="underline text-sm text-gray-600 hover:text-gray-900">Log Out</inertia-link>
             </div>
         </form>
-    </breeze-authentication-card>
+    </bolt-authentication-card>
 </template>
 
 <script>
-    import BreezeApplicationLogo from '@/Components/ApplicationLogo'
-    import BreezeAuthenticationCard from '@/Components/AuthenticationCard'
-    import BreezeButton from '@/Components/Button'
+    import BoltApplicationLogo from '@/Components/ApplicationMark'
+    import BoltAuthenticationCard from '@/Components/AuthenticationCard'
+    import BoltButton from '@/Components/Button'
 
     export default {
         components: {
-            BreezeApplicationLogo,
-            BreezeAuthenticationCard,
-            BreezeButton,
+            BoltApplicationLogo,
+            BoltAuthenticationCard,
+            BoltButton,
         },
 
         props: {
