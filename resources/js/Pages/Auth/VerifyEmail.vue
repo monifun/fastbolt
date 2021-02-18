@@ -29,7 +29,7 @@
 <script>
     import BoltApplicationLogo from '@/Components/ApplicationMark'
     import BoltAuthenticationCard from '@/Components/AuthenticationCard'
-    import BoltButton from '@/Components/Button'
+    import BoltButton from '@/Components/PrimaryButton'
 
     export default {
         components: {
