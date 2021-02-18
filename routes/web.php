@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return \Inertia\Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => \Illuminate\Foundation\Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => ['auth', 'can:viewAdmin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('dashboard', \App\Http\Controllers\Admin\DashboardController::class)->name('dashboard');
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('markets', \App\Http\Controllers\Admin\MarketController::class);

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
 
 class PasswordResetLinkController extends Controller
 {
@@ -15,7 +17,9 @@ class PasswordResetLinkController extends Controller
      */
     public function create()
     {
-        return view('auth.forgot-password');
+        return Inertia::render('Auth/ForgotPassword', [
+            'status' => session('status'),
+        ]);
     }
 
     /**
@@ -39,9 +43,12 @@ class PasswordResetLinkController extends Controller
             $request->only('email')
         );
 
-        return $status == Password::RESET_LINK_SENT
-                    ? back()->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+        if ($status == Password::RESET_LINK_SENT) {
+            return back()->with('status', __($status));
+        }
+
+        throw ValidationException::withMessages([
+            'email' => [trans($status)],
+        ]);
     }
 }

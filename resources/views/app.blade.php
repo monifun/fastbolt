@@ -16,8 +16,10 @@
         <!-- Scripts -->
         @if(request()->is('admin/*'))
             @routes('admin')
-        @else
+        @elseif(request()->is('user/*'))
             @routes('user')
+        @else
+            @routes
         @endif
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
