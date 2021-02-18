@@ -14,7 +14,11 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         <!-- Scripts -->
-        @routes
+        @if(request()->is('admin/*'))
+            @routes('admin')
+        @else
+            @routes('user')
+        @endif
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
