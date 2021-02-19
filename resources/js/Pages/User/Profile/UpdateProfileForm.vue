@@ -28,6 +28,25 @@
                 />
             </div>
 
+            <!-- Name -->
+            <div class="col-span-6 sm:col-span-4">
+                <bolt-label
+                    for="phone"
+                    value="Phone"
+                />
+                <bolt-input
+                    id="phone"
+                    v-model="form.phone"
+                    type="number"
+                    class="mt-1 block w-full"
+                    autocomplete="phone"
+                />
+                <bolt-input-error
+                    :message="form.errors.phone"
+                    class="mt-2"
+                />
+            </div>
+
             <!-- Email -->
             <div class="col-span-6 sm:col-span-4">
                 <bolt-label
@@ -90,6 +109,7 @@
                 form: this.$inertia.form({
                     name: this.user.name,
                     email: this.user.email,
+                    phone: this.user.phone,
                 }),
             };
         },
