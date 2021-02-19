@@ -32,8 +32,11 @@ Route::group(['middleware' => ['auth', 'can:viewAdmin'], 'prefix' => 'admin', 'a
     Route::resource('products.charges', \App\Http\Controllers\Admin\ProductChargeController::class);
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => 'user', 'as' => 'user.'], function () {
+Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 'user.'], function () {
     Route::get('dashboard', \App\Http\Controllers\User\DashboardController::class)->name('dashboard');
+    Route::get('profile', [\App\Http\Controllers\User\ProfileController::class, 'show'])->name('profile.show');
+    Route::put('profile', [\App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');
+    Route::put('password', \App\Http\Controllers\User\PasswordController::class)->name('password.update');
 });
 
 require __DIR__.'/auth.php';
