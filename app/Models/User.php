@@ -44,6 +44,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'is_admin'
+    ];
+
+    public function getIsAdminAttribute()
+    {
+        return in_array($this->email, config('fastbolt.admin_emails'));
+    }
+
     public function setPhoneAttribute($value): string
     {
         return $this->attributes['phone'] = (string) phone($value, 'VN');
