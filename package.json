@@ -11,11 +11,14 @@
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.8.4",
-        "@inertiajs/inertia-vue": "^0.5.5",
+        "@inertiajs/inertia-vue3": "^0.3.5",
+        "@inertiajs/progress": "^0.2.4",
         "@tailwindcss/forms": "^0.2.1",
+        "@vue/compiler-sfc": "^3.0.5",
         "alpinejs": "^2.7.3",
         "autoprefixer": "^10.1.0",
         "axios": "^0.21",
+        "date-fns": "^2.17.0",
         "eslint": "^7.19.0",
         "eslint-plugin-vue": "^7.5.0",
         "laravel-mix": "^6.0.6",
@@ -23,9 +26,8 @@
         "postcss": "^8.2.1",
         "postcss-import": "^12.0.1",
         "tailwindcss": "^2.0.2",
-        "vue": "^2.6.12",
+        "vue": "^3.0.5",
         "vue-date-fns": "^2.0.1",
-        "vue-loader": "^15.9.6",
-        "vue-template-compiler": "^2.6.12"
+        "vue-loader": "^16.1.2"
     }
 }

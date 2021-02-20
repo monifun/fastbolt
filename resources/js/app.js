@@ -2,25 +2,22 @@ require('./bootstrap');
 
 require('alpinejs');
 
-require('@/Filters/currency');
-
 // Import modules...
-import Vue from 'vue';
-import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue';
-import VueDateFns from "vue-date-fns";
+import { createApp, h } from 'vue';
+import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
+import { InertiaProgress } from '@inertiajs/progress';
 
-Vue.mixin({ methods: { route } });
-Vue.use(InertiaPlugin);
-Vue.use(VueDateFns, "HH:mm:ss dd-MM-yyyy");
+const el = document.getElementById('app');
 
-const app = document.getElementById('app');
-
-new Vue({
-    render: (h) =>
+createApp({
+    render: () =>
         h(InertiaApp, {
-            props: {
-                initialPage: JSON.parse(app.dataset.page),
-                resolveComponent: (name) => require(`./Pages/${name}`).default,
-            },
+            initialPage: JSON.parse(el.dataset.page),
+            resolveComponent: (name) => require(`./Pages/${name}`).default,
         }),
-}).$mount(app);
+})
+    .mixin({ methods: { route } })
+    .use(InertiaPlugin)
+    .mount(el);
+
+InertiaProgress.init({ color: '#4B5563' });
