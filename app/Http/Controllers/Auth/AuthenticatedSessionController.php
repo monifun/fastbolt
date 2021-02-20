@@ -29,13 +29,17 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      *
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function store(LoginRequest $request)
     {
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        if ($request->inertia()) {
+            return Inertia::location(RouteServiceProvider::HOME);
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -44,7 +48,7 @@ class AuthenticatedSessionController extends Controller
      * Destroy an authenticated session.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
@@ -57,6 +61,7 @@ class AuthenticatedSessionController extends Controller
         if ($request->inertia()) {
             return Inertia::location('/');
         }
+
         return redirect('/');
     }
 }

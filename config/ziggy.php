@@ -3,7 +3,7 @@
 return [
     'except' => ['admin.*', 'user.*'],
     'groups' => [
-        'admin' => ['admin.*'],
-        'user' => ['user.*']
+        'admin' => ['admin.*', 'logout'],
+        'user' => ['user.*', 'logout']
     ]
 ];
