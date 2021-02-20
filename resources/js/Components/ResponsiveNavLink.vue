@@ -1,26 +1,13 @@
 <template>
-    <div>
-        <button
-            v-if="as == 'button'"
-            :class="classes"
-            class="w-full text-left"
-        >
-            <slot />
-        </button>
-
-        <inertia-link
-            v-else
-            :href="href"
-            :class="classes"
-        >
-            <slot />
-        </inertia-link>
-    </div>
+    <inertia-link :class="classes">
+        <slot />
+    </inertia-link>
 </template>
 
 <script>
     export default {
-        props: ['active', 'href', 'as'],
+        props: ['active'],
+
         computed: {
             classes() {
                 return this.active
