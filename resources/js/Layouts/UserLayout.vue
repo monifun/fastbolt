@@ -20,6 +20,13 @@
                             >
                                 Dashboard
                             </nav-link>
+
+                            <nav-link
+                                :href="route('user.profile.show')"
+                                :active="route().current('user.profile.*')"
+                            >
+                                Profile
+                            </nav-link>
                         </div>
                     </div>
 
@@ -153,7 +160,11 @@
                             </responsive-nav-link>
 
                             <!-- Authentication -->
-                            <responsive-nav-link :href="route('logout')" as="button" method="post">
+                            <responsive-nav-link
+                                :href="route('logout')"
+                                as="button"
+                                method="post"
+                            >
                                 Logout
                             </responsive-nav-link>
                         </div>
