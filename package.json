@@ -28,6 +28,7 @@
         "tailwindcss": "^2.0.2",
         "vue": "^3.0.5",
         "vue-date-fns": "^2.0.1",
+        "vue-eslint-parser": "^7.5.0",
         "vue-loader": "^16.1.2"
     }
 }

@@ -6,8 +6,9 @@ module.exports = {
     },
     extends: [
         "eslint:recommended",
-        "plugin:vue/recommended",
+        "plugin:vue/vue3-recommended",
     ],
+    parser: "vue-eslint-parser",
     parserOptions: {
         ecmaVersion: 12,
         sourceType: "module",
