@@ -14,15 +14,13 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
         <!-- Scripts -->
-        @routes
-
-        @auth()
-            @if(request()->user()->is_admin and request()->routeIs('admin.*'))
-                @routes('admin')
-            @else
-                @routes('user')
-            @endif
-        @endauth
+        @if(request()->routeIs('admin.*'))
+            @routes('admin')
+        @elseif(request()->routeIs('user.*'))
+            @routes('user')
+        @else
+            @routes
+        @endif
 
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
