@@ -40,7 +40,7 @@
 
 <script>
     export default {
-        name: "SearchFilter",
+        name: 'SearchFilter',
         props: {
             value: String,
         },

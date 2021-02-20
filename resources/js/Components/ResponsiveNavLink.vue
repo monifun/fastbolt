@@ -1,7 +1,7 @@
 <template>
     <div>
         <button
-            v-if="as === 'button'"
+            v-if="as == 'button'"
             :class="classes"
             class="w-full text-left"
         >
@@ -21,7 +21,6 @@
 <script>
     export default {
         props: ['active', 'href', 'as'],
-
         computed: {
             classes() {
                 return this.active

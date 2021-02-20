@@ -18,8 +18,7 @@
 </template>
 
 <script>
-    import SectionTitle from './SectionTitle';
-
+    import SectionTitle from '@/Components/SectionTitle';
     export default {
         components: {
             SectionTitle,

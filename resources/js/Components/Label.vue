@@ -7,7 +7,6 @@
 
 <script>
     export default {
-        name: "FormLabel",
         props: ['value'],
     };
 </script>

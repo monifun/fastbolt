@@ -10,7 +10,7 @@
 
 <script>
     export default {
-        name: "ButtonLink",
+        name: 'ButtonLink',
         props: ['href', 'classes'],
     };
 </script>
