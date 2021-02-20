@@ -56,24 +56,19 @@
 
                                 <template #content>
                                     <!-- Account Management -->
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
-                                        Quản lý tài khoản
-                                    </div>
-
                                     <drop-down-link :href="route('user.profile.show')">
-                                        Hồ sơ cá nhân
+                                        Profile
                                     </drop-down-link>
 
                                     <div class="border-t border-gray-100" />
 
-                                    <form
-                                        method="POST"
-                                        @submit.prevent="logout"
+                                    <drop-down-link
+                                        :href="route('logout')"
+                                        as="button"
+                                        method="post"
                                     >
-                                        <drop-down-link as="button">
-                                            Đăng xuất
-                                        </drop-down-link>
-                                    </form>
+                                        Logout
+                                    </drop-down-link>
                                 </template>
                             </drop-down>
                         </div>
@@ -120,7 +115,7 @@
                         :href="route('user.dashboard')"
                         :active="route().current('user.dashboard')"
                     >
-                        Bảng điều khiển
+                        Dashboard
                     </responsive-nav-link>
 
                     <div class="pt-4 pb-1 border-t border-gray-200">
@@ -154,18 +149,13 @@
 
                         <div class="mt-3 space-y-1">
                             <responsive-nav-link :href="route('user.profile.show')">
-                                Hồ sơ cá nhân
+                                Profile
                             </responsive-nav-link>
 
                             <!-- Authentication -->
-                            <form
-                                method="POST"
-                                @submit.prevent="logout"
-                            >
-                                <responsive-nav-link as="button">
-                                    Đăng xuất
-                                </responsive-nav-link>
-                            </form>
+                            <responsive-nav-link :href="route('logout')" as="button" method="post">
+                                Logout
+                            </responsive-nav-link>
                         </div>
                     </div>
                 </div>
@@ -199,11 +189,6 @@
             return {
                 showingNavigationDropdown: false,
             };
-        },
-        methods: {
-            logout() {
-                this.$inertia.post(route('logout'));
-            },
         },
     };
 </script>
