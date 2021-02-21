@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\CreateUserWallet;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -36,16 +37,20 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|phone:VN|unique:users',
             'password' => 'required|string|confirmed|min:8',
         ]);
 
         Auth::login($user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]));
 
         event(new Registered($user));
+
+        CreateUserWallet::dispatchNow($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
