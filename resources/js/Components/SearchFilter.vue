@@ -21,11 +21,11 @@
                 id="search"
                 type="text"
                 name="search"
-                :value="value"
+                :value="modelValue"
                 class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-                placeholder="Tìm kiếm"
+                placeholder="Search"
                 autocomplete="off"
-                @input="$emit('input', $event.target.value)"
+                @input="$emit('update:modelValue', $event.target.value)"
             >
         </div>
         <button
@@ -41,8 +41,7 @@
 <script>
     export default {
         name: 'SearchFilter',
-        props: {
-            value: String,
-        },
+        props: ['modelValue'],
+        emits: ['update:modelValue', 'reset'],
     };
 </script>
