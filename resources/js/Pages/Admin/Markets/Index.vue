@@ -1,9 +1,21 @@
 <template>
     <admin-layout>
         <template #header>
-            <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Markets
-            </h1>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-semibold leading-tight text-gray-800">
+                        Markets
+                    </h1>
+                </div>
+                <div class="mt-4 flex md:mt-0 md:ml-4">
+                    <inertia-link
+                        :href="route('admin.markets.create')"
+                        class="inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Create
+                    </inertia-link>
+                </div>
+            </div>
         </template>
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -13,14 +25,6 @@
                             v-model="form.search"
                             @reset="reset"
                         />
-                    </div>
-                    <div class="ml-4 my-4 flex-shrink-0">
-                        <inertia-link
-                            class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-indigo transition ease-in-out duration-150"
-                            :href="route('admin.markets.create')"
-                        >
-                            Thêm mới
-                        </inertia-link>
                     </div>
                 </div>
 
@@ -34,7 +38,7 @@
                                             scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            Tên
+                                            Name
                                         </th>
                                         <th
                                             scope="col"
@@ -50,9 +54,9 @@
                                         </th>
                                         <th
                                             scope="col"
-                                            class="relative px-6 py-3"
+                                            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            <span class="sr-only">Sửa</span>
+                                            Created
                                         </th>
                                     </tr>
                                 </thead>
@@ -60,27 +64,38 @@
                                     <tr
                                         v-for="market in markets.data"
                                         :key="market.id"
+                                        class="hover:bg-gray-100 focus-within:bg-gray-100"
                                     >
-                                        <td class="px-6 py-4 whitespace-nowrap tabular-nums">
+                                        <td class="whitespace-nowrap">
                                             <inertia-link
-                                                :href="route('admin.markets.show', market)"
-                                                class="hover:text-indigo-600 transition ease-in-out duration-150"
+                                                :href="route('admin.markets.show', market.id)"
+                                                class="px-6 py-4 flex items-center"
                                             >
                                                 {{ market.name }}
                                             </inertia-link>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap tabular-nums">
-                                            {{ market.website }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center tabular-nums">
-                                            {{ market.vendors_count }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <td class="whitespace-nowrap">
                                             <inertia-link
-                                                :href="route('admin.markets.edit', market)"
-                                                class="text-indigo-600 hover:text-indigo-900"
+                                                :href="route('admin.markets.show', market.id)"
+                                                class="px-6 py-4 flex items-center"
                                             >
-                                                Chỉnh sửa
+                                                {{ market.website }}
+                                            </inertia-link>
+                                        </td>
+                                        <td class="whitespace-nowrap tabular-nums">
+                                            <inertia-link
+                                                :href="route('admin.markets.show', market.id)"
+                                                class="px-6 py-4 flex items-center justify-center"
+                                            >
+                                                {{ market.vendors_count }}
+                                            </inertia-link>
+                                        </td>
+                                        <td class="whitespace-nowrap tabular-nums">
+                                            <inertia-link
+                                                :href="route('admin.markets.show', market.id)"
+                                                class="px-6 py-4 flex items-center justify-end"
+                                            >
+                                                {{ dateFilter(market.created_at) }}
                                             </inertia-link>
                                         </td>
                                     </tr>
@@ -88,97 +103,13 @@
                             </table>
                         </div>
                         <!-- Pagination -->
-                        <div class="bg-white overflow-x-visible px-4 py-3 flex items-center border-t border-gray-200 justify-between sm:px-6">
-                            <div class="flex-1 flex justify-between sm:hidden">
-                                <inertia-link
-                                    :href="markets.prev_page_url || ''"
-                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500"
-                                    :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': markets.prev_page_url === null}"
-                                >
-                                    Trang trước
-                                </inertia-link>
-                                <inertia-link
-                                    :href="markets.next_page_url || ''"
-                                    class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500"
-                                    :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': markets.next_page_url === null}"
-                                >
-                                    Trang sau
-                                </inertia-link>
-                            </div>
-                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                                <div>
-                                    <p class="text-sm text-gray-700">
-                                        Hiển thị từ
-                                        <span class="font-medium">{{ markets.from }}</span>
-                                        đến
-                                        <span class="font-medium">{{ markets.to }}</span>
-                                        trên tổng số
-                                        <span class="font-medium">{{ markets.total }}</span>
-                                        kết quả
-                                    </p>
-                                </div>
-                                <div>
-                                    <nav
-                                        class="relative z-0 inline-flex shadow-sm -space-x-px"
-                                        aria-label="Pagination"
-                                    >
-                                        <inertia-link
-                                            v-if="markets.prev_page_url"
-                                            :href="markets.prev_page_url || ''"
-                                            class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                                            :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': markets.prev_page_url === null}"
-                                        >
-                                            <span class="sr-only">Trước</span>
-                                            <svg
-                                                class="h-5 w-5"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                    clip-rule="evenodd"
-                                                />
-                                            </svg>
-                                        </inertia-link>
-                                        <template
-                                            v-for="link in markets.links.slice(1, -1)"
-                                        >
-                                            <inertia-link
-                                                :href="link.url || ''"
-                                                class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                                                :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': link.active}"
-                                            >
-                                                {{ link.label }}
-                                            </inertia-link>
-                                        </template>
-                                        <inertia-link
-                                            v-if="markets.next_page_url"
-                                            :href="markets.next_page_url || ''"
-                                            class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                                            :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': markets.next_page_url === null}"
-                                        >
-                                            <span class="sr-only">Sau</span>
-                                            <svg
-                                                class="h-5 w-5"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                    clip-rule="evenodd"
-                                                />
-                                            </svg>
-                                        </inertia-link>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
+                        <bolt-pagination-simple
+                            :from="markets.from"
+                            :to="markets.to"
+                            :total="markets.total"
+                            :prev-page-url="markets.prev_page_url"
+                            :next-page-url="markets.next_page_url"
+                        />
                     </div>
                 </div>
             </div>
@@ -189,13 +120,14 @@
 <script>
     import AdminLayout from "@/Layouts/AdminLayout";
     import BoltSearchFilter from "@/Components/SearchFilter";
+    import BoltPaginationSimple from "@/Components/PaginationSimple";
+    import dateFilter from "@/Filters/date";
     import throttle from "lodash/throttle";
     import pickBy from "lodash/pickBy";
     import mapValues from "lodash/mapValues";
-
     export default {
         name: "Index",
-        components: {AdminLayout, BoltSearchFilter},
+        components: {AdminLayout, BoltSearchFilter, BoltPaginationSimple},
         props: ['markets', 'filters'],
         data() {
             return {
@@ -214,6 +146,7 @@
             },
         },
         methods: {
+            dateFilter,
             reset() {
                 this.form = mapValues(this.form, () => null);
             },

@@ -19,7 +19,7 @@ class MarketController extends Controller
     {
         return Inertia::render('Admin/Markets/Index', [
             'filters' => request()->all('search'),
-            'markets' => fn () => Market::filter(request()->all('search'))->withCount('vendors')->orderByDesc('created_at')->paginate()
+            'markets' => Market::filter(request()->all('search'))->withCount('vendors')->orderByDesc('created_at')->paginate()
         ]);
     }
 

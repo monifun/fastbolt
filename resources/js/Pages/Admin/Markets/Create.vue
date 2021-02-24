@@ -1,9 +1,13 @@
 <template>
     <admin-layout>
         <template #header>
-            <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create new market
-            </h1>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-semibold leading-tight text-gray-800">
+                        Create new market
+                    </h1>
+                </div>
+            </div>
         </template>
 
         <div class="py-12">
@@ -17,7 +21,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="name"
-                                        value="Tên"
+                                        value="Name"
                                     />
                                     <bolt-input
                                         id="name"
@@ -53,7 +57,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="description"
-                                        value="Chú thích"
+                                        value="Description"
                                     />
                                     <bolt-input
                                         id="description"
@@ -75,7 +79,7 @@
                                 :class="{ 'opacity-25': marketForm.processing }"
                                 :disabled="marketForm.processing"
                             >
-                                Lưu lại
+                                Save
                             </bolt-primary-button>
                         </div>
                     </div>
