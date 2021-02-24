@@ -2,7 +2,7 @@
     <admin-layout>
         <template #header>
             <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Chỉnh sửa người dùng
+                Edit User
             </h1>
         </template>
 
@@ -10,11 +10,11 @@
             <!-- Profile -->
             <bolt-form-section @submitted="updateUserProfile">
                 <template #title>
-                    Hồ sơ
+                    Profile Information
                 </template>
 
                 <template #description>
-                    Cập nhật thông tin cá nhân của người dùng.
+                    Update user profile information and email address.
                 </template>
 
                 <template #form>
@@ -22,7 +22,7 @@
                     <div class="col-span-6 sm:col-span-4">
                         <bolt-label
                             for="name"
-                            value="Họ và Tên"
+                            value="Name"
                         />
                         <bolt-input
                             id="name"
@@ -58,7 +58,7 @@
                     <div class="col-span-6 sm:col-span-4">
                         <bolt-label
                             for="phone"
-                            value="Điện thoại"
+                            value="Phone"
                         />
                         <bolt-input
                             id="phone"
@@ -82,7 +82,7 @@
                                     class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                     :checked="userProfileForm.email_verified"
                                 >
-                                <span class="ml-2">Xác nhận email</span>
+                                <span class="ml-2">Email verified</span>
                             </label>
                         </div>
                     </div>
@@ -93,14 +93,14 @@
                         :on="userProfileForm.recentlySuccessful"
                         class="mr-3"
                     >
-                        Đã lưu.
+                        Saved.
                     </bolt-action-message>
 
                     <bolt-primary-button
                         :class="{ 'opacity-25': userProfileForm.processing }"
                         :disabled="userProfileForm.processing"
                     >
-                        Lưu lại
+                        Save
                     </bolt-primary-button>
                 </template>
             </bolt-form-section>
@@ -113,11 +113,11 @@
                 @submitted="updateUserPassword"
             >
                 <template #title>
-                    Mật khẩu
+                    Update Password
                 </template>
 
                 <template #description>
-                    Thay đổi thông tin mật khẩu đăng nhập của người dùng.
+                    Ensure using a long, random password to stay secure.
                 </template>
 
                 <template #form>
@@ -125,7 +125,7 @@
                     <div class="col-span-6 sm:col-span-4">
                         <bolt-label
                             for="password"
-                            value="Mật khẩu"
+                            value="Password"
                         />
                         <bolt-input
                             id="password"
@@ -143,7 +143,7 @@
                     <div class="col-span-6 sm:col-span-4">
                         <bolt-label
                             for="password_confirmation"
-                            value="Xác nhận mật khẩu"
+                            value="Password confirmation"
                         />
                         <bolt-input
                             id="password_confirmation"
@@ -163,14 +163,14 @@
                         :on="userPasswordForm.recentlySuccessful"
                         class="mr-3"
                     >
-                        Đã lưu.
+                        Saved.
                     </bolt-action-message>
 
                     <bolt-primary-button
                         :class="{ 'opacity-25': userPasswordForm.processing }"
                         :disabled="userPasswordForm.processing"
                     >
-                        Lưu lại
+                        Save
                     </bolt-primary-button>
                 </template>
             </bolt-form-section>

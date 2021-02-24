@@ -2,7 +2,7 @@
     <admin-layout>
         <template #header>
             <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Thêm người dùng
+                Create new user
             </h1>
         </template>
         <div class="py-12">
@@ -16,7 +16,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="name"
-                                        value="Họ và Tên"
+                                        value="Name"
                                     />
                                     <bolt-input
                                         id="name"
@@ -52,7 +52,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="phone"
-                                        value="Điện thoại"
+                                        value="Phone"
                                     />
                                     <bolt-input
                                         id="phone"
@@ -70,7 +70,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="password"
-                                        value="Mật khẩu"
+                                        value="Password"
                                     />
                                     <bolt-input
                                         id="password"
@@ -88,7 +88,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="password_confirmation"
-                                        value="Xác nhận mật khẩu"
+                                        value="Password confirmation"
                                     />
                                     <bolt-input
                                         id="password_confirmation"
@@ -112,7 +112,7 @@
                                                 class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 :checked="userForm.email_verified"
                                             >
-                                            <span class="ml-2">Xác nhận email</span>
+                                            <span class="ml-2">Email verified</span>
                                         </label>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                 :class="{ 'opacity-25': userForm.processing }"
                                 :disabled="userForm.processing"
                             >
-                                Lưu lại
+                                Save
                             </bolt-primary-button>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
     <admin-layout>
         <template #header>
             <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Người dùng
+                Users
             </h1>
         </template>
         <div class="py-12">
@@ -19,7 +19,7 @@
                             class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:border-indigo-900 focus:shadow-outline-indigo transition ease-in-out duration-150"
                             :href="route('admin.users.create')"
                         >
-                            Thêm mới
+                            Create
                         </inertia-link>
                     </div>
                 </div>
@@ -34,25 +34,25 @@
                                             scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            Họ và tên
+                                            Name
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            Điện thoại
+                                            Phone
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            Đơn hàng
+                                            Orders
                                         </th>
                                         <th
                                             scope="col"
-                                            class="relative px-6 py-3"
+                                            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            <span class="sr-only">Edit</span>
+                                            Joined
                                         </th>
                                     </tr>
                                 </thead>
@@ -60,9 +60,13 @@
                                     <tr
                                         v-for="user in users.data"
                                         :key="user.id"
+                                        class="hover:bg-gray-100 focus-within:bg-gray-100"
                                     >
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="flex items-center">
+                                        <td class="whitespace-nowrap">
+                                            <inertia-link
+                                                :href="route('admin.users.show', user.id)"
+                                                class="px-6 py-4 flex items-center"
+                                            >
                                                 <div class="flex-shrink-0 h-10 w-10">
                                                     <svg
                                                         class="h-10 w-10 fill-current text-gray-400 rounded-full bg-gray-200 p-1"
@@ -81,12 +85,7 @@
                                                 </div>
                                                 <div class="ml-4">
                                                     <div class="text-sm font-medium text-gray-900">
-                                                        <inertia-link
-                                                            :href="route('admin.users.show', user)"
-                                                            class="hover:text-indigo-600 transition ease-in-out duration-150"
-                                                        >
-                                                            {{ user.name }}
-                                                        </inertia-link>
+                                                        {{ user.name }}
                                                     </div>
                                                     <div class="flex items-center text-sm text-gray-500">
                                                         <span
@@ -112,20 +111,30 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </inertia-link>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap tabular-nums">
-                                            {{ user.phone }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap tabular-nums text-center">
-                                            {{ user.orders_count }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <td class="whitespace-nowrap tabular-nums">
                                             <inertia-link
-                                                :href="route('admin.users.edit', user)"
-                                                class="text-indigo-600 hover:text-indigo-900"
+                                                :href="route('admin.users.show', user.id)"
+                                                class="px-6 py-4 flex items-center"
                                             >
-                                                Chỉnh sửa
+                                                {{ user.phone }}
+                                            </inertia-link>
+                                        </td>
+                                        <td class="whitespace-nowrap tabular-nums">
+                                            <inertia-link
+                                                :href="route('admin.users.show', user.id)"
+                                                class="px-6 py-4 flex items-center justify-center"
+                                            >
+                                                {{ user.orders_count }}
+                                            </inertia-link>
+                                        </td>
+                                        <td class="whitespace-nowrap tabular-nums">
+                                            <inertia-link
+                                                :href="route('admin.users.show', user.id)"
+                                                class="px-6 py-4 flex items-center justify-end"
+                                            >
+                                                {{ dateFilter(user.created_at) }}
                                             </inertia-link>
                                         </td>
                                     </tr>
@@ -133,97 +142,13 @@
                             </table>
                         </div>
                         <!-- Pagination -->
-                        <div class="bg-white overflow-x-visible px-4 py-3 flex items-center border-t border-gray-200 justify-between sm:px-6">
-                            <div class="flex-1 flex justify-between sm:hidden">
-                                <inertia-link
-                                    :href="users.prev_page_url || ''"
-                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500"
-                                    :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': users.prev_page_url === null}"
-                                >
-                                    Trang trước
-                                </inertia-link>
-                                <inertia-link
-                                    :href="users.next_page_url || ''"
-                                    class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500"
-                                    :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': users.next_page_url === null}"
-                                >
-                                    Trang sau
-                                </inertia-link>
-                            </div>
-                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                                <div>
-                                    <p class="text-sm text-gray-700">
-                                        Hiển thị từ
-                                        <span class="font-medium">{{ users.from }}</span>
-                                        đến
-                                        <span class="font-medium">{{ users.to }}</span>
-                                        trên tổng số
-                                        <span class="font-medium">{{ users.total }}</span>
-                                        kết quả
-                                    </p>
-                                </div>
-                                <div>
-                                    <nav
-                                        class="relative z-0 inline-flex shadow-sm -space-x-px"
-                                        aria-label="Pagination"
-                                    >
-                                        <inertia-link
-                                            v-if="users.prev_page_url"
-                                            :href="users.prev_page_url || ''"
-                                            class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                                            :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': users.prev_page_url === null}"
-                                        >
-                                            <span class="sr-only">Trước</span>
-                                            <svg
-                                                class="h-5 w-5"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                    clip-rule="evenodd"
-                                                />
-                                            </svg>
-                                        </inertia-link>
-                                        <template
-                                            v-for="link in users.links.slice(1, -1)"
-                                        >
-                                            <inertia-link
-                                                :href="link.url || ''"
-                                                class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
-                                                :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': link.active}"
-                                            >
-                                                {{ link.label }}
-                                            </inertia-link>
-                                        </template>
-                                        <inertia-link
-                                            v-if="users.next_page_url"
-                                            :href="users.next_page_url || ''"
-                                            class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                                            :class="{'cursor-not-allowed bg-gray-200 hover:bg-gray-200': users.next_page_url === null}"
-                                        >
-                                            <span class="sr-only">Sau</span>
-                                            <svg
-                                                class="h-5 w-5"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 20 20"
-                                                fill="currentColor"
-                                                aria-hidden="true"
-                                            >
-                                                <path
-                                                    fill-rule="evenodd"
-                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                    clip-rule="evenodd"
-                                                />
-                                            </svg>
-                                        </inertia-link>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
+                        <bolt-pagination-simple
+                            :from="users.from"
+                            :to="users.to"
+                            :total="users.total"
+                            :prev-page-url="users.prev_page_url"
+                            :next-page-url="users.next_page_url"
+                        />
                     </div>
                 </div>
             </div>
@@ -234,13 +159,15 @@
 <script>
     import AdminLayout from "@/Layouts/AdminLayout";
     import BoltSearchFilter from "@/Components/SearchFilter";
+    import BoltPaginationSimple from "@/Components/PaginationSimple";
+    import dateFilter from "@/Filters/date";
     import throttle from "lodash/throttle";
     import pickBy from "lodash/pickBy";
     import mapValues from "lodash/mapValues";
 
     export default {
         name: "UserIndex",
-        components: {AdminLayout, BoltSearchFilter},
+        components: {AdminLayout, BoltSearchFilter, BoltPaginationSimple},
         props: ["users", "filters"],
         data() {
             return {
@@ -259,6 +186,7 @@
             },
         },
         methods: {
+            dateFilter,
             reset() {
                 this.form = mapValues(this.form, () => null);
             },

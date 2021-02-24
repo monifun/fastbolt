@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         return Inertia::render('Admin/Users/Index', [
             'filters' => request()->all('search'),
-            'users' => fn () => User::withCount('orders')->filter(request()->all('search'))->orderByDesc('created_at')->paginate(),
+            'users' => User::withCount('orders')->filter(request()->all('search'))->orderByDesc('created_at')->paginate(),
         ]);
     }
 
@@ -47,7 +47,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'phone:VN', 'unique:users'],
             'password' => ['required', 'string', 'confirmed'],
-            'email_verified' => ['required', 'boolean']
+            'email_verified' => ['required', 'boolean'],
         ]);
 
         $user = User::create([
@@ -70,9 +70,14 @@ class UserController extends Controller
     public function show($id)
     {
         return Inertia::render('Admin/Users/Show', [
-            'user' => User::with(['orders' => function ($query) {
-                return $query->orderByDesc('created_at')->limit(10);
-            }])->findOrFail($id)
+            'user' => User::with([
+                'orders' => function ($query) {
+                    return $query->orderByDesc('created_at')->limit(10);
+                },
+                'transactions' => function ($query) {
+                    return $query->orderByDesc('created_at')->limit(10);
+                },
+            ])->findOrFail($id),
         ]);
     }
 
@@ -85,7 +90,7 @@ class UserController extends Controller
     public function edit($id)
     {
         return Inertia::render('Admin/Users/Edit', [
-            'user' => User::findOrFail($id)
+            'user' => User::findOrFail($id),
         ]);
     }
 
@@ -105,7 +110,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'phone' => ['sometimes', 'required', 'phone:VN', Rule::unique('users')->ignore($user->id)],
             'password' => ['sometimes', 'required', 'string', 'confirmed'],
-            'email_verified' => ['required', 'boolean']
+            'email_verified' => ['required', 'boolean'],
         ]);
 
         $user->update([

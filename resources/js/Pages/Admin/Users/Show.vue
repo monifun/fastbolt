@@ -2,7 +2,7 @@
     <admin-layout>
         <template #header>
             <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Thông tin người dùng
+                User details
             </h1>
         </template>
 
@@ -66,10 +66,10 @@
                         <div class="bg-white overflow-hidden shadow sm:rounded-lg">
                             <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                    Đơn hàng
+                                    Orders
                                 </h3>
                                 <p class="mt-1 text-sm text-gray-500">
-                                    Danh sách đơn hàng được tạo gần đây
+                                    List of recent orders
                                 </p>
                             </div>
                             <div>
@@ -84,25 +84,19 @@
                                                     scope="col"
                                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Mã đơn
-                                                </th>
-                                                <th
-                                                    scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
-                                                >
-                                                    Trạng thái
+                                                    ID
                                                 </th>
                                                 <th
                                                     scope="col"
                                                     class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Ngày tạo
+                                                    Status
                                                 </th>
                                                 <th
                                                     scope="col"
-                                                    class="relative px-6 py-3 whitespace-nowrap"
+                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    <span class="sr-only">Thao tác</span>
+                                                    Created
                                                 </th>
                                             </tr>
                                         </thead>
@@ -110,30 +104,41 @@
                                             <tr
                                                 v-for="order in user.orders"
                                                 :key="order.id"
+                                                class="hover:bg-gray-100 focus-within:bg-gray-100"
                                             >
-                                                <td class="px-6 py-4 whitespace-nowrap">
-                                                    {{ order.id }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-center">
-                                                    {{ order.status.description }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-right tabular-nums">
-                                                    {{ new Date(order.created_at) | date }}
-                                                </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <td class="whitespace-nowrap">
                                                     <inertia-link
                                                         :href="route('admin.orders.show', order)"
-                                                        class="text-indigo-600 hover:text-indigo-900"
+                                                        class="px-6 py-4 flex items-center"
                                                     >
-                                                        Chi tiết
+                                                        {{ order.id }}
+                                                    </inertia-link>
+                                                </td>
+                                                <td class="whitespace-nowrap">
+                                                    <inertia-link
+                                                        :href="route('admin.orders.show', order)"
+                                                        class="px-6 py-4 flex items-center justify-end"
+                                                    >
+                                                        {{ order.status.description }}
+                                                    </inertia-link>
+                                                </td>
+                                                <td class="whitespace-nowrap tabular-nums">
+                                                    <inertia-link
+                                                        :href="route('admin.orders.show', order)"
+                                                        class="px-6 py-4 flex items-center justify-end"
+                                                    >
+                                                        {{ dateFilter(order.created_at) }}
                                                     </inertia-link>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <div v-else class="px-4 py-5 sm:p-6">
-                                    Chưa có thông tin đơn hàng
+                                <div
+                                    v-else
+                                    class="px-4 py-5 sm:p-6"
+                                >
+                                    No records to display
                                 </div>
                             </div>
                         </div>
@@ -142,11 +147,80 @@
                         <div class="mt-6 bg-white overflow-hidden shadow sm:rounded-lg">
                             <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                    Giao dịch
+                                    Transactions
                                 </h3>
+                                <p class="mt-1 text-sm text-gray-500">
+                                    List of recent transactions
+                                </p>
                             </div>
-                            <div class="px-4 py-5 sm:p-6">
-                                <p>Chưa có thông tin giao dịch</p>
+                            <div>
+                                <div
+                                    v-if="user.transactions.length > 0"
+                                    class="overflow-hidden overflow-x-auto relative"
+                                >
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                            <tr>
+                                                <th
+                                                    scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                                >
+                                                    ID
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                                >
+                                                    Amount
+                                                </th>
+                                                <th
+                                                    scope="col"
+                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                                >
+                                                    Created
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            <tr
+                                                v-for="transaction in user.transactions"
+                                                :key="transaction.id"
+                                                class="hover:bg-gray-100 focus-within:bg-gray-100"
+                                            >
+                                                <td class="whitespace-nowrap">
+                                                    <inertia-link
+                                                        href="#"
+                                                        class="px-6 py-4 flex items-center"
+                                                    >
+                                                        {{ transaction.id }}
+                                                    </inertia-link>
+                                                </td>
+                                                <td class="whitespace-nowrap">
+                                                    <inertia-link
+                                                        href="#"
+                                                        class="px-6 py-4 flex items-center justify-end"
+                                                    >
+                                                        {{ currencyFilter(transaction.amount) }}
+                                                    </inertia-link>
+                                                </td>
+                                                <td class="whitespace-nowrap tabular-nums">
+                                                    <inertia-link
+                                                        href="#"
+                                                        class="px-6 py-4 flex items-center justify-end"
+                                                    >
+                                                        {{ dateFilter(transaction.created_at) }}
+                                                    </inertia-link>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p
+                                    v-else
+                                    class="px-4 py-5"
+                                >
+                                    No records to display
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -158,9 +232,15 @@
 
 <script>
     import AdminLayout from "@/Layouts/AdminLayout";
+    import currencyFilter from "@/Filters/currency";
+    import dateFilter from "@/Filters/date";
     export default {
         name: "Show",
         components: {AdminLayout},
         props: ['user'],
+        methods: {
+            currencyFilter,
+            dateFilter,
+        },
     };
 </script>
