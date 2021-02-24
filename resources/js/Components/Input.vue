@@ -10,9 +10,7 @@
 <script>
     export default {
         props: ['modelValue'],
-
         emits: ['update:modelValue'],
-
         methods: {
             focus() {
                 this.$refs.input.focus();
