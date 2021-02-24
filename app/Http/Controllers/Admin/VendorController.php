@@ -20,7 +20,7 @@ class VendorController extends Controller
     {
         return Inertia::render('Admin/Vendors/Index', [
             'filters' => request()->all('search'),
-            'vendors' => fn () => Vendor::filter(request()->all('search'))->with('market')->orderByDesc('created_at')->paginate()
+            'vendors' => Vendor::filter(request()->all('search'))->with('market')->orderByDesc('created_at')->paginate()
         ]);
     }
 

@@ -1,9 +1,13 @@
 <template>
     <admin-layout>
         <template #header>
-            <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Vendors
-            </h1>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-semibold leading-tight text-gray-800">
+                        Edit vendor
+                    </h1>
+                </div>
+            </div>
         </template>
 
         <div class="py-12">
@@ -88,13 +92,13 @@
                                 :on="vendorForm.recentlySuccessful"
                                 class="mr-3"
                             >
-                                Đã lưu.
+                                Saved.
                             </bolt-action-message>
                             <bolt-primary-button
                                 :class="{ 'opacity-25': vendorForm.processing }"
                                 :disabled="vendorForm.processing"
                             >
-                                Lưu lại
+                                Save
                             </bolt-primary-button>
                         </div>
                     </div>
