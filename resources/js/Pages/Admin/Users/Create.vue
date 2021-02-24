@@ -1,9 +1,13 @@
 <template>
     <admin-layout>
         <template #header>
-            <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create new user
-            </h1>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-semibold leading-tight text-gray-800">
+                        Create new user
+                    </h1>
+                </div>
+            </div>
         </template>
         <div class="py-12">
             <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
