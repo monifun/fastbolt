@@ -56,6 +56,9 @@ class Order extends Model
 
     public function charges()
     {
-        return $this->morphMany(Charge::class, 'chargeable');
+        return $this->morphToMany(Charge::class, 'chargeable')
+            ->withPivot('value')
+            ->using(Chargeable::class)
+            ->whereIn('target', ['subtotal', 'grandtotal']);
     }
 }
