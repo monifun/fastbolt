@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ChargeType;
 use App\Enums\OrderStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Charge;
 use App\Models\Order;
 use BenSampo\Enum\Rules\EnumValue;
 use Illuminate\Http\Request;
@@ -69,6 +71,8 @@ class OrderController extends Controller
     {
         return Inertia::render('Admin/Orders/Edit', [
             'order' => $order->load('charges'),
+            'charges' => Charge::whereIn('target', ['subtotal', 'grandtotal'])->get(),
+            'chargeTypes' => ChargeType::asSelectArray(),
         ]);
     }
 
