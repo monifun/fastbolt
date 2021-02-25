@@ -1,9 +1,27 @@
 <template>
     <admin-layout>
         <template #header>
-            <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Edit product
-            </h1>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-semibold leading-tight text-gray-800">
+                        Edit product
+                    </h1>
+                </div>
+                <div class="mt-4 flex md:mt-0 md:ml-4">
+                    <inertia-link
+                        :href="route('admin.products.index')"
+                        class="inline-flex items-center px-4 py-1 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Index
+                    </inertia-link>
+                    <inertia-link
+                        :href="route('admin.products.show', product)"
+                        class="ml-3 inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Details
+                    </inertia-link>
+                </div>
+            </div>
         </template>
 
         <div class="py-12">
@@ -11,11 +29,11 @@
                 <!-- Details -->
                 <bolt-form-section @submitted="updateProductDetails">
                     <template #title>
-                        Thông tin
+                        Product Information
                     </template>
 
                     <template #description>
-                        Cập nhật thông tin sản phẩm.
+                        Update product information.
                     </template>
 
                     <template #form>
@@ -23,7 +41,7 @@
                         <div class="col-span-6 lg:col-span-4">
                             <bolt-label
                                 for="name"
-                                value="Tên sản phẩm"
+                                value="Name"
                             />
                             <bolt-input
                                 id="name"
@@ -41,7 +59,7 @@
                         <div class="col-span-6 lg:col-span-4">
                             <bolt-label
                                 for="image"
-                                value="Ảnh sản phẩm"
+                                value="Image URL"
                             />
                             <bolt-input
                                 id="image"
@@ -59,7 +77,7 @@
                         <div class="col-span-6 lg:col-span-4">
                             <bolt-label
                                 for="url"
-                                value="Link sản phẩm"
+                                value="Sale URL"
                             />
                             <bolt-input
                                 id="url"
@@ -79,16 +97,24 @@
                                 <div class="col-span-3">
                                     <bolt-label
                                         for="price"
-                                        value="Đơn giá"
+                                        value="Price"
                                     />
-                                    <bolt-input
-                                        id="price"
-                                        v-model="productDetailsForm.price"
-                                        type="number"
-                                        min="1"
-                                        step="any"
-                                        class="mt-1 block w-full"
-                                    />
+
+                                    <div class="mt-1 relative rounded-md shadow-sm">
+                                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                            <span class="text-gray-500 sm:text-sm">
+                                                {{ product.order.currency_code }}
+                                            </span>
+                                        </div>
+                                        <bolt-input
+                                            id="price"
+                                            v-model="productDetailsForm.price"
+                                            type="number"
+                                            min="1"
+                                            step="any"
+                                            class="mt-1 pl-11 block w-full"
+                                        />
+                                    </div>
                                     <bolt-input-error
                                         :message="productDetailsForm.errors.price"
                                         class="mt-2"
@@ -99,7 +125,7 @@
                                 <div class="col-span-3">
                                     <bolt-label
                                         for="quantity"
-                                        value="Số lượng"
+                                        value="Quantity"
                                     />
                                     <bolt-input
                                         id="quantity"
@@ -122,14 +148,14 @@
                             :on="productDetailsForm.recentlySuccessful"
                             class="mr-3"
                         >
-                            Đã lưu.
+                            Saved.
                         </bolt-action-message>
 
                         <bolt-primary-button
                             :class="{ 'opacity-25': productDetailsForm.processing }"
                             :disabled="productDetailsForm.processing"
                         >
-                            Lưu lại
+                            Save
                         </bolt-primary-button>
                     </template>
                 </bolt-form-section>
@@ -137,13 +163,16 @@
                 <bolt-section-border />
 
                 <!-- Tax and Fee -->
-                <bolt-form-section class="mt-10 sm:mt-0" @submitted="createProductTax">
+                <bolt-form-section
+                    class="mt-10 sm:mt-0"
+                    @submitted="createProductCharge"
+                >
                     <template #title>
-                        Thuế và Phí
+                        Fees
                     </template>
 
                     <template #description>
-                        Thêm thuế và phí dịch vụ.
+                        Add new tax or fee to the order.
                     </template>
 
                     <template #form>
@@ -153,7 +182,7 @@
                                 <div class="col-span-3">
                                     <bolt-label
                                         for="charge_id"
-                                        value="Loại"
+                                        value="Type"
                                     />
                                     <select
                                         id="charge_id"
@@ -165,7 +194,7 @@
                                             value="null"
                                             disabled
                                         >
-                                            Vui lòng chọn
+                                            Please select
                                         </option>
                                         <option
                                             v-for="charge in charges"
@@ -185,7 +214,7 @@
                                 <div class="col-span-3">
                                     <bolt-label
                                         for="tax_value"
-                                        value="Giá trị"
+                                        value="Value"
                                     />
                                     <bolt-input
                                         id="tax_value"
@@ -205,7 +234,7 @@
                         <div class="col-span-6 lg:col-span-4">
                             <bolt-label
                                 for="tax_description"
-                                value="Mô tả"
+                                value="Description"
                             />
                             <bolt-input
                                 id="tax_description"
@@ -225,14 +254,14 @@
                             :on="productChargeForm.recentlySuccessful"
                             class="mr-3"
                         >
-                            Đã lưu.
+                            Saved.
                         </bolt-action-message>
 
                         <bolt-primary-button
                             :class="{ 'opacity-25': productChargeForm.processing }"
                             :disabled="productChargeForm.processing"
                         >
-                            Lưu lại
+                            Save
                         </bolt-primary-button>
                     </template>
                 </bolt-form-section>
@@ -240,96 +269,99 @@
                 <!-- Manage Taxes -->
                 <div v-if="product.charges.length > 0">
                     <bolt-section-border />
-                </div>
 
-                <bolt-action-section class="mt-10 sm:mt-0" v-if="product.charges.length > 0">
-                    <template #title>
-                        Quản lý thuế và phí
-                    </template>
+                    <bolt-action-section>
+                        <template #title>
+                            Manage Taxes and Fees
+                        </template>
 
-                    <template #description>
-                        Description goes here
-                    </template>
+                        <template #description>
+                            Product applied taxes and fees.
+                        </template>
 
-                    <template #content>
-                        <div class="flex flex-col">
-                            <div class="overflow-x-auto">
-                                <div class="align-middle inline-block min-w-full">
-                                    <div class="shadow overflow-hidden">
-                                        <table class="min-w-full divide-y divide-gray-200">
-                                            <thead>
-                                                <tr>
-                                                    <th
-                                                        scope="col"
-                                                        class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                    >
-                                                        Loại
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                    >
-                                                        Tên
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                    >
-                                                        Áp dụng
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="px-2 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                    >
-                                                        Giá trị
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="px-2 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                    >
-                                                        Thành tiền
-                                                    </th>
-                                                    <th
-                                                        scope="col"
-                                                        class="relative px-2 py-3"
-                                                    >
-                                                        <span class="sr-only">Edit</span>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="bg-white divide-y divide-gray-200">
-                                                <tr v-for="tax in product.charges">
-                                                    <td class="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                        {{ chargeTypes[tax.type] }}
-                                                    </td>
-                                                    <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                        {{ tax.name }}
-                                                    </td>
-                                                    <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                        {{ tax.target }}
-                                                    </td>
-                                                    <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
-                                                        <span v-if="tax.method === 'percent'">{{ tax.value }}%</span>
-                                                        <span v-else>{{ tax.value | currency(product.order.currency_code) }}</span>
-                                                    </td>
-                                                    <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
-                                                        {{ calculateTaxRow(product, tax) | currency(product.order.currency_code) }}
-                                                    </td>
-                                                    <td class="px-2 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <a
-                                                            href="#"
-                                                            class="text-indigo-600 hover:text-indigo-900"
-                                                        >Edit</a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                        <template #content>
+                            <div class="flex flex-col">
+                                <div class="overflow-x-auto">
+                                    <div class="align-middle inline-block min-w-full">
+                                        <div class="shadow overflow-hidden">
+                                            <table class="min-w-full divide-y divide-gray-200">
+                                                <thead>
+                                                    <tr>
+                                                        <th
+                                                            scope="col"
+                                                            class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                        >
+                                                            Type
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                        >
+                                                            Name
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                        >
+                                                            Apply
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="px-2 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                        >
+                                                            Value
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="px-2 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                        >
+                                                            Total
+                                                        </th>
+                                                        <th
+                                                            scope="col"
+                                                            class="relative px-2 py-3"
+                                                        >
+                                                            <span class="sr-only">Actions</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="bg-white divide-y divide-gray-200">
+                                                    <tr v-for="charge in product.charges">
+                                                        <td class="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                            {{ chargeTypes[charge.type] }}
+                                                        </td>
+                                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            {{ charge.name }}
+                                                        </td>
+                                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                            {{ charge.target }}
+                                                        </td>
+                                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
+                                                            <span v-if="charge.method === 'percent'">{{ charge.value }}%</span>
+                                                            <span v-else>{{ currencyFilter(charge.value, product.order.currency_code) }}</span>
+                                                        </td>
+                                                        <td class="px-2 py-4 whitespace-nowrap text-sm text-gray-500 text-right">
+                                                            {{ currencyFilter(calculateTaxRow(product, charge), product.order.currency_code) }}
+                                                        </td>
+                                                        <td class="px-2 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                            <inertia-link
+                                                                method="delete"
+                                                                :href="route('admin.products.charges.destroy', [product, charge])"
+                                                                class="text-indigo-600 hover:text-indigo-900"
+                                                            >
+                                                                Remove
+                                                            </inertia-link>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </template>
-                </bolt-action-section>
+                        </template>
+                    </bolt-action-section>
+                </div>
             </div>
         </div>
     </admin-layout>
@@ -345,6 +377,7 @@
     import BoltSectionBorder from "@/Components/SectionBorder";
     import BoltActionMessage from "@/Components/ActionMessage";
     import BoltPrimaryButton from "@/Components/PrimaryButton";
+    import currencyFilter from "@/Filters/currency";
     export default {
         name: "Edit",
         components: {AdminLayout, BoltActionSection, BoltFormSection, BoltLabel, BoltInput, BoltInputError, BoltSectionBorder, BoltActionMessage, BoltPrimaryButton},
@@ -368,6 +401,7 @@
             };
         },
         methods: {
+            currencyFilter,
             updateProductDetails() {
                 return this.productDetailsForm.put(route('admin.products.update', this.product), {
                     preserveScroll: true,
@@ -378,35 +412,35 @@
 
                 return this.productChargeForm = {...this.productChargeForm, value: charge.value, description: charge.description};
             },
-            createProductTax() {
+            createProductCharge() {
                 return this.productChargeForm.post(route('admin.products.charges.store', this.product), {
                     preserveScroll: true,
                 });
             },
-            calculateTaxRow(product, tax) {
+            calculateTaxRow(product, charge) {
                 let price = 0;
-                if (tax.method === 'fixed') {
-                    switch (tax.target) {
+                if (charge.method === 'fixed') {
+                    switch (charge.target) {
                         case 'quantity':
-                            price = product.quantity * tax.value;
+                            price = product.quantity * charge.value;
                             break;
                         case 'price':
-                            price = product.price + tax.value;
+                            price = product.price + charge.value;
                             break;
                         case 'subtotal':
-                            price = product.subtotal + tax.value;
+                            price = product.subtotal + charge.value;
                             break;
                     }
                 } else {
-                    switch (tax.target) {
+                    switch (charge.target) {
                         case 'quantity':
-                            price = product.quantity * tax.value / 100;
+                            price = product.quantity * charge.value / 100;
                             break;
                         case 'price':
-                            price = product.price * tax.value / 100;
+                            price = product.price * charge.value / 100;
                             break;
                         case 'subtotal':
-                            price = product.subtotal * tax.value / 100;
+                            price = product.subtotal * charge.value / 100;
                             break;
                     }
                 }

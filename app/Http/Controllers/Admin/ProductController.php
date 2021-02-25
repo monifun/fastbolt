@@ -14,21 +14,28 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        //
+        return Inertia::render('Admin/Products/Index', [
+            'filters' => request()->all('search'),
+            'products' => Product::with([
+                'order' => function ($query) {
+                    return $query->select('id', 'currency_code');
+                },
+            ])->paginate(),
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Products/Create');
     }
 
     /**
@@ -46,11 +53,13 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function show(Product $product)
     {
-        //
+        return Inertia::render('Admin/Products/Show', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -64,7 +73,7 @@ class ProductController extends Controller
         return Inertia::render('Admin/Products/Edit', [
             'product' => $product->load('order'),
             'charges' => Charge::all(),
-            'chargeTypes' => ChargeType::asSelectArray()
+            'chargeTypes' => ChargeType::asSelectArray(),
         ]);
     }
 
@@ -83,7 +92,7 @@ class ProductController extends Controller
             'url' => ['sometimes', 'required', 'url'],
             'price' => ['sometimes', 'required', 'numeric'],
             'quantity' => ['sometimes', 'required', 'numeric', 'min:1'],
-            'note' => ['sometimes', 'nullable', 'string']
+            'note' => ['sometimes', 'nullable', 'string'],
         ]));
 
         return back();

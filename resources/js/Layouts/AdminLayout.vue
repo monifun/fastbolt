@@ -39,6 +39,12 @@
                                 Vendors
                             </nav-link>
                             <nav-link
+                                :href="route('admin.products.index')"
+                                :active="route().current('admin.products.*')"
+                            >
+                                Products
+                            </nav-link>
+                            <nav-link
                                 :href="route('admin.orders.index')"
                                 :active="route().current('admin.orders.*')"
                             >
