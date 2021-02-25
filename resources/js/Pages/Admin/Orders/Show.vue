@@ -1,9 +1,21 @@
 <template>
     <admin-layout>
         <template #header>
-            <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Order details
-            </h1>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-semibold leading-tight text-gray-800">
+                        Order #{{ order.id }}
+                    </h1>
+                </div>
+                <div class="mt-4 flex md:mt-0 md:ml-4">
+                    <inertia-link
+                        :href="route('admin.orders.edit', order.id)"
+                        class="inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Edit
+                    </inertia-link>
+                </div>
+            </div>
         </template>
 
         <div class="py-12">
@@ -23,31 +35,31 @@
                                                 scope="col"
                                                 class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                             >
-                                                SL
+                                                Qty
                                             </th>
                                             <th
                                                 scope="col"
                                                 class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                             >
-                                                Đơn giá
+                                                Price
                                             </th>
                                             <th
                                                 scope="col"
                                                 class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                             >
-                                                Tiền hàng
+                                                Subtotal
                                             </th>
                                             <th
                                                 scope="col"
                                                 class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                             >
-                                                Phụ phí
+                                                Fees
                                             </th>
                                             <th
                                                 scope="col"
                                                 class="relative px-6 py-3"
                                             >
-                                                <span class="sr-only">Sửa</span>
+                                                <span class="sr-only">Edit</span>
                                             </th>
                                         </tr>
                                     </thead>
@@ -81,9 +93,10 @@
                                                         >
                                                             <ul class="list-none">
                                                                 <li
-                                                                    v-for="option in product.options"
+                                                                    v-for="(option, index) in product.options"
                                                                     :key="option.label"
                                                                     class="inline"
+                                                                    :class="{'ml-1': index > 0}"
                                                                 >
                                                                     {{ option.label }}: {{ option.value }}
                                                                 </li>
@@ -103,35 +116,35 @@
                                             </td>
                                             <td class="px-6 py-4 text-right tabular-nums whitespace-nowrap">
                                                 <div class="text-sm text-gray-500">
-                                                    {{ product.price | currency(order.currency_code) }}
+                                                    {{ currencyFilter(product.price, order.currency_code) }}
                                                 </div>
                                                 <div class="text-sm text-gray-900">
-                                                    {{ product.price * order.currency_rate | currency() }}
+                                                    {{ currencyFilter(product.price * order.currency_rate) }}
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 text-right tabular-nums whitespace-nowrap">
                                                 <div class="text-sm text-gray-500">
-                                                    {{ product.subtotal | currency(order.currency_code) }}
+                                                    {{ currencyFilter(product.subtotal, order.currency_code) }}
                                                 </div>
                                                 <div class="text-sm text-gray-900">
-                                                    {{ product.subtotal * order.currency_rate | currency() }}
+                                                    {{ currencyFilter(product.subtotal * order.currency_rate) }}
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 text-right tabular-nums whitespace-nowrap">
                                                 <div class="text-sm text-gray-500">
-                                                    {{ product.charge_total | currency(order.currency_code) }}
+                                                    {{ currencyFilter(product.charge_total, order.currency_code) }}
                                                 </div>
                                                 <div class="text-sm text-gray-900">
-                                                    {{ product.charge_total * order.currency_rate | currency() }}
+                                                    {{ currencyFilter(product.charge_total * order.currency_rate) }}
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <a
+                                                <inertia-link
                                                     :href="route('admin.products.edit', product)"
                                                     class="text-indigo-600 hover:text-indigo-900"
                                                 >
-                                                    Sửa
-                                                </a>
+                                                    Edit
+                                                </inertia-link>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -149,6 +162,7 @@
                             </template>
                         </bolt-card>
                     </div>
+
                     <div class="col-span-3 lg:col-span-1">
                         <div class="grid grid-cols-2 gap-6">
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
@@ -221,7 +235,7 @@
                                                     Created at
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
-                                                    {{ new Date(order.created_at) | date }}
+                                                    {{ dateFilter(order.created_at) }}
                                                 </dd>
                                             </div>
 
@@ -230,7 +244,7 @@
                                                     Last update
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
-                                                    {{ new Date(order.updated_at) | date }}
+                                                    {{ dateFilter(order.updated_at) }}
                                                 </dd>
                                             </div>
                                         </dl>
@@ -285,26 +299,26 @@
                                         <dl class="grid grid-cols-1 gap-4">
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Tiền hàng
+                                                    Subtotal
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
-                                                    {{ orderSubtotal * order.currency_rate | currency }}
+                                                    {{ currencyFilter(orderSubtotal * order.currency_rate) }}
                                                 </dd>
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Phụ phí
+                                                    Fees
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
-                                                    {{ orderChargeTotal * order.currency_rate | currency }}
+                                                    {{ currencyFilter(orderChargeTotal * order.currency_rate) }}
                                                 </dd>
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Tổng cộng
+                                                    Grandtotal
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
-                                                    {{ orderGrandTotal * order.currency_rate | currency }}
+                                                    {{ currencyFilter(orderGrandTotal * order.currency_rate) }}
                                                 </dd>
                                             </div>
                                         </dl>
@@ -322,7 +336,8 @@
 <script>
     import AdminLayout from "@/Layouts/AdminLayout";
     import BoltCard from "@/Components/Card";
-
+    import currencyFilter from "@/Filters/currency";
+    import dateFilter from "@/Filters/date";
     export default {
         name: "Show",
         components: {AdminLayout, BoltCard},
@@ -350,6 +365,8 @@
             },
         },
         methods: {
+            currencyFilter,
+            dateFilter,
             updateOrderStatus() {
                 return this.updateOrderStatusForm.put(route('admin.orders.update', this.order), {
                     preserveScroll: true,
