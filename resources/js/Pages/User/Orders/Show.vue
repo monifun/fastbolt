@@ -88,9 +88,10 @@
                                                         >
                                                             <ul class="list-none">
                                                                 <li
-                                                                    v-for="option in product.options"
+                                                                    v-for="(option, index) in product.options"
                                                                     :key="option.label"
                                                                     class="inline"
+                                                                    :class="{'ml-1': index > 0}"
                                                                 >
                                                                     {{ option.label }}: {{ option.value }}
                                                                 </li>
