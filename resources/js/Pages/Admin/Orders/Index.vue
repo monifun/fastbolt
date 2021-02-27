@@ -43,7 +43,7 @@
                                             scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                         >
-                                            Vendor
+                                            User
                                         </th>
                                         <th
                                             scope="col"
@@ -86,7 +86,7 @@
                                                 :href="route('admin.orders.show', order.id)"
                                                 class="px-6 py-4 flex items-center"
                                             >
-                                                {{ order.vendor.name }}
+                                                {{ order.user.name }}
                                             </inertia-link>
                                         </td>
                                         <td class="whitespace-nowrap">

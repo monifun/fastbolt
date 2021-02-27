@@ -22,7 +22,11 @@ class OrderController extends Controller
     {
         return Inertia::render('Admin/Orders/Index', [
             'filters' => request()->all('search'),
-            'orders' => fn () => Order::with('user', 'vendor.market', 'products')->filter(request()->all('search'))->orderByDesc('id')->paginate()
+            'orders' => Order::with([
+                'user' => function ($query) {
+                    return $query->select('id', 'name');
+                }, 'vendor.market',
+            ])->withCount('products')->filter(request()->all('search'))->orderByDesc('id')->paginate(),
         ]);
     }
 
@@ -56,8 +60,14 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return Inertia::render('Admin/Orders/Show', [
-            'order' => $order->load('user', 'vendor.market', 'products'),
-            'orderStatuses' => OrderStatus::asSelectArray()
+            'order' => $order->load('user', 'vendor.market', 'products')->append([
+                'product_price_total',
+                'product_charge_total',
+                'product_grand_total',
+                'charge_total',
+                'grand_total'
+            ]),
+            'orderStatuses' => OrderStatus::asSelectArray(),
         ]);
     }
 
