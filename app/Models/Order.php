@@ -61,4 +61,51 @@ class Order extends Model
             ->using(Chargeable::class)
             ->whereIn('target', ['subtotal', 'grandtotal']);
     }
+
+    public function getProductPriceTotalAttribute()
+    {
+        return $this->products->reduce(function ($total, $product) {
+            return $total + $product->subtotal;
+        }, 0);
+    }
+
+    public function getProductChargeTotalAttribute()
+    {
+        return $this->products->reduce(function ($total, $product) {
+            return $total + $product->charge_total;
+        }, 0);
+    }
+
+    public function getProductGrandTotalAttribute()
+    {
+        return $this->products->reduce(function ($total, $product) {
+            return $total + $product->subtotal + $product->charge_total;
+        }, 0);
+    }
+
+    public function getChargeTotalAttribute()
+    {
+        return $this->charges->reduce(function ($total, $charge) {
+            if ($charge->method === 'fixed') {
+                switch ($charge->target) {
+                    case 'subtotal':
+                        return $total + $charge->pivot->value + $this->product_price_total;
+                    case 'grandtotal':
+                        return $total + $charge->pivot->value + $this->grandtotal;
+                }
+            } else {
+                switch ($charge->target) {
+                    case 'subtotal':
+                        return $total + $charge->pivot->value * $this->product_price_total / 100;
+                    case 'grandtotal':
+                        return $total + $charge->pivot->value * $this->grandtotal / 100;
+                }
+            }
+        }, 0);
+    }
+
+    public function getGrandTotalAttribute()
+    {
+        return $this->product_grand_total + $this->charge_total;
+    }
 }
