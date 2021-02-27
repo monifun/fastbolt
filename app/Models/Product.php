@@ -25,7 +25,8 @@ class Product extends Model
     ];
 
     protected $appends = [
-        'charge_total'
+        'charge_total',
+        'grand_total',
     ];
 
     public function order()
@@ -67,5 +68,10 @@ class Product extends Model
         });
 
         return round($total ?? 0, 2);
+    }
+
+    public function getGrandTotalAttribute()
+    {
+        return $this->subtotal + $this->charge_total;
     }
 }
