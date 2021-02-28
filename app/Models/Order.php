@@ -62,6 +62,21 @@ class Order extends Model
             ->whereIn('target', ['subtotal', 'grandtotal']);
     }
 
+    public function transactions()
+    {
+        return $this->morphMany(Transaction::class, 'payable');
+    }
+
+    public function payments()
+    {
+        return $this->transactions()->where('type', 'payment');
+    }
+
+    public function refunds()
+    {
+        return $this->transactions()->where('type', 'refund');
+    }
+
     public function getProductPriceTotalAttribute()
     {
         return $this->products->reduce(function ($total, $product) {
@@ -107,5 +122,17 @@ class Order extends Model
     public function getGrandTotalAttribute()
     {
         return $this->product_grand_total + $this->charge_total;
+    }
+
+    public function getTotalPaidAttribute()
+    {
+        return $this->payments->reduce(function ($total, $payment) {
+            return $total + $payment->amount;
+        });
+    }
+
+    public function getTotalDueAttribute()
+    {
+        return $this->grand_total * $this->currency_rate - $this->total_paid;
     }
 }

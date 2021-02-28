@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Propaganistas\LaravelPhone\Exceptions\CountryCodeException;
@@ -22,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'phone',
         'password',
-        'email_verified_at'
+        'email_verified_at',
     ];
 
     /**
@@ -44,13 +46,24 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = [
-        'is_admin'
+    protected $with = [
+        'wallet',
     ];
 
-    public function getIsAdminAttribute()
+    protected $appends = [
+        'is_admin',
+        'wallet_balance',
+    ];
+
+
+    public function getIsAdminAttribute(): bool
     {
         return in_array($this->email, config('fastbolt.admin_emails'));
+    }
+
+    public function getWalletBalanceAttribute()
+    {
+        return $this->wallet->balance;
     }
 
     public function setPhoneAttribute($value): string
@@ -82,7 +95,19 @@ class User extends Authenticatable implements MustVerifyEmail
         });
     }
 
-    public function orders()
+    public function wallet(): MorphOne
+    {
+        return $this->morphOne(Wallet::class, 'ownable')->withDefault([
+            'balance' => 0,
+        ]);
+    }
+
+    public function transactions()
+    {
+        return $this->hasManyThrough(Transaction::class, Wallet::class, 'ownable_id', 'wallet_id');
+    }
+
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
