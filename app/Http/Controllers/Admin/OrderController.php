@@ -60,12 +60,14 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return Inertia::render('Admin/Orders/Show', [
-            'order' => $order->load('user', 'vendor.market', 'products')->append([
+            'order' => $order->load('user', 'vendor.market', 'products', 'charges', 'payments', 'refunds')->append([
                 'product_price_total',
                 'product_charge_total',
                 'product_grand_total',
                 'charge_total',
-                'grand_total'
+                'grand_total',
+                'total_paid',
+                'total_due',
             ]),
             'orderStatuses' => OrderStatus::asSelectArray(),
         ]);

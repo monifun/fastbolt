@@ -21,6 +21,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-3 gap-6">
+                    <!-- Products -->
                     <div class="col-span-3 lg:col-span-2">
                         <div class="col-span-3 lg:col-span-2">
                             <div class="overflow-hidden bg-white shadow sm:rounded-lg">
@@ -177,6 +178,7 @@
 
                     <div class="col-span-3 lg:col-span-1">
                         <div class="grid grid-cols-2 gap-6">
+                            <!-- General -->
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
@@ -264,6 +266,7 @@
                                 </bolt-card>
                             </div>
 
+                            <!-- Customer -->
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
@@ -301,10 +304,21 @@
                                 </bolt-card>
                             </div>
 
+                            <!-- Payment -->
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
                                         Payment
+                                    </template>
+
+                                    <template #actions>
+                                        <button
+                                            type="button"
+                                            class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150"
+                                            @click="openPaymentModal"
+                                        >
+                                            add payment
+                                        </button>
                                     </template>
 
                                     <template #content>
@@ -341,6 +355,22 @@
                                                     {{ currencyFilter(order.grand_total * order.currency_rate) }}
                                                 </dd>
                                             </div>
+                                            <div class="col-span-1 flex justify-between">
+                                                <dt class="text-sm leading-5 font-medium text-gray-500">
+                                                    Total paid
+                                                </dt>
+                                                <dd class="mt-1 text-sm leading-5 text-gray-900">
+                                                    {{ currencyFilter(order.total_paid) }}
+                                                </dd>
+                                            </div>
+                                            <div class="col-span-1 flex justify-between">
+                                                <dt class="text-sm leading-5 font-medium text-gray-500">
+                                                    Total due
+                                                </dt>
+                                                <dd class="mt-1 text-sm leading-5 text-gray-900">
+                                                    {{ currencyFilter(order.total_due) }}
+                                                </dd>
+                                            </div>
                                         </dl>
                                     </template>
                                 </bolt-card>
@@ -350,22 +380,85 @@
                 </div>
             </div>
         </div>
+
+        <bolt-dialog-model
+            :show="addNewPayment"
+            :closeable="false"
+            @close="addNewPayment = null"
+        >
+            <template #title>
+                Add new payment
+            </template>
+
+            <template #content>
+                <p>Use user's wallet to pay for this order, current wallet balance is: {{ currencyFilter(order.user.wallet_balance) }}</p>
+                <div class="mt-3">
+                    <bolt-label
+                        for="paymentAmount"
+                        :value="'Amount to pay ' + currencyFilter(order.total_due)"
+                    />
+                    <bolt-input
+                        id="paymentAmount"
+                        v-model="createPaymentForm.amount"
+                        type="number"
+                        class="mt-1 block w-full"
+                        :placeholder="currencyFilter(order.total_due)"
+                        min="1"
+                    />
+                    <bolt-input-error
+                        :message="createPaymentForm.errors.amount"
+                        class="mt-2"
+                    />
+                    <p
+                        v-if="createPaymentForm.amount > 0"
+                        class="mt-2 text-sm text-gray-500"
+                    >
+                        You entered: {{ currencyFilter(createPaymentForm.amount) }}
+                    </p>
+                </div>
+            </template>
+
+            <template #footer>
+                <bolt-secondary-button @click="addNewPayment = null">
+                    Cancel
+                </bolt-secondary-button>
+
+                <bolt-primary-button
+                    class="ml-2"
+                    @click="createOrderPayment"
+                >
+                    Save
+                </bolt-primary-button>
+            </template>
+        </bolt-dialog-model>
     </admin-layout>
 </template>
 
 <script>
     import AdminLayout from "@/Layouts/AdminLayout";
     import BoltCard from "@/Components/Card";
+    import BoltDialogModel from "@/Components/DialogModal";
+    import BoltInput from "@/Components/Input";
+    import BoltInputError from "@/Components/InputError";
+    import BoltLabel from "@/Components/Label";
+    import BoltPrimaryButton from "@/Components/PrimaryButton";
+    import BoltSecondaryButton from "@/Components/SecondaryButton";
     import currencyFilter from "@/Filters/currency";
     import dateFilter from "@/Filters/date";
     export default {
         name: "Show",
-        components: {AdminLayout, BoltCard},
+        components: {AdminLayout, BoltCard, BoltDialogModel, BoltInput, BoltInputError, BoltLabel, BoltPrimaryButton, BoltSecondaryButton},
         props: ['order', 'orderStatuses'],
         data() {
             return {
                 updateOrderStatusForm: this.$inertia.form({
                     status: this.order.status.value,
+                }),
+                addNewPayment: null,
+                createPaymentForm: this.$inertia.form({
+                    type: 'payment',
+                    status: 'completed',
+                    amount: null,
                 }),
             };
         },
@@ -375,6 +468,18 @@
             updateOrderStatus() {
                 return this.updateOrderStatusForm.put(route('admin.orders.update', this.order), {
                     preserveScroll: true,
+                });
+            },
+            openPaymentModal() {
+                return this.addNewPayment = true;
+            },
+            createOrderPayment() {
+                return this.createPaymentForm.post(route('admin.orders.transactions.store', this.order), {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        this.createPaymentForm.reset();
+                        this.addNewPayment = null;
+                    },
                 });
             },
         },
