@@ -17,9 +17,11 @@ class OrderController extends Controller
     public function index()
     {
         return Inertia::render('User/Orders/Index', [
-            'orders' => Order::with(['products' => function($query) {
-                return $query->select(['id', 'order_id', 'name', 'image']);
-            }])->where('user_id', request()->user()->id)->paginate(),
+            'orders' => Order::with([
+                'products' => function ($query) {
+                    return $query->select(['id', 'order_id', 'name', 'image']);
+                },
+            ])->where('user_id', request()->user()->id)->paginate(),
         ]);
     }
 
@@ -39,8 +41,10 @@ class OrderController extends Controller
                 'product_charge_total',
                 'product_grand_total',
                 'charge_total',
-                'grand_total'
-            ])
+                'grand_total',
+                'total_paid',
+                'total_due',
+            ]),
         ]);
     }
 
