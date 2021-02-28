@@ -22,7 +22,7 @@ class MarketFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word(),
+            'name' => $this->faker->company,
             'website' => $this->faker->domainName,
             'description' => $this->faker->paragraph()
         ];
