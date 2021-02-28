@@ -1,9 +1,13 @@
 <template>
     <user-layout>
         <template #header>
-            <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Profile
-            </h1>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-semibold leading-tight text-gray-800">
+                        Profile
+                    </h1>
+                </div>
+            </div>
         </template>
 
         <div class="py-12">
