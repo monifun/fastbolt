@@ -27,10 +27,30 @@
                             >
                                 Profile
                             </nav-link>
+
+                            <nav-link
+                                :href="route('user.wallet.show')"
+                                :active="route().current('user.wallet.*')"
+                            >
+                                Wallet
+                            </nav-link>
+
+                            <nav-link
+                                :href="route('user.orders.index')"
+                                :active="route().current('user.orders.*')"
+                            >
+                                Orders
+                            </nav-link>
                         </div>
                     </div>
 
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <a
+                            href="#"
+                            class="px-3 py-2 rounded-md text-sm font-medium text-gray-500 hover:text-gray-700"
+                        >
+                            Balance: {{ currencyFilter($page.props.auth.user.wallet_balance) }}
+                        </a>
                         <!-- Settings Dropdown -->
                         <div class="ml-3 relative">
                             <drop-down
@@ -192,6 +212,7 @@
     import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
     import DropDown from "@/Components/DropDown";
     import DropDownLink from "@/Components/DropDownLink";
+    import currencyFilter from "@/Filters/currency";
 
     export default {
         name: "UserLayout",
@@ -200,6 +221,9 @@
             return {
                 showingNavigationDropdown: false,
             };
+        },
+        methods: {
+            currencyFilter,
         },
     };
 </script>
