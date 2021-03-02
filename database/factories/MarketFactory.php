@@ -24,6 +24,7 @@ class MarketFactory extends Factory
         return [
             'name' => $this->faker->company,
             'website' => $this->faker->domainName,
+            'currency_code' => $this->faker->randomElement(['USD', 'CNY']),
             'description' => $this->faker->paragraph()
         ];
     }

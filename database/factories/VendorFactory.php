@@ -22,7 +22,7 @@ class VendorFactory extends Factory
     public function definition()
     {
         return [
-            'identity' => $this->faker->unique()->word().$this->faker->unique()->randomNumber(6),
+            'identity' => $this->faker->word().$this->faker->unique()->randomNumber(6),
             'name' => $this->faker->name
         ];
     }
