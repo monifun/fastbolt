@@ -1,5 +1,6 @@
 <template>
-    <div class="bg-white shadow sm:rounded-lg">
+    <div class="bg-white shadow sm:rounded-lg overflow-hidden">
+        <!-- Title and Description -->
         <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
             <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
                 <div class="ml-4 mt-2">
@@ -21,8 +22,18 @@
                 </div>
             </div>
         </div>
+
+        <!-- Content -->
         <div class="px-4 py-5 sm:px-6">
             <slot name="content" />
+        </div>
+
+        <!-- Footer -->
+        <div
+            v-if="hasFooter"
+            class="px-4 py-3 bg-gray-50 sm:px-6"
+        >
+            <slot name="footer" />
         </div>
     </div>
 </template>
@@ -36,6 +47,9 @@
             },
             hasActions() {
                 return !! this.$slots.actions;
+            },
+            hasFooter() {
+                return !! this.$slots.footer;
             },
         },
     };
