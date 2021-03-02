@@ -83,7 +83,7 @@
                                                 class="bg-white"
                                             >
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="flex items-start">
+                                                    <div class="flex items-center">
                                                         <div class="flex-shrink-0 h-14 w-12">
                                                             <img
                                                                 class="h-14 rounded"
