@@ -15,7 +15,7 @@ class Order extends Model
 
     protected $casts = [
         'status' => OrderStatus::class,
-        'currency_rate' => 'float'
+        'currency_rate' => 'float',
     ];
 
     public function setShippingPhoneAttribute($value): string
