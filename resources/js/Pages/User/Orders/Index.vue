@@ -1,80 +1,123 @@
 <template>
     <user-layout>
         <template #header>
-            <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Orders
-            </h1>
+            <div class="md:flex md:items-center md:justify-between">
+                <div class="flex-1 min-w-0">
+                    <h1 class="text-2xl font-semibold leading-tight text-gray-800">
+                        Orders
+                    </h1>
+                </div>
+                <div class="mt-4 flex md:mt-0 md:ml-4">
+                    <inertia-link
+                        :href="route('user.orders.create')"
+                        class="inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Create
+                    </inertia-link>
+                </div>
+            </div>
         </template>
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <bolt-section-title>
-                    <template #title>
-                        Orders
-                    </template>
-                </bolt-section-title>
-                <div class="flex flex-col mt-2">
-                    <div class="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead>
-                                <tr>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        ID
-                                    </th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Products
-                                    </th>
-                                    <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Status
-                                    </th>
-                                    <th class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Date
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <tr
-                                    v-for="order in orders.data"
-                                    :key="order.id"
-                                    class="bg-white"
-                                >
-                                    <td class="max-w-0 px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        <inertia-link
-                                            :href="route('user.orders.show', order.id)"
-                                            class="hover:text-indigo-600 transition ease-in-out duration-150"
-                                        >
-                                            {{ order.id }}
-                                        </inertia-link>
-                                    </td>
-                                    <td class="max-w-0 px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        <div class="flex items-center space-x-2">
-                                            <div class="flex flex-shrink-0 -space-x-1">
-                                                <img
-                                                    v-for="product in order.products.slice(0, 3)"
-                                                    :key="product.id"
-                                                    class="max-w-none h-6 w-6 rounded-full ring-2 ring-white"
-                                                    :src="product.image"
-                                                    :alt="product.name"
-                                                >
-                                            </div>
+                <div class="-ml-4 -mt-4 px-4 sm:px-0 flex justify-between items-center flex-wrap sm:flex-no-wrap">
+                    <div class="ml-4 my-4 w-full max-w-md">
+                        <bolt-search-filter
+                            v-model="form.search"
+                            @reset="reset"
+                        />
+                    </div>
+                </div>
 
-                                            <span
-                                                v-if="order.products.length > 3"
-                                                class="flex-shrink-0 text-xs leading-5 font-medium"
+                <div class="overflow-hidden shadow sm:rounded-lg">
+                    <div class="relative">
+                        <div class="overflow-hidden overflow-x-auto relative">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th
+                                            scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                        >
+                                            ID
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                        >
+                                            Products
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                        >
+                                            Status
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
+                                        >
+                                            Created
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr
+                                        v-for="order in orders.data"
+                                        :key="order.id"
+                                        class="hover:bg-gray-100 focus-within:bg-gray-100"
+                                    >
+                                        <td class="whitespace-nowrap">
+                                            <inertia-link
+                                                :href="route('user.orders.show', order.id)"
+                                                class="px-6 py-4 flex items-center"
                                             >
-                                                +{{ order.products.length - 3 }}
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td class="max-w-0 px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                        {{ order.status.description }}
-                                    </td>
-                                    <td class="px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500 tabular-nums">
-                                        {{ dateFilter(order.created_at) }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                                {{ order.id }}
+                                            </inertia-link>
+                                        </td>
+                                        <td class="whitespace-nowrap">
+                                            <inertia-link
+                                                :href="route('user.orders.show', order.id)"
+                                                class="px-6 py-4 flex items-center"
+                                            >
+                                                <div class="flex flex-shrink-0 -space-x-1">
+                                                    <img
+                                                        v-for="product in order.products.slice(0, 3)"
+                                                        :key="product.id"
+                                                        class="max-w-none h-6 w-6 rounded-full ring-2 ring-white"
+                                                        :src="product.image"
+                                                        :alt="product.name"
+                                                    >
+                                                </div>
+
+                                                <span
+                                                    v-if="order.products.length > 3"
+                                                    class="flex-shrink-0 text-xs leading-5 font-medium"
+                                                >
+                                                    +{{ order.products.length - 3 }}
+                                                </span>
+                                            </inertia-link>
+                                        </td>
+                                        <td class="whitespace-nowrap">
+                                            <inertia-link
+                                                :href="route('user.orders.show', order.id)"
+                                                class="px-6 py-4 flex items-center"
+                                            >
+                                                {{ order.status.description }}
+                                            </inertia-link>
+                                        </td>
+                                        <td class="text-right whitespace-nowrap">
+                                            <inertia-link
+                                                :href="route('user.orders.show', order.id)"
+                                                class="px-6 py-4 flex items-center justify-end"
+                                            >
+                                                {{ dateFilter(order.created_at) }}
+                                            </inertia-link>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- Pagination -->
                         <bolt-pagination-simple
                             :from="orders.from"
@@ -92,15 +135,37 @@
 
 <script>
     import UserLayout from "@/Layouts/UserLayout";
-    import BoltSectionTitle from "@/Components/SectionTitle";
+    import BoltSearchFilter from "@/Components/SearchFilter";
     import BoltPaginationSimple from "@/Components/PaginationSimple";
     import dateFilter from "@/Filters/date";
+    import throttle from "lodash/throttle";
+    import pickBy from "lodash/pickBy";
+    import mapValues from "lodash/mapValues";
     export default {
         name: "Index",
-        components: {UserLayout, BoltSectionTitle, BoltPaginationSimple},
-        props: ['orders'],
+        components: {UserLayout, BoltSearchFilter, BoltPaginationSimple},
+        props: ['orders', 'filters'],
+        data() {
+            return {
+                form: {
+                    search: this.filters.search,
+                },
+            };
+        },
+        watch: {
+            form: {
+                handler: throttle(function () {
+                    let query = pickBy(this.form);
+                    this.$inertia.replace(route('user.orders.index', Object.keys(query).length ? query : {}));
+                }, 500),
+                deep: true,
+            },
+        },
         methods: {
             dateFilter,
+            reset() {
+                this.form = mapValues(this.form, () => null);
+            },
         },
     };
 </script>
