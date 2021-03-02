@@ -14,7 +14,7 @@ class Product extends Model
     ];
 
     protected $casts = [
-        'options' => 'json',
+        'options' => 'array',
         'quantity' => 'integer',
         'price' => 'float',
         'subtotal' => 'float'
