@@ -25,6 +25,8 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth', 'can:viewAdmin'], 'prefix' => config('fastbolt.admin_prefix'), 'as' => 'admin.'], function () {
     Route::get('dashboard', \App\Http\Controllers\Admin\DashboardController::class)->name('dashboard');
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    Route::post('users/{user}/wallet/deposit', [\App\Http\Controllers\Admin\UserWalletController::class, 'deposit'])->name('users.wallet.deposit');
+    Route::post('users/{user}/wallet/refresh', [\App\Http\Controllers\Admin\UserWalletController::class, 'refresh'])->name('users.wallet.refresh');
     Route::resource('markets', \App\Http\Controllers\Admin\MarketController::class);
     Route::resource('vendors', \App\Http\Controllers\Admin\VendorController::class);
     Route::resource('orders', \App\Http\Controllers\Admin\OrderController::class);
