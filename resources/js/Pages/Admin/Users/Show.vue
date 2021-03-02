@@ -14,6 +14,12 @@
                     >
                         Edit
                     </inertia-link>
+                    <button
+                        class="ml-2 inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        @click="openDepositModal"
+                    >
+                        Nạp ví
+                    </button>
                 </div>
             </div>
         </template>
@@ -69,6 +75,26 @@
                                         </span>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+                                <dl class="sm:divide-y sm:divide-gray-200">
+                                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-sm font-medium text-gray-500">
+                                            Joined
+                                        </dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 col-span-2">
+                                            {{ dateFilter(user.created_at) }}
+                                        </dd>
+                                    </div>
+                                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-sm font-medium text-gray-500">
+                                            Balance
+                                        </dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                            {{ currencyFilter(user.wallet_balance) }}
+                                        </dd>
+                                    </div>
+                                </dl>
                             </div>
                         </div>
                     </div>
@@ -239,20 +265,90 @@
                 </div>
             </div>
         </div>
+
+        <bolt-dialog-modal
+            :show="showDepositModal"
+            :closeable="false"
+            :max-width="'md'"
+            @close="showDepositModal = false"
+        >
+            <template #title>
+                Nạp tiền vào ví
+            </template>
+
+            <template #content>
+                <bolt-label
+                    for="amount"
+                    value="Amount"
+                />
+                <bolt-input
+                    id="amount"
+                    v-model="depositForm.amount"
+                    type="number"
+                    class="block w-full"
+                    autocomplete="off"
+                />
+                <bolt-input-error
+                    :message="depositForm.errors.amount"
+                    class="mt-2"
+                />
+                <p class="mt-2 text-sm text-gray-500">
+                    Số tiền nạp vào: {{ currencyFilter(depositForm.amount) }}
+                </p>
+            </template>
+
+            <template #footer>
+                <bolt-secondary-button @click="showDepositModal = false">
+                    Bỏ qua
+                </bolt-secondary-button>
+
+                <bolt-primary-button
+                    class="ml-2"
+                    @click="makeDeposit"
+                >
+                    Lưu lại
+                </bolt-primary-button>
+            </template>
+        </bolt-dialog-modal>
     </admin-layout>
 </template>
 
 <script>
     import AdminLayout from "@/Layouts/AdminLayout";
+    import BoltDialogModal from "@/Components/DialogModal";
+    import BoltInput from "@/Components/Input";
+    import BoltInputError from "@/Components/InputError";
+    import BoltLabel from "@/Components/Label";
+    import BoltPrimaryButton from "@/Components/PrimaryButton";
+    import BoltSecondaryButton from "@/Components/SecondaryButton";
     import currencyFilter from "@/Filters/currency";
     import dateFilter from "@/Filters/date";
     export default {
         name: "Show",
-        components: {AdminLayout},
+        components: {AdminLayout, BoltDialogModal, BoltInput, BoltInputError, BoltLabel, BoltPrimaryButton, BoltSecondaryButton},
         props: ['user'],
+        data() {
+            return {
+                showDepositModal: false,
+                depositForm: this.$inertia.form({
+                    amount: null,
+                }),
+            };
+        },
         methods: {
             currencyFilter,
             dateFilter,
+            openDepositModal() {
+                return this.showDepositModal = true;
+            },
+            makeDeposit() {
+                return this.depositForm.post(route('admin.users.wallet.deposit', this.user), {
+                    onSuccess: () => {
+                        this.depositForm.reset();
+                        this.showDepositModal = false;
+                    },
+                });
+            },
         },
     };
 </script>
