@@ -15,7 +15,9 @@ class Transaction extends Model
         'wallet_id',
         'type',
         'status',
-        'amount'
+        'amount',
+        'meta',
+        'note'
     ];
 
     protected $casts = [
