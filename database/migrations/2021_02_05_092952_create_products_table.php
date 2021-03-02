@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->string('name');
-            $table->json('options')->nullable();
+            $table->json('options')->default(new \Illuminate\Database\Query\Expression('(JSON_ARRAY())'));
             $table->string('image')->nullable();
             $table->string('url')->nullable();
             $table->integer('quantity')->default(1);
