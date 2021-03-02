@@ -2,7 +2,7 @@
     <bolt-authentication-card>
         <template #logo>
             <inertia-link href="/">
-                <bolt-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <bolt-application-logo class="h-20 fill-current text-gray-500" />
             </inertia-link>
         </template>
 
@@ -106,7 +106,7 @@
 </template>
 
 <script>
-    import BoltApplicationLogo from '@/Components/ApplicationMark';
+    import BoltApplicationLogo from '@/Components/ApplicationLogo';
     import BoltAuthenticationCard from '@/Components/AuthenticationCard';
     import BoltButton from '@/Components/PrimaryButton';
     import BoltInput from '@/Components/Input';
