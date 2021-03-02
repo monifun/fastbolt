@@ -41,6 +41,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::put('password', \App\Http\Controllers\User\PasswordController::class)->name('password.update');
     Route::get('wallet', [\App\Http\Controllers\User\WalletController::class, 'show'])->name('wallet.show');
     Route::get('orders', [\App\Http\Controllers\User\OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/create', [\App\Http\Controllers\User\OrderController::class, 'create'])->name('orders.create');
+    Route::post('orders', [\App\Http\Controllers\User\OrderController::class, 'store'])->name('orders.store');
     Route::get('orders/{order}', [\App\Http\Controllers\User\OrderController::class, 'show'])->name('orders.show');
     Route::post('orders/{order}/payments', [\App\Http\Controllers\User\OrderPaymentController::class, 'store'])->name('orders.payments.store');
 });
