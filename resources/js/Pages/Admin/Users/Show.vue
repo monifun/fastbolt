@@ -277,24 +277,41 @@
             </template>
 
             <template #content>
-                <bolt-label
-                    for="amount"
-                    value="Amount"
-                />
-                <bolt-input
-                    id="amount"
-                    v-model="depositForm.amount"
-                    type="number"
-                    class="block w-full"
-                    autocomplete="off"
-                />
-                <bolt-input-error
-                    :message="depositForm.errors.amount"
-                    class="mt-2"
-                />
-                <p class="mt-2 text-sm text-gray-500">
-                    Số tiền nạp vào: {{ currencyFilter(depositForm.amount) }}
-                </p>
+                <div>
+                    <bolt-label
+                        for="amount"
+                        :value="`Số tiền: ${currencyFilter(depositForm.amount)}`"
+                    />
+                    <bolt-input
+                        id="amount"
+                        v-model="depositForm.amount"
+                        type="number"
+                        class="block w-full"
+                        autocomplete="off"
+                    />
+                    <bolt-input-error
+                        :message="depositForm.errors.amount"
+                        class="mt-2"
+                    />
+                </div>
+
+                <div class="mt-6">
+                    <bolt-label
+                        for="note"
+                        value="Ghi chú"
+                    />
+                    <bolt-input
+                        id="note"
+                        v-model="depositForm.note"
+                        type="text"
+                        class="block w-full"
+                        autocomplete="off"
+                    />
+                    <bolt-input-error
+                        :message="depositForm.errors.note"
+                        class="mt-2"
+                    />
+                </div>
             </template>
 
             <template #footer>
@@ -332,6 +349,7 @@
                 showDepositModal: false,
                 depositForm: this.$inertia.form({
                     amount: null,
+                    note: null,
                 }),
             };
         },
