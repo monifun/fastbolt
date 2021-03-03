@@ -50,6 +50,12 @@
                             >
                                 Orders
                             </nav-link>
+                            <nav-link
+                                :href="route('admin.transactions.index')"
+                                :active="route().current('admin.transactions.*')"
+                            >
+                                Transactions
+                            </nav-link>
                         </div>
                     </div>
 
