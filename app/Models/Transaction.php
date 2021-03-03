@@ -25,6 +25,11 @@ class Transaction extends Model
         'amount' => 'float'
     ];
 
+    public function wallet()
+    {
+        return $this->belongsTo(Wallet::class);
+    }
+
     public function payable(): MorphTo
     {
         return $this->morphTo();
