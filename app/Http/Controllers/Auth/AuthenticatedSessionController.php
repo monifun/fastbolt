@@ -41,7 +41,7 @@ class AuthenticatedSessionController extends Controller
         CalculateWalletBalance::dispatchNow($request->user()->wallet);
 
         if ($request->inertia()) {
-            return Inertia::location(RouteServiceProvider::HOME);
+            return Inertia::location(session()->pull('url.intended', RouteServiceProvider::HOME));
         }
 
         return redirect()->intended(RouteServiceProvider::HOME);
