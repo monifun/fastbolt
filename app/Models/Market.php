@@ -23,4 +23,9 @@ class Market extends Model
     {
         return $this->hasMany(Vendor::class);
     }
+
+    public function orders()
+    {
+        return $this->hasManyThrough(Order::class, Vendor::class);
+    }
 }
