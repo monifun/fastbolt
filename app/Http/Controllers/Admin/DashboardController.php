@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Market;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
@@ -35,7 +36,9 @@ class DashboardController extends Controller
             'user' => function ($query) {
                 return $query->select('id', 'name');
             },
-        ])->orderByDesc('created_at')->limit(10)->get();
+        ])->orderByDesc('created_at')->limit(6)->get();
+
+        $topMarkets = Market::withCount('orders')->orderByDesc('orders_count')->limit(5)->get();
 
         return Inertia::render('Admin/Dashboard', [
             'totalUsersCount' => $totalUsersCount,
@@ -45,6 +48,7 @@ class DashboardController extends Controller
             'recentOrders' => $recentOrders,
             'totalProductsCount' => $totalProductsCount,
             'last30DaysProductsCount' => $last30DaysProductsCount,
+            'topMarkets' => $topMarkets,
         ]);
     }
 }
