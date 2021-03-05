@@ -11,5 +11,12 @@ return [
         \App\Enums\ChargeType::FEE => 'Phí',
         \App\Enums\ChargeType::TAX => 'Thuế',
         \App\Enums\ChargeType::OTHER => 'Khác'
-    ]
+    ],
+    \App\Enums\ShipmentStatus::class => [
+        \App\Enums\ShipmentStatus::PENDING => 'Chờ xử lý',
+        \App\Enums\ShipmentStatus::PICKUP => 'Pick up',
+        \App\Enums\ShipmentStatus::TRANSIT => 'Đang vận chuyển',
+        \App\Enums\ShipmentStatus::DELIVERED => 'Phát thành công',
+        \App\Enums\ShipmentStatus::UNDELIVERED => 'Phát thất bại',
+    ],
 ];

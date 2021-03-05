@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Enums\ChargeType;
 use App\Enums\OrderStatus;
+use App\Enums\ShipmentStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Charge;
 use App\Models\Order;
@@ -70,6 +71,7 @@ class OrderController extends Controller
                 'total_due',
             ]),
             'orderStatuses' => OrderStatus::asSelectArray(),
+            'shipmentStatuses' => ShipmentStatus::asSelectArray(),
         ]);
     }
 
@@ -82,7 +84,7 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         return Inertia::render('Admin/Orders/Edit', [
-            'order' => $order->load('charges'),
+            'order' => $order->load('charges', 'shipments'),
             'charges' => Charge::whereIn('target', ['subtotal', 'grandtotal'])->get(),
             'chargeTypes' => ChargeType::asSelectArray(),
         ]);

@@ -39,6 +39,11 @@ class Product extends Model
         return $this->morphToMany(Charge::class, 'chargeable')->withPivot('value')->using(Chargeable::class);
     }
 
+    public function shipments()
+    {
+        return $this->belongsToMany(Shipment::class);
+    }
+
     public function getChargeTotalAttribute()
     {
         $total = $this->charges->reduce(function ($total, $charge) {

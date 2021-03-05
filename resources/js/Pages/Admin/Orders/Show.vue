@@ -375,6 +375,29 @@
                                     </template>
                                 </bolt-card>
                             </div>
+
+                            <!-- Shipment -->
+                            <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
+                                <bolt-card class="flex-1">
+                                    <template #title>
+                                        Shipment
+                                    </template>
+
+                                    <template #actions>
+                                        <button
+                                            type="button"
+                                            class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150"
+                                            @click="openNewShipmentModal"
+                                        >
+                                            add shipment
+                                        </button>
+                                    </template>
+
+                                    <template #content>
+                                        ahihi
+                                    </template>
+                                </bolt-card>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -384,7 +407,7 @@
         <bolt-dialog-model
             :show="addNewPayment"
             :closeable="false"
-            @close="addNewPayment = null"
+            @close="addNewPayment = false"
         >
             <template #title>
                 Add new payment
@@ -419,13 +442,333 @@
             </template>
 
             <template #footer>
-                <bolt-secondary-button @click="addNewPayment = null">
+                <bolt-secondary-button @click="addNewPayment = false">
                     Cancel
                 </bolt-secondary-button>
 
                 <bolt-primary-button
                     class="ml-2"
                     @click="createOrderPayment"
+                >
+                    Save
+                </bolt-primary-button>
+            </template>
+        </bolt-dialog-model>
+
+        <bolt-dialog-model
+            :show="addNewShipment"
+            :closeable="false"
+            @close="addNewShipment = false"
+        >
+            <template #title>
+                Add new shipment
+            </template>
+
+            <template #content>
+                <!-- Product list -->
+                <ul
+                    class="block divide-y divide-gray-200"
+                    :class="{'max-h-64 overflow-y-scroll': !expandProductInShipment}"
+                >
+                    <li
+                        v-for="product in createShipmentForm.products"
+                        :key="product.id"
+                        class="py-4"
+                    >
+                        <div class="flex items-center">
+                            <div class="flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div class="flex items-center">
+                                    <img
+                                        class="h-10 w-10 rounded-full"
+                                        :src="product.image"
+                                        alt="Product image"
+                                    >
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-gray-900">
+                                            {{ product.name }}
+                                        </p>
+                                        <ul class="list-none text-sm text-gray-500">
+                                            <li
+                                                v-for="(option, index) in product.options"
+                                                :key="option.label"
+                                                class="inline"
+                                                :class="{'ml-1': index > 0}"
+                                            >
+                                                {{ option.label }}: {{ option.value }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex-shrink-0 sm:mt-0 sm:ml-4 sm:flex sm:justify-end">
+                                    <bolt-input
+                                        v-model="product.quantity"
+                                        type="text"
+                                        class="block w-full sm:w-1/3 text-center"
+                                        :placeholder="product.quantity"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Expand/Collapse product list -->
+                <div class="relative">
+                    <div
+                        class="absolute inset-0 flex items-center"
+                        aria-hidden="true"
+                    >
+                        <div class="w-full border-t border-gray-300" />
+                    </div>
+                    <div class="relative flex justify-center">
+                        <button
+                            type="button"
+                            class="inline-flex items-center shadow-sm px-2 py-1 border border-gray-300 text-xs leading-5 font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+                            @click="toggleProductInShipment"
+                        >
+                            <span>
+                                {{ expandProductInShipment ? 'Thu gọn' : 'Mở rộng' }}
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Shipment form -->
+                <div class="mt-5 grid grid-cols-6 gap-4">
+                    <!-- Carrier -->
+                    <div class="col-span-6 sm:col-span-2">
+                        <bolt-label
+                            for="carrier"
+                            value="Carrier"
+                        />
+                        <bolt-input
+                            id="carrier"
+                            v-model="createShipmentForm.carrier_name"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
+                        <bolt-input-error
+                            :message="createShipmentForm.errors.carrier_name"
+                            class="mt-2"
+                        />
+                    </div>
+
+                    <!-- Tracking -->
+                    <div class="col-span-6 sm:col-span-2">
+                        <bolt-label
+                            for="tracking"
+                            value="Tracking number"
+                        />
+                        <bolt-input
+                            id="tracking"
+                            v-model="createShipmentForm.tracking_number"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
+                        <bolt-input-error
+                            :message="createShipmentForm.errors.tracking_number"
+                            class="mt-2"
+                        />
+                    </div>
+
+                    <!-- Status -->
+                    <div class="col-span-6 sm:col-span-2">
+                        <bolt-label
+                            for="shipment_status"
+                            value="Status"
+                        />
+                        <select
+                            id="shipment_status"
+                            v-model="createShipmentForm.status"
+                            class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
+                        >
+                            <option
+                                v-for="(value, key) in shipmentStatuses"
+                                :key="key"
+                                :value="key"
+                            >
+                                {{ value }}
+                            </option>
+                        </select>
+                        <bolt-input-error
+                            :message="createShipmentForm.errors.tracking_number"
+                            class="mt-2"
+                        />
+                    </div>
+
+                    <!-- Price -->
+                    <div class="col-span-6">
+                        <div class="grid grid-cols-6 gap-4">
+                            <div class="col-span-2">
+                                <bolt-label
+                                    for="price"
+                                    value="Price"
+                                />
+                                <bolt-input
+                                    id="price"
+                                    v-model="createShipmentForm.price"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    placeholder="0.00"
+                                />
+                                <bolt-input-error
+                                    :message="createShipmentForm.errors.price"
+                                    class="mt-2"
+                                />
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <bolt-label
+                                    for="shipment_currency_code"
+                                    value="Loại tiền"
+                                />
+                                <select
+                                    id="shipment_currency_code"
+                                    v-model="createShipmentForm.currency_code"
+                                    class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
+                                >
+                                    <option :value="order.currency_code">
+                                        {{ order.currency_code }}
+                                    </option>
+                                    <option value="VND">
+                                        VND
+                                    </option>
+                                </select>
+                                <bolt-input-error
+                                    :message="createShipmentForm.errors.currency_code"
+                                    class="mt-2"
+                                />
+                            </div>
+
+                            <div class="col-span-2 sm:col-span-1">
+                                <bolt-label
+                                    for="shipment_currency_rate"
+                                    value="Tỷ giá"
+                                />
+                                <bolt-input
+                                    id="shipment_currency_rate"
+                                    v-model="createShipmentForm.currency_rate"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    placeholder="0.00"
+                                />
+                                <bolt-input-error
+                                    :message="createShipmentForm.errors.currency_rate"
+                                    class="mt-2"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dimension -->
+                    <div class="col-span-6">
+                        <div class="grid grid-cols-8 gap-4">
+                            <!-- Weight -->
+                            <div class="col-span-2 sm:col-span-2">
+                                <bolt-label
+                                    for="weight"
+                                    value="Trọng lượng (gr)"
+                                />
+                                <bolt-input
+                                    id="weight"
+                                    v-model="createShipmentForm.weight"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    placeholder="0.00"
+                                />
+                                <bolt-input-error
+                                    :message="createShipmentForm.errors.weight"
+                                    class="mt-2"
+                                />
+                            </div>
+
+                            <!-- Length -->
+                            <div class="col-span-2 sm:col-span-2">
+                                <bolt-label
+                                    for="length"
+                                    value="Chiều dài (cm)"
+                                />
+                                <bolt-input
+                                    id="length"
+                                    v-model="createShipmentForm.length"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    placeholder="0.00"
+                                />
+                                <bolt-input-error
+                                    :message="createShipmentForm.errors.length"
+                                    class="mt-2"
+                                />
+                            </div>
+
+                            <!-- Width -->
+                            <div class="col-span-2 sm:col-span-2">
+                                <bolt-label
+                                    for="width"
+                                    value="Chiều rộng (cm)"
+                                />
+                                <bolt-input
+                                    id="width"
+                                    v-model="createShipmentForm.width"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    placeholder="0.00"
+                                />
+                                <bolt-input-error
+                                    :message="createShipmentForm.errors.width"
+                                    class="mt-2"
+                                />
+                            </div>
+
+                            <!-- Height -->
+                            <div class="col-span-2 sm:col-span-2">
+                                <bolt-label
+                                    for="height"
+                                    value="Chiều cao (cm)"
+                                />
+                                <bolt-input
+                                    id="height"
+                                    v-model="createShipmentForm.height"
+                                    type="text"
+                                    class="mt-1 block w-full"
+                                    placeholder="0.00"
+                                />
+                                <bolt-input-error
+                                    :message="createShipmentForm.errors.height"
+                                    class="mt-2"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Note -->
+                    <div class="col-span-6">
+                        <bolt-label
+                            for="note"
+                            value="Note"
+                        />
+                        <bolt-input
+                            id="note"
+                            v-model="createShipmentForm.note"
+                            type="text"
+                            class="mt-1 block w-full"
+                        />
+                        <bolt-input-error
+                            :message="createShipmentForm.errors.note"
+                            class="mt-2"
+                        />
+                    </div>
+                </div>
+            </template>
+
+            <template #footer>
+                <bolt-secondary-button @click="addNewShipment = false">
+                    Cancel
+                </bolt-secondary-button>
+
+                <bolt-primary-button
+                    class="ml-2"
+                    @click="createNewShipment"
                 >
                     Save
                 </bolt-primary-button>
@@ -448,18 +791,34 @@
     export default {
         name: "Show",
         components: {AdminLayout, BoltCard, BoltDialogModel, BoltInput, BoltInputError, BoltLabel, BoltPrimaryButton, BoltSecondaryButton},
-        props: ['order', 'orderStatuses'],
+        props: ['order', 'orderStatuses', 'shipmentStatuses'],
         data() {
             return {
                 updateOrderStatusForm: this.$inertia.form({
                     status: this.order.status.value,
                 }),
-                addNewPayment: null,
+                addNewPayment: false,
                 createPaymentForm: this.$inertia.form({
                     type: 'payment',
                     status: 'completed',
                     amount: null,
                 }),
+                addNewShipment: false,
+                createShipmentForm: this.$inertia.form({
+                    status: 'PENDING',
+                    carrier_name: null,
+                    tracking_number: null,
+                    weight: null,
+                    length: null,
+                    width: null,
+                    height: null,
+                    price: null,
+                    currency_code: this.order.currency_code,
+                    currency_rate: this.order.currency_rate,
+                    note: null,
+                    products: this.order.products,
+                }),
+                expandProductInShipment: false,
             };
         },
         methods: {
@@ -478,9 +837,24 @@
                     preserveScroll: true,
                     onSuccess: () => {
                         this.createPaymentForm.reset();
-                        this.addNewPayment = null;
+                        this.addNewPayment = false;
                     },
                 });
+            },
+            openNewShipmentModal() {
+                return this.addNewShipment = true;
+            },
+            createNewShipment() {
+                return this.createShipmentForm.post(route('admin.orders.shipments.store', this.order), {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        this.createShipmentForm.reset();
+                        this.addNewShipment = false;
+                    },
+                });
+            },
+            toggleProductInShipment() {
+                return this.expandProductInShipment =! this.expandProductInShipment;
             },
         },
     };
