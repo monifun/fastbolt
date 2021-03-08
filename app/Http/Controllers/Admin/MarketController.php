@@ -19,7 +19,7 @@ class MarketController extends Controller
     {
         return Inertia::render('Admin/Markets/Index', [
             'filters' => request()->all('search'),
-            'markets' => Market::filter(request()->all('search'))->withCount('vendors')->orderByDesc('created_at')->paginate()
+            'markets' => Market::filter(request()->all('search'))->withCount('vendors')->orderByDesc('created_at')->paginate(),
         ]);
     }
 
@@ -44,12 +44,14 @@ class MarketController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'website' => ['required', 'url', 'unique:markets'],
+            'currency_code' => ['required', Rule::in(collect(config('fastbolt.currency.rates'))->keys())],
             'description' => ['nullable', 'string'],
         ]);
 
         $market = Market::create([
             'name' => $request->name,
             'website' => $request->website,
+            'currency_code' => $request->currency_code,
             'description' => $request->description,
         ]);
 
@@ -65,7 +67,7 @@ class MarketController extends Controller
     public function show($id)
     {
         return Inertia::render('Admin/Markets/Show', [
-            'market' => Market::findOrFail($id)
+            'market' => Market::findOrFail($id),
         ]);
     }
 
@@ -78,7 +80,7 @@ class MarketController extends Controller
     public function edit($id)
     {
         return Inertia::render('Admin/Markets/Edit', [
-            'market' => Market::findOrFail($id)
+            'market' => Market::findOrFail($id),
         ]);
     }
 
@@ -96,12 +98,14 @@ class MarketController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'website' => ['sometimes', 'required', 'url', Rule::unique('markets')->ignore($market->id)],
+            'currency_code' => ['required', Rule::in(collect(config('fastbolt.currency.rates'))->keys())],
             'description' => ['nullable', 'string'],
         ]);
 
         $market->update([
             'name' => $request->name,
             'website' => $request->website,
+            'currency_code' => $request->currency_code,
             'description' => $request->description,
         ]);
 

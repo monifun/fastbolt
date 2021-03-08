@@ -9,7 +9,7 @@ class Market extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'website', 'description'];
+    protected $fillable = ['name', 'website', 'currency_code', 'description'];
 
     public function scopeFilter($query, array $filters)
     {
