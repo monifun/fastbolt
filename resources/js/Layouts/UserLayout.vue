@@ -18,28 +18,21 @@
                                 :href="route('user.dashboard')"
                                 :active="route().current('user.dashboard')"
                             >
-                                Dashboard
-                            </nav-link>
-
-                            <nav-link
-                                :href="route('user.profile.show')"
-                                :active="route().current('user.profile.*')"
-                            >
-                                Profile
+                                Trang chủ
                             </nav-link>
 
                             <nav-link
                                 :href="route('user.wallet.show')"
                                 :active="route().current('user.wallet.*')"
                             >
-                                Wallet
+                                Ví điện tử
                             </nav-link>
 
                             <nav-link
                                 :href="route('user.orders.index')"
                                 :active="route().current('user.orders.*')"
                             >
-                                Orders
+                                Đơn hàng
                             </nav-link>
                         </div>
                     </div>
@@ -78,7 +71,7 @@
                                 <template #content>
                                     <!-- Account Management -->
                                     <drop-down-link :href="route('user.profile.show')">
-                                        Profile
+                                        Hồ sơ cá nhân
                                     </drop-down-link>
 
                                     <div class="border-t border-gray-100" />
@@ -88,7 +81,7 @@
                                         as="button"
                                         method="post"
                                     >
-                                        Logout
+                                        Đăng xuất
                                     </drop-down-link>
                                 </template>
                             </drop-down>
@@ -136,7 +129,21 @@
                         :href="route('user.dashboard')"
                         :active="route().current('user.dashboard')"
                     >
-                        Dashboard
+                        Trang chủ
+                    </responsive-nav-link>
+
+                    <responsive-nav-link
+                        :href="route('user.wallet.show')"
+                        :active="route().current('user.wallet.*')"
+                    >
+                        Ví điện tử
+                    </responsive-nav-link>
+
+                    <responsive-nav-link
+                        :href="route('user.orders.index')"
+                        :active="route().current('user.orders.*')"
+                    >
+                        Đơn hàng
                     </responsive-nav-link>
 
                     <div class="pt-4 pb-1 border-t border-gray-200">
@@ -170,7 +177,7 @@
 
                         <div class="mt-3 space-y-1">
                             <responsive-nav-link :href="route('user.profile.show')">
-                                Profile
+                                Hồ sơ cá nhân
                             </responsive-nav-link>
 
                             <!-- Authentication -->
@@ -179,7 +186,7 @@
                                 as="button"
                                 method="post"
                             >
-                                Logout
+                                Đăng xuất
                             </responsive-nav-link>
                         </div>
                     </div>
