@@ -394,7 +394,16 @@
                                     </template>
 
                                     <template #content>
-                                        ahihi
+                                        <dl class="grid grid-cols-1 gap-4">
+                                            <div v-for="shipment in order.shipments" class="col-span-1 flex justify-between">
+                                                <dt class="text-sm leading-5 font-medium text-gray-500">
+                                                    {{ shipment.id }}
+                                                </dt>
+                                                <dd class="mt-1 text-sm leading-5 text-gray-900">
+                                                    {{ shipment.status.description }}
+                                                </dd>
+                                            </div>
+                                        </dl>
                                     </template>
                                 </bolt-card>
                             </div>
@@ -805,7 +814,7 @@
                 }),
                 addNewShipment: false,
                 createShipmentForm: this.$inertia.form({
-                    status: 'PENDING',
+                    status: 'pending',
                     carrier_name: null,
                     tracking_number: null,
                     weight: null,
