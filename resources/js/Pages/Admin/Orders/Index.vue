@@ -4,7 +4,7 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Orders
+                        Đơn hàng
                     </h1>
                 </div>
             </div>
@@ -37,25 +37,25 @@
                                             scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                         >
-                                            Market
+                                            Thị trường
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                         >
-                                            User
+                                            Người dùng
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                         >
-                                            Status
+                                            Trạng thái
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                         >
-                                            Created
+                                            Ngày tạo
                                         </th>
                                     </tr>
                                 </thead>

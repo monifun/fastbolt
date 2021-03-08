@@ -4,15 +4,28 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Order #{{ order.id }}
+                        Đơn hàng #{{ order.id }}
                     </h1>
                 </div>
                 <div class="mt-4 flex md:mt-0 md:ml-4">
                     <inertia-link
                         :href="route('admin.orders.edit', order.id)"
-                        class="inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="inline-flex items-center px-3 py-2 border border-transparent leading-4 rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Edit
+                        <svg
+                            class="-ml-0.5 mr-2 w-4 h-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                            <path
+                                fill-rule="evenodd"
+                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                        Sửa
                     </inertia-link>
                 </div>
             </div>
@@ -27,7 +40,7 @@
                             <div class="overflow-hidden bg-white shadow sm:rounded-lg">
                                 <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
                                     <h2 class="text-lg leading-6 font-medium text-gray-900">
-                                        Products
+                                        Sản phẩm
                                     </h2>
                                 </div>
                                 <div class="overflow-hidden overflow-x-auto relative">
@@ -36,43 +49,43 @@
                                             <tr>
                                                 <th
                                                     scope="col"
-                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 />
                                                 <th
                                                     scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Qty
+                                                    SL
                                                 </th>
                                                 <th
                                                     scope="col"
-                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Price
+                                                    Đơn giá
                                                 </th>
                                                 <th
                                                     scope="col"
-                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Subtotal
+                                                    Tạm tính
                                                 </th>
                                                 <th
                                                     scope="col"
-                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Fees
+                                                    Phụ phí
                                                 </th>
                                                 <th
                                                     scope="col"
-                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                    class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Total
+                                                    Tổng cộng
                                                 </th>
                                                 <th
                                                     scope="col"
-                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                    class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    <span class="sr-only">Actions</span>
+                                                    <span class="sr-only">Thao tác</span>
                                                 </th>
                                             </tr>
                                         </thead>
@@ -165,7 +178,7 @@
                                                         :href="route('admin.products.edit', product.id)"
                                                         class="hover:text-indigo-600 transition ease-in-out duration-150"
                                                     >
-                                                        Edit
+                                                        Sửa
                                                     </inertia-link>
                                                 </td>
                                             </tr>
@@ -182,14 +195,14 @@
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
-                                        General
+                                        Tổng quan
                                     </template>
 
                                     <template #content>
                                         <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                             <div class="col-span-2">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Status
+                                                    Trạng thái
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     <select
@@ -210,7 +223,7 @@
                                             </div>
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Order ID
+                                                    ID
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.id }}
@@ -219,7 +232,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Exchange rate
+                                                    Tỷ giá
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.currency_rate }}
@@ -228,7 +241,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Market
+                                                    Thị trường
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.vendor.market.name }}
@@ -237,7 +250,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Vendor
+                                                    Cửa hàng
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.vendor.name }}
@@ -246,7 +259,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Created at
+                                                    Ngày tạo đơn
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ dateFilter(order.created_at) }}
@@ -255,7 +268,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Last update
+                                                    Ngày cập nhật
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ dateFilter(order.updated_at) }}
@@ -270,14 +283,23 @@
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
-                                        Customer
+                                        Khách hàng
+                                    </template>
+
+                                    <template #actions>
+                                        <inertia-link
+                                            :href="route('admin.users.show', order.user.id)"
+                                            class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150"
+                                        >
+                                            Chi tiết
+                                        </inertia-link>
                                     </template>
 
                                     <template #content>
                                         <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Name
+                                                    Họ và Tên
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.shipping_name }}
@@ -285,7 +307,7 @@
                                             </div>
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Phone
+                                                    Điện thoại
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.shipping_phone }}
@@ -293,7 +315,7 @@
                                             </div>
                                             <div class="sm:col-span-2">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Address
+                                                    Địa chỉ
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.shipping_address }}
@@ -308,7 +330,7 @@
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
-                                        Payment
+                                        Tài chính
                                     </template>
 
                                     <template #actions>
@@ -317,7 +339,7 @@
                                             class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150"
                                             @click="openPaymentModal"
                                         >
-                                            add payment
+                                            Thêm giao dịch
                                         </button>
                                     </template>
 
@@ -325,7 +347,7 @@
                                         <dl class="grid grid-cols-1 gap-4">
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Total product price
+                                                    Tổng tiền hàng
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.product_price_total * order.currency_rate) }}
@@ -333,7 +355,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Total product fees
+                                                    Tổng phụ phí sản phẩm
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.product_charge_total * order.currency_rate) }}
@@ -341,7 +363,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Order fees
+                                                    Tổng phụ phí đơn hàng
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.charge_total * order.currency_rate) }}
@@ -349,7 +371,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Order total
+                                                    Tổng cộng
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.grand_total * order.currency_rate) }}
@@ -357,7 +379,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Total paid
+                                                    Đã thanh toán
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.total_paid) }}
@@ -365,7 +387,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Total due
+                                                    Dư nợ
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.total_due) }}
@@ -380,7 +402,7 @@
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
-                                        Shipment
+                                        Vận chuyển
                                     </template>
 
                                     <template #actions>
@@ -389,7 +411,7 @@
                                             class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150"
                                             @click="openNewShipmentModal"
                                         >
-                                            add shipment
+                                            Thêm vận đơn
                                         </button>
                                     </template>
 
@@ -419,15 +441,15 @@
             @close="addNewPayment = false"
         >
             <template #title>
-                Add new payment
+                Thêm giao dịch mới
             </template>
 
             <template #content>
-                <p>Use user's wallet to pay for this order, current wallet balance is: {{ currencyFilter(order.user.wallet_balance) }}</p>
+                <p>Sử dụng ví điện tử để tạo giao dịch cho đơn hàng, số dư hiện tại là: {{ currencyFilter(order.user.wallet_balance) }}</p>
                 <div class="mt-3">
                     <bolt-label
                         for="paymentAmount"
-                        :value="'Amount to pay ' + currencyFilter(order.total_due)"
+                        :value="'Số tiền cần thanh toán ' + currencyFilter(order.total_due)"
                     />
                     <bolt-input
                         id="paymentAmount"
@@ -445,21 +467,21 @@
                         v-if="createPaymentForm.amount > 0"
                         class="mt-2 text-sm text-gray-500"
                     >
-                        You entered: {{ currencyFilter(createPaymentForm.amount) }}
+                        Bạn đã nhập: {{ currencyFilter(createPaymentForm.amount) }}
                     </p>
                 </div>
             </template>
 
             <template #footer>
                 <bolt-secondary-button @click="addNewPayment = false">
-                    Cancel
+                    Hủy bỏ
                 </bolt-secondary-button>
 
                 <bolt-primary-button
                     class="ml-2"
                     @click="createOrderPayment"
                 >
-                    Save
+                    Lưu lại
                 </bolt-primary-button>
             </template>
         </bolt-dialog-model>
@@ -470,7 +492,7 @@
             @close="addNewShipment = false"
         >
             <template #title>
-                Add new shipment
+                Thêm vận đơn
             </template>
 
             <template #content>
@@ -548,7 +570,7 @@
                     <div class="col-span-6 sm:col-span-2">
                         <bolt-label
                             for="carrier"
-                            value="Carrier"
+                            value="Nhà vận chuyển"
                         />
                         <bolt-input
                             id="carrier"
@@ -566,7 +588,7 @@
                     <div class="col-span-6 sm:col-span-2">
                         <bolt-label
                             for="tracking"
-                            value="Tracking number"
+                            value="Mã vận đơn"
                         />
                         <bolt-input
                             id="tracking"
@@ -584,7 +606,7 @@
                     <div class="col-span-6 sm:col-span-2">
                         <bolt-label
                             for="shipment_status"
-                            value="Status"
+                            value="Trạng thái"
                         />
                         <select
                             id="shipment_status"
@@ -611,7 +633,7 @@
                             <div class="col-span-2">
                                 <bolt-label
                                     for="price"
-                                    value="Price"
+                                    value="Giá tiền"
                                 />
                                 <bolt-input
                                     id="price"
@@ -754,7 +776,7 @@
                     <div class="col-span-6">
                         <bolt-label
                             for="note"
-                            value="Note"
+                            value="Ghi chú"
                         />
                         <bolt-input
                             id="note"
@@ -772,14 +794,14 @@
 
             <template #footer>
                 <bolt-secondary-button @click="addNewShipment = false">
-                    Cancel
+                    Hủy bỏ
                 </bolt-secondary-button>
 
                 <bolt-primary-button
                     class="ml-2"
                     @click="createNewShipment"
                 >
-                    Save
+                    Lưu lại
                 </bolt-primary-button>
             </template>
         </bolt-dialog-model>
