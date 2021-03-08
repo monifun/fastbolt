@@ -97,7 +97,7 @@
                                                 {{ order.status.description }}
                                             </inertia-link>
                                         </td>
-                                        <td class="text-right whitespace-nowrap">
+                                        <td class="whitespace-nowrap tabular-nums">
                                             <inertia-link
                                                 :href="route('admin.orders.show', order.id)"
                                                 class="px-6 py-4 flex items-center justify-end"
