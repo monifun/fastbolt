@@ -4,7 +4,7 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Edit vendor
+                        Cập nhật cửa hàng
                     </h1>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="market"
-                                        value="Market"
+                                        value="Thị trường"
                                     />
                                     <select
                                         id="market"
@@ -32,7 +32,7 @@
                                             value="null"
                                             disabled
                                         >
-                                            Please select one
+                                            Vui lòng chọn
                                         </option>
                                         <option
                                             v-for="market in markets"
@@ -52,7 +52,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="identity"
-                                        value="Identity"
+                                        value="Mã định danh"
                                     />
                                     <bolt-input
                                         id="identity"
@@ -70,7 +70,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="name"
-                                        value="Name"
+                                        value="Tên"
                                     />
                                     <bolt-input
                                         id="name"
@@ -92,13 +92,13 @@
                                 :on="vendorForm.recentlySuccessful"
                                 class="mr-3"
                             >
-                                Saved.
+                                Đã lưu.
                             </bolt-action-message>
                             <bolt-primary-button
                                 :class="{ 'opacity-25': vendorForm.processing }"
                                 :disabled="vendorForm.processing"
                             >
-                                Save
+                                Lưu lại
                             </bolt-primary-button>
                         </div>
                     </div>
