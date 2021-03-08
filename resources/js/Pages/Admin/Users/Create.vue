@@ -4,7 +4,7 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Create new user
+                        Thêm người dùng mới
                     </h1>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="name"
-                                        value="Name"
+                                        value="Họ và Tên"
                                     />
                                     <bolt-input
                                         id="name"
@@ -56,7 +56,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="phone"
-                                        value="Phone"
+                                        value="Điện thoại"
                                     />
                                     <bolt-input
                                         id="phone"
@@ -74,7 +74,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="password"
-                                        value="Password"
+                                        value="Mật khẩu"
                                     />
                                     <bolt-input
                                         id="password"
@@ -92,7 +92,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="password_confirmation"
-                                        value="Password confirmation"
+                                        value="Xác nhận mật khẩu"
                                     />
                                     <bolt-input
                                         id="password_confirmation"
@@ -116,7 +116,7 @@
                                                 class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                                 :checked="userForm.email_verified"
                                             >
-                                            <span class="ml-2">Email verified</span>
+                                            <span class="ml-2">Đã xác nhận email</span>
                                         </label>
                                     </div>
                                 </div>

@@ -4,20 +4,45 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        User details
+                        Thông tin người dùng
                     </h1>
                 </div>
                 <div class="mt-4 flex md:mt-0 md:ml-4">
                     <inertia-link
                         :href="route('admin.users.edit', user.id)"
-                        class="inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="inline-flex items-center px-3 py-2 border border-transparent leading-4 rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Edit
+                        <svg
+                            class="-ml-0.5 mr-2 w-4 h-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+                            <path
+                                fill-rule="evenodd"
+                                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                        Sửa
                     </inertia-link>
                     <button
-                        class="ml-2 inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="ml-2 inline-flex items-center px-3 py-2 border border-transparent leading-4 rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         @click="openDepositModal"
                     >
+                        <svg
+                            class="-ml-0.5 mr-2 w-4 h-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
                         Nạp ví
                     </button>
                 </div>
@@ -80,15 +105,23 @@
                                 <dl class="sm:divide-y sm:divide-gray-200">
                                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt class="text-sm font-medium text-gray-500">
-                                            Joined
+                                            Đăng ký
                                         </dt>
                                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 col-span-2">
-                                            {{ dateFilter(user.created_at) }}
+                                            {{ dateFilter(user.created_at, 'dd-MM-yyyy') }}
                                         </dd>
                                     </div>
                                     <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt class="text-sm font-medium text-gray-500">
-                                            Balance
+                                            Điện thoại
+                                        </dt>
+                                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 col-span-2">
+                                            {{ user.phone }}
+                                        </dd>
+                                    </div>
+                                    <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt class="text-sm font-medium text-gray-500">
+                                            Số dư ví
                                         </dt>
                                         <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                             {{ currencyFilter(user.wallet_balance) }}
@@ -104,10 +137,10 @@
                         <div class="bg-white overflow-hidden shadow sm:rounded-lg">
                             <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                    Orders
+                                    Đơn hàng
                                 </h3>
                                 <p class="mt-1 text-sm text-gray-500">
-                                    List of recent orders
+                                    Danh sách đơn hàng được tạo gần đây
                                 </p>
                             </div>
                             <div>
@@ -128,13 +161,13 @@
                                                     scope="col"
                                                     class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Status
+                                                    Trạng thái
                                                 </th>
                                                 <th
                                                     scope="col"
                                                     class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Created
+                                                    Ngày tạo
                                                 </th>
                                             </tr>
                                         </thead>
@@ -176,7 +209,7 @@
                                     v-else
                                     class="px-4 py-5 sm:p-6"
                                 >
-                                    No records to display
+                                    Không có dữ liệu.
                                 </div>
                             </div>
                         </div>
@@ -185,10 +218,10 @@
                         <div class="mt-6 bg-white overflow-hidden shadow sm:rounded-lg">
                             <div class="border-b border-gray-200 px-4 py-5 sm:px-6">
                                 <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                    Transactions
+                                    Giao dịch
                                 </h3>
                                 <p class="mt-1 text-sm text-gray-500">
-                                    List of recent transactions
+                                    Danh sách giao dịch thực hiện gần đây
                                 </p>
                             </div>
                             <div>
@@ -209,13 +242,13 @@
                                                     scope="col"
                                                     class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Amount
+                                                    Số tiền
                                                 </th>
                                                 <th
                                                     scope="col"
                                                     class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                 >
-                                                    Created
+                                                    Thời gian
                                                 </th>
                                             </tr>
                                         </thead>
@@ -255,9 +288,9 @@
                                 </div>
                                 <p
                                     v-else
-                                    class="px-4 py-5"
+                                    class="px-4 py-5 sm:p-6"
                                 >
-                                    No records to display
+                                    Không có dữ liệu.
                                 </p>
                             </div>
                         </div>
