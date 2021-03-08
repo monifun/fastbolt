@@ -4,7 +4,7 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Dashboard
+                        Bảng điều khiển
                     </h1>
                 </div>
             </div>
@@ -12,62 +12,77 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <!-- Statistics -->
-                <div>
-                    <bolt-section-title>
-                        <template #title>
-                            Last 30 days
-                        </template>
-                    </bolt-section-title>
-                    <dl class="mt-2 grid grid-cols-1 sm:rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
-                        <div>
-                            <div class="px-4 py-5 sm:p-6">
-                                <dt class="text-base font-normal text-gray-900">
-                                    Users
-                                </dt>
-                                <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                                    <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                        {{ last30DaysUsersCount }}
-                                        <span class="ml-2 text-sm font-medium text-gray-500">
-                                            in total of {{ totalUsersCount }} users
-                                        </span>
+                <div class="mt-2 grid grid-cols-3 gap-6 flex flex-wrap">
+                    <div class="col-span-3 sm:col-span-1 flex flex-col w-full">
+                        <!-- Statistics -->
+                        <bolt-card class="flex-1">
+                            <template #content>
+                                <div>
+                                    <h2 class="text-lg font-semibold">
+                                        Thống kê
+                                    </h2>
+                                    <p class="text-gray-500 text-sm">
+                                        Tổng quan dữ liệu 30 ngày qua.
+                                    </p>
+                                </div>
+                                <dl class="py-6 grid grid-cols-2 gap-6">
+                                    <div>
+                                        <dt class="text-gray-500 text-sm font-medium">
+                                            Khách hàng
+                                        </dt>
+                                        <dd class="text-2xl font-medium text-indigo-600">
+                                            {{ last30DaysUsersCount }}
+                                        </dd>
                                     </div>
-                                </dd>
-                            </div>
-                        </div>
 
-                        <div>
-                            <div class="px-4 py-5 sm:p-6">
-                                <dt class="text-base font-normal text-gray-900">
-                                    Orders
-                                </dt>
-                                <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                                    <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                        {{ last30DaysOrdersCount }}
-                                        <span class="ml-2 text-sm font-medium text-gray-500">
-                                            in total of {{ totalOrdersCount }} orders
-                                        </span>
+                                    <div>
+                                        <dt class="text-gray-500 text-sm font-medium">
+                                            Giao dịch
+                                        </dt>
+                                        <dd class="text-2xl font-medium text-indigo-600">
+                                            {{ last30DaysTransactionsCount }}
+                                        </dd>
                                     </div>
-                                </dd>
-                            </div>
-                        </div>
 
-                        <div>
-                            <div class="px-4 py-5 sm:p-6">
-                                <dt class="text-base font-normal text-gray-900">
-                                    Products
-                                </dt>
-                                <dd class="mt-1 flex justify-between items-baseline md:block lg:flex">
-                                    <div class="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                        {{ totalProductsCount }}
-                                        <span class="ml-2 text-sm font-medium text-gray-500">
-                                            in total of {{ last30DaysProductsCount }} products
-                                        </span>
+                                    <div>
+                                        <dt class="text-gray-500 text-sm font-medium">
+                                            Đơn hàng
+                                        </dt>
+                                        <dd class="text-2xl font-medium text-indigo-600">
+                                            {{ last30DaysOrdersCount }}
+                                        </dd>
                                     </div>
-                                </dd>
-                            </div>
-                        </div>
-                    </dl>
+
+                                    <div>
+                                        <dt class="text-gray-500 text-sm font-medium">
+                                            Sản phẩm
+                                        </dt>
+                                        <dd class="text-2xl font-medium text-indigo-600">
+                                            {{ last30DaysProductsCount }}
+                                        </dd>
+                                    </div>
+                                </dl>
+                            </template>
+                        </bolt-card>
+                    </div>
+                    <div class="col-span-3 sm:col-span-2 flex flex-col w-full">
+                        <!-- Graph -->
+                        <bolt-card class="flex-1 relative">
+                            <template #content>
+                                <div>
+                                    <h2 class="text-lg font-semibold">
+                                        Biểu đồ đơn hàng
+                                    </h2>
+                                    <p class="text-gray-500 text-sm">
+                                        Mô tả tình hình tăng trưởng đơn hàng 30 ngày qua.
+                                    </p>
+                                </div>
+                                <div class="-mx-8 -my-10 sm:-mx-6 sm:-my-5 sm:absolute bottom-0 inset-x-0 h-2/3">
+                                    <canvas id="myChart" />
+                                </div>
+                            </template>
+                        </bolt-card>
+                    </div>
                 </div>
 
                 <div class="mt-8">
@@ -75,7 +90,7 @@
                         <div class="col-span-3 sm:col-span-1 flex flex-col">
                             <bolt-card class="flex-1">
                                 <template #title>
-                                    Top markets
+                                    Thị trường nổi bật
                                 </template>
                                 <template #content>
                                     <ul class="divide-y divide-gray-200 -mx-4 sm:-mx-6 -my-5">
@@ -115,7 +130,7 @@
                             <!-- Recent orders -->
                             <bolt-card class="flex-1">
                                 <template #title>
-                                    Recent orders
+                                    Đơn hàng gần đây
                                 </template>
                                 <template #content>
                                     <div class="relative -mx-4 -my-5 sm:-mx-6">
@@ -136,19 +151,19 @@
                                                             scope="col"
                                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                         >
-                                                            User
+                                                            Khách hàng
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                         >
-                                                            Status
+                                                            Trạng thái
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                                         >
-                                                            Created
+                                                            Thời gian
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -213,14 +228,76 @@
 
 <script>
     import AdminLayout from "@/Layouts/AdminLayout";
-    import BoltSectionTitle from "@/Components/SectionTitle";
     import BoltCard from "@/Components/Card";
     import dateFilter from "@/Filters/date";
 
     export default {
         name: "Dashboard",
-        components: {AdminLayout, BoltSectionTitle, BoltCard},
-        props: ['last30DaysUsersCount', 'totalUsersCount', 'last30DaysOrdersCount', 'totalOrdersCount', 'recentOrders', 'totalProductsCount', 'last30DaysProductsCount', 'topMarkets'],
+        components: {AdminLayout, BoltCard},
+        props: ['last30DaysUsersCount', 'totalUsersCount', 'last30DaysTransactionsCount', 'totalTransactionsCount', 'last30DaysOrdersCount', 'totalOrdersCount', 'recentOrders', 'totalProductsCount', 'last30DaysProductsCount', 'topMarkets', 'orders_graph'],
+        mounted() {
+            const dates = [...Array(30)].map((_, i) => {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                return d.toLocaleDateString('vi-VN');
+            }).reverse();
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+                // The data for our dataset
+                data: {
+                    labels: dates,
+                    datasets: [{
+                        label: 'Đơn hàng',
+                        backgroundColor: 'rgba(141, 162, 251)',
+                        borderColor: 'rgba(104,117,245)',
+                        data: this.orders_graph,
+                    }],
+                },
+                // Configuration options go here
+                options: {
+                    layout: {
+                        padding: {
+                            top: 5,
+                        },
+                    },
+                    maintainAspectRatio: false,
+                    legend: {
+                        display: false,
+                    },
+                    elements: {
+                        point: {
+                            radius: 2,
+                        },
+                    },
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                display: false,
+                            },
+                            gridLines: {
+                                display: false,
+                            },
+                            scaleLabel: {
+                                display: false,
+                            },
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                display: false,
+                            },
+                            gridLines: {
+                                display: false,
+                            },
+                            scaleLabel: {
+                                display: false,
+                            },
+                        }],
+                    },
+                },
+            });
+        },
         methods: {
             dateFilter,
         },
