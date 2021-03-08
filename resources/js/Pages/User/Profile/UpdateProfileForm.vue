@@ -1,11 +1,11 @@
 <template>
     <bolt-form-section @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Thông tin
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Cập nhật thông tin cá nhân và địa chỉ email của bạn.
         </template>
 
         <template #form>
@@ -13,7 +13,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <bolt-label
                     for="name"
-                    value="Name"
+                    value="Họ và Tên"
                 />
                 <bolt-input
                     id="name"
@@ -32,7 +32,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <bolt-label
                     for="phone"
-                    value="Phone"
+                    value="Điện thoại"
                 />
                 <bolt-input
                     id="phone"
@@ -71,14 +71,14 @@
                 :on="form.recentlySuccessful"
                 class="mr-3"
             >
-                Saved.
+                Đã lưu.
             </bolt-action-message>
 
             <bolt-primary-button
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
             >
-                Save
+                Lưu lại
             </bolt-primary-button>
         </template>
     </bolt-form-section>

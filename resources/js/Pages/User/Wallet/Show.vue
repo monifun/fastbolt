@@ -4,7 +4,7 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Wallet
+                        Ví điện tử
                     </h1>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                 <!-- Overview -->
                 <bolt-section-title>
                     <template #title>
-                        Overview
+                        Tổng quan
                     </template>
                 </bolt-section-title>
                 <div class="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -43,7 +43,7 @@
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
                                         <dt class="text-sm font-medium text-gray-500 truncate">
-                                            Account balance
+                                            Số dư
                                         </dt>
                                         <dd>
                                             <div class="text-lg font-medium text-gray-900">
@@ -60,7 +60,7 @@
                 <!-- Recent activity -->
                 <bolt-section-title class="mt-8">
                     <template #title>
-                        Recent activity
+                        Giao dịch gần đây
                     </template>
                 </bolt-section-title>
                 <div class="flex flex-col mt-2">
@@ -69,13 +69,13 @@
                             <thead>
                                 <tr>
                                     <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Type
+                                        Loại
                                     </th>
                                     <th class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Amount
+                                        Số tiền
                                     </th>
                                     <th class="px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Date
+                                        Thời gian
                                     </th>
                                 </tr>
                             </thead>

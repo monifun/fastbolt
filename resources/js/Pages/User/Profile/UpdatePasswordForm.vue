@@ -1,18 +1,18 @@
 <template>
     <bolt-form-section @submitted="updatePassword">
         <template #title>
-            Update Password
+            Mật khẩu
         </template>
 
         <template #description>
-            Ensure your account is using a long, random password to stay secure.
+            Hãy sử dụng mật khẩu dài, ngẫu nhiên để đảm bảo an toàn.
         </template>
 
         <template #form>
             <div class="col-span-6 sm:col-span-4">
                 <bolt-label
                     for="current_password"
-                    value="Current Password"
+                    value="Mật khẩu hiện tại"
                 />
                 <bolt-input
                     id="current_password"
@@ -31,7 +31,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <bolt-label
                     for="password"
-                    value="New Password"
+                    value="Mật khẩu mới"
                 />
                 <bolt-input
                     id="password"
@@ -50,7 +50,7 @@
             <div class="col-span-6 sm:col-span-4">
                 <bolt-label
                     for="password_confirmation"
-                    value="Confirm Password"
+                    value="Xác nhận mật khẩu mới"
                 />
                 <bolt-input
                     id="password_confirmation"
@@ -71,14 +71,14 @@
                 :on="form.recentlySuccessful"
                 class="mr-3"
             >
-                Saved.
+                Đã lưu.
             </bolt-action-message>
 
             <bolt-primary-button
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
             >
-                Save
+                Lưu lại
             </bolt-primary-button>
         </template>
     </bolt-form-section>
