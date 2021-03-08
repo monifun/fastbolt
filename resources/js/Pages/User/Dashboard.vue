@@ -233,7 +233,7 @@
             </div>
 
             <div class="mt-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <h2 class="text-lg leading-6 font-medium text-gray-900">
+                <h2 class="px-4 sm:px-0 text-lg leading-6 font-medium text-gray-900">
                     Đơn hàng gần đây
                 </h2>
                 <div class="mt-2 overflow-hidden shadow sm:rounded-lg">
