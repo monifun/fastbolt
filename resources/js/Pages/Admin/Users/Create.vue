@@ -129,7 +129,7 @@
                                 :class="{ 'opacity-25': userForm.processing }"
                                 :disabled="userForm.processing"
                             >
-                                Save
+                                Lưu lại
                             </bolt-primary-button>
                         </div>
                     </div>
