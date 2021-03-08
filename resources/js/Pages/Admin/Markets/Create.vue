@@ -4,7 +4,7 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Create new market
+                        Thêm thị trường mới
                     </h1>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                                 <div class="block">
                                     <bolt-label
                                         for="name"
-                                        value="Name"
+                                        value="Tên"
                                     />
                                     <bolt-input
                                         id="name"
@@ -53,11 +53,29 @@
                                     />
                                 </div>
 
+                                <!-- Currency code -->
+                                <div class="block">
+                                    <bolt-label
+                                        for="currency_code"
+                                        value="Loại tiền"
+                                    />
+                                    <bolt-input
+                                        id="currency_code"
+                                        v-model="marketForm.currency_code"
+                                        type="text"
+                                        class="mt-1 block w-full"
+                                    />
+                                    <bolt-input-error
+                                        :message="marketForm.errors.currency_code"
+                                        class="mt-2"
+                                    />
+                                </div>
+
                                 <!-- Description -->
                                 <div class="block">
                                     <bolt-label
                                         for="description"
-                                        value="Description"
+                                        value="Mô tả"
                                     />
                                     <bolt-input
                                         id="description"
@@ -79,7 +97,7 @@
                                 :class="{ 'opacity-25': marketForm.processing }"
                                 :disabled="marketForm.processing"
                             >
-                                Save
+                                Lưu lại
                             </bolt-primary-button>
                         </div>
                     </div>
@@ -103,6 +121,7 @@
                 marketForm: this.$inertia.form({
                     name: null,
                     website: null,
+                    currency_code: null,
                     description: null,
                 }),
             };

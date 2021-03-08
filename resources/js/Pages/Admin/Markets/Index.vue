@@ -4,15 +4,27 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Markets
+                        Thị trường
                     </h1>
                 </div>
                 <div class="mt-4 flex md:mt-0 md:ml-4">
                     <inertia-link
                         :href="route('admin.markets.create')"
-                        class="inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="inline-flex items-center px-3 py-2 border border-transparent leading-4 rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Create
+                        <svg
+                            class="-ml-0.5 mr-2 w-4 h-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                        Thêm mới
                     </inertia-link>
                 </div>
             </div>
@@ -38,7 +50,7 @@
                                             scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            Name
+                                            Tên
                                         </th>
                                         <th
                                             scope="col"
@@ -50,13 +62,13 @@
                                             scope="col"
                                             class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            Vendors
+                                            Cửa hàng
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            Created
+                                            Ngày tạo
                                         </th>
                                     </tr>
                                 </thead>
