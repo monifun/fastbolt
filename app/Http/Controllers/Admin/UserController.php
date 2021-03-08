@@ -67,30 +67,30 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Inertia\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
         return Inertia::render('Admin/Users/Show', [
-            'user' => User::with([
+            'user' => $user->load([
                 'orders' => function ($query) {
                     return $query->orderByDesc('created_at')->limit(10);
                 },
                 'transactions' => function ($query) {
                     return $query->orderByDesc('created_at')->limit(10);
                 },
-            ])->findOrFail($id),
+            ]),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Inertia\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         return Inertia::render('Admin/Users/Edit', [
-            'user' => User::findOrFail($id),
+            'user' => $user,
         ]);
     }
 
@@ -98,28 +98,36 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'name' => ['sometimes', 'required', 'string', 'max:255'],
+            'email' => [
+                'sometimes', 'required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id),
+            ],
             'phone' => ['sometimes', 'required', 'phone:VN', Rule::unique('users')->ignore($user->id)],
             'password' => ['sometimes', 'required', 'string', 'confirmed'],
-            'email_verified' => ['required', 'boolean'],
+            'email_verified' => ['sometimes', 'required', 'boolean'],
         ]);
+        // Update user profile information without password and verification status
+        $user->update($request->except(['password', 'email_verified']));
 
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
-            'email_verified_at' => $request->email_verified ? now() : null,
-        ]);
+        // Update password if present
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
+
+        // Update verification status if present
+        if ($request->filled('email_verified')) {
+            $user->update([
+                'email_verified_at' => $request->email_verified ? now() : null,
+            ]);
+        }
 
         return back();
     }
@@ -127,10 +135,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
     }
