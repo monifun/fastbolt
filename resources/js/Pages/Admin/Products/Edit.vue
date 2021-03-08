@@ -4,21 +4,28 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Edit product
+                        Cập nhật sản phẩm
                     </h1>
                 </div>
                 <div class="mt-4 flex md:mt-0 md:ml-4">
                     <inertia-link
-                        :href="route('admin.products.index')"
-                        class="inline-flex items-center px-4 py-1 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Index
-                    </inertia-link>
-                    <inertia-link
                         :href="route('admin.products.show', product)"
-                        class="ml-3 inline-flex items-center px-4 py-1 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        class="inline-flex items-center px-3 py-2 border border-transparent leading-4 rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
-                        Details
+                        <svg
+                            class="-ml-0.5 mr-2 w-4 h-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                        >
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                            <path
+                                fill-rule="evenodd"
+                                d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
+                                clip-rule="evenodd"
+                            />
+                        </svg>
+                        Chi tiết
                     </inertia-link>
                 </div>
             </div>
@@ -29,11 +36,11 @@
                 <!-- Details -->
                 <bolt-form-section @submitted="updateProductDetails">
                     <template #title>
-                        Product Information
+                        Thông tin
                     </template>
 
                     <template #description>
-                        Update product information.
+                        Cập nhật thông tin chi tiết sản phẩm.
                     </template>
 
                     <template #form>
@@ -41,7 +48,7 @@
                         <div class="col-span-6 lg:col-span-4">
                             <bolt-label
                                 for="name"
-                                value="Name"
+                                value="Tên"
                             />
                             <bolt-input
                                 id="name"
@@ -59,7 +66,7 @@
                         <div class="col-span-6 lg:col-span-4">
                             <bolt-label
                                 for="image"
-                                value="Image URL"
+                                value="Link ảnh"
                             />
                             <bolt-input
                                 id="image"
@@ -77,7 +84,7 @@
                         <div class="col-span-6 lg:col-span-4">
                             <bolt-label
                                 for="url"
-                                value="Sale URL"
+                                value="Link bán"
                             />
                             <bolt-input
                                 id="url"
@@ -97,7 +104,7 @@
                                 <div class="col-span-3">
                                     <bolt-label
                                         for="price"
-                                        value="Price"
+                                        value="Đơn giá"
                                     />
 
                                     <div class="mt-1 relative rounded-md shadow-sm">
@@ -125,7 +132,7 @@
                                 <div class="col-span-3">
                                     <bolt-label
                                         for="quantity"
-                                        value="Quantity"
+                                        value="Số lượng"
                                     />
                                     <bolt-input
                                         id="quantity"
@@ -148,14 +155,14 @@
                             :on="productDetailsForm.recentlySuccessful"
                             class="mr-3"
                         >
-                            Saved.
+                            Đã lưu.
                         </bolt-action-message>
 
                         <bolt-primary-button
                             :class="{ 'opacity-25': productDetailsForm.processing }"
                             :disabled="productDetailsForm.processing"
                         >
-                            Save
+                            Lưu lại
                         </bolt-primary-button>
                     </template>
                 </bolt-form-section>
@@ -168,11 +175,11 @@
                     @submitted="createProductCharge"
                 >
                     <template #title>
-                        Fees
+                        Chi phí
                     </template>
 
                     <template #description>
-                        Add new tax or fee to the order.
+                        Thêm thuế hoặc phụ phí cho sản phẩm.
                     </template>
 
                     <template #form>
@@ -182,7 +189,7 @@
                                 <div class="col-span-3">
                                     <bolt-label
                                         for="charge_id"
-                                        value="Type"
+                                        value="Loại hình"
                                     />
                                     <select
                                         id="charge_id"
@@ -194,7 +201,7 @@
                                             value="null"
                                             disabled
                                         >
-                                            Please select
+                                            Vui lòng chọn
                                         </option>
                                         <option
                                             v-for="charge in charges"
@@ -214,7 +221,7 @@
                                 <div class="col-span-3">
                                     <bolt-label
                                         for="tax_value"
-                                        value="Value"
+                                        value="Giá trị"
                                     />
                                     <bolt-input
                                         id="tax_value"
@@ -234,7 +241,7 @@
                         <div class="col-span-6 lg:col-span-4">
                             <bolt-label
                                 for="tax_description"
-                                value="Description"
+                                value="Mô tả"
                             />
                             <bolt-input
                                 id="tax_description"
@@ -254,14 +261,14 @@
                             :on="productChargeForm.recentlySuccessful"
                             class="mr-3"
                         >
-                            Saved.
+                            Đã lưu.
                         </bolt-action-message>
 
                         <bolt-primary-button
                             :class="{ 'opacity-25': productChargeForm.processing }"
                             :disabled="productChargeForm.processing"
                         >
-                            Save
+                            Lưu lại
                         </bolt-primary-button>
                     </template>
                 </bolt-form-section>
@@ -272,11 +279,11 @@
 
                     <bolt-action-section>
                         <template #title>
-                            Manage Taxes and Fees
+                            Quản lý chi phí
                         </template>
 
                         <template #description>
-                            Product applied taxes and fees.
+                            Quản lý các chi phí đã áp dụng cho sản phẩm.
                         </template>
 
                         <template #content>
@@ -291,37 +298,37 @@
                                                             scope="col"
                                                             class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                         >
-                                                            Type
+                                                            Loại
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                         >
-                                                            Name
+                                                            Tên
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                         >
-                                                            Apply
+                                                            Áp dụng
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="px-2 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                         >
-                                                            Value
+                                                            Giá trị
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="px-2 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                         >
-                                                            Total
+                                                            Thành tiền
                                                         </th>
                                                         <th
                                                             scope="col"
                                                             class="relative px-2 py-3"
                                                         >
-                                                            <span class="sr-only">Actions</span>
+                                                            <span class="sr-only">Thao tác</span>
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -349,7 +356,7 @@
                                                                 :href="route('admin.products.charges.destroy', [product, charge])"
                                                                 class="text-indigo-600 hover:text-indigo-900"
                                                             >
-                                                                Remove
+                                                                Xóa
                                                             </inertia-link>
                                                         </td>
                                                     </tr>
