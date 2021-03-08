@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TransactionStatus;
 use App\Enums\TransactionType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,12 +18,13 @@ class Transaction extends Model
         'status',
         'amount',
         'meta',
-        'note'
+        'note',
     ];
 
     protected $casts = [
         'type' => TransactionType::class,
-        'amount' => 'float'
+        'status' => TransactionStatus::class,
+        'amount' => 'float',
     ];
 
     public function wallet()
