@@ -15,6 +15,6 @@ final class ShipmentStatus extends Enum implements LocalizedEnum
 
     public function toArray()
     {
-        return $this->toArray();
+        return $this;
     }
 }
