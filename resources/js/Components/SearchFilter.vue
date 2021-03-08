@@ -23,7 +23,7 @@
                 name="search"
                 :value="modelValue"
                 class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md"
-                placeholder="Search"
+                placeholder="Tìm kiếm"
                 autocomplete="off"
                 @input="$emit('update:modelValue', $event.target.value)"
             >
@@ -33,7 +33,7 @@
             type="button"
             @click="$emit('reset')"
         >
-            Reset
+            Xóa
         </button>
     </div>
 </template>
