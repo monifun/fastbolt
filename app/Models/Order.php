@@ -77,6 +77,11 @@ class Order extends Model
         return $this->transactions()->where('type', 'refund');
     }
 
+    public function shipments()
+    {
+        return $this->hasMany(Shipment::class);
+    }
+
     public function getProductPriceTotalAttribute()
     {
         return $this->products->reduce(function ($total, $product) {
