@@ -416,8 +416,12 @@
                                     </template>
 
                                     <template #content>
-                                        <dl class="grid grid-cols-1 gap-4">
-                                            <div v-for="shipment in order.shipments" class="col-span-1 flex justify-between">
+                                        <dl v-if="order.shipments.length > 0" class="grid grid-cols-1 gap-4">
+                                            <div
+                                                v-for="shipment in order.shipments"
+                                                :key="shipment.id"
+                                                class="col-span-1 flex justify-between"
+                                            >
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
                                                     {{ shipment.id }}
                                                 </dt>
@@ -426,6 +430,11 @@
                                                 </dd>
                                             </div>
                                         </dl>
+                                        <div v-else>
+                                            <p class="text-sm">
+                                                Chưa có thông tin vận chuyển.
+                                            </p>
+                                        </div>
                                     </template>
                                 </bolt-card>
                             </div>
