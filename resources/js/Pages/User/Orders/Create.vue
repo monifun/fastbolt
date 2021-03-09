@@ -4,7 +4,7 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Create new order
+                        Tạo đơn hàng
                     </h1>
                 </div>
             </div>
@@ -17,7 +17,7 @@
                         <!-- Product form -->
                         <bolt-card>
                             <template #title>
-                                Product
+                                Sản phẩm
                             </template>
 
                             <template #content>
@@ -26,7 +26,7 @@
                                     <div class="col-span-6 sm:col-span-4">
                                         <bolt-label
                                             for="market"
-                                            value="Market"
+                                            value="Thị trường"
                                         />
                                         <select
                                             id="market"
@@ -53,14 +53,14 @@
                                     <div class="col-span-6 sm:col-span-4">
                                         <bolt-label
                                             for="name"
-                                            value="Name"
+                                            value="Tên sản phẩm"
                                         />
                                         <bolt-input
                                             id="name"
                                             v-model="addProductForm.name"
                                             type="text"
-                                            placeholder="Name"
                                             class="block w-full"
+                                            autocomplete="off"
                                         />
                                         <bolt-input-error
                                             :message="addProductForm.errors.name"
@@ -72,13 +72,13 @@
                                     <div class="col-span-6 sm:col-span-4">
                                         <bolt-label
                                             for="url"
-                                            value="Sale Link"
+                                            value="Link bán"
                                         />
                                         <bolt-input
                                             id="url"
                                             v-model="addProductForm.url"
                                             type="text"
-                                            placeholder="Link to product"
+                                            autocomplete="off"
                                             class="block w-full"
                                         />
                                     </div>
@@ -87,13 +87,13 @@
                                     <div class="col-span-6 sm:col-span-4">
                                         <bolt-label
                                             for="image"
-                                            value="Image URL"
+                                            value="Link ảnh"
                                         />
                                         <bolt-input
                                             id="image"
                                             v-model="addProductForm.image"
                                             type="text"
-                                            placeholder="Image URL"
+                                            autocomplete="off"
                                             class="block w-full"
                                         />
                                     </div>
@@ -107,7 +107,7 @@
                                             <div class="col-span-5 lg:col-span-4">
                                                 <fieldset>
                                                     <legend class="block text-sm font-medium text-gray-700">
-                                                        Options
+                                                        Thuộc tính
                                                     </legend>
                                                     <div class="mt-1 bg-white rounded-md shadow-sm -space-y-px">
                                                         <div class="flex -space-x-px">
@@ -116,14 +116,13 @@
                                                                     :for="`option-label-${index}`"
                                                                     class="sr-only"
                                                                 >
-                                                                    Label
+                                                                    Nhãn
                                                                 </label>
                                                                 <input
                                                                     :id="`option-label-${index}`"
                                                                     v-model="option.label"
                                                                     type="text"
                                                                     class="focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-bl-md rounded-tl-md bg-transparent focus:z-10 sm:text-sm border-gray-300"
-                                                                    placeholder="Label"
                                                                 >
                                                             </div>
                                                             <div class="flex-1 min-w-0">
@@ -131,14 +130,13 @@
                                                                     :for="`option-value-${index}`"
                                                                     class="sr-only"
                                                                 >
-                                                                    Value
+                                                                    Giá trị
                                                                 </label>
                                                                 <input
                                                                     :id="`option-value-${index}`"
                                                                     v-model="option.value"
                                                                     type="text"
                                                                     class="focus:ring-indigo-500 focus:border-indigo-500 relative block w-full rounded-none rounded-br-md rounded-tr-md bg-transparent focus:z-10 sm:text-sm border-gray-300"
-                                                                    placeholder="Value"
                                                                 >
                                                             </div>
                                                         </div>
@@ -174,7 +172,7 @@
                                             class="col-span-6"
                                         >
                                             <bolt-secondary-button @click="addProductOption">
-                                                Add product option
+                                                Thêm thuộc tính
                                             </bolt-secondary-button>
                                         </div>
                                     </div>
@@ -185,14 +183,15 @@
                                             <div class="col-span-6 sm:col-span-2 lg:col-span-2">
                                                 <bolt-label
                                                     for="price"
-                                                    :value="`Price (${productCurrency['currency_code']})`"
+                                                    :value="`Đơn giá (${productCurrency['currency_code']})`"
                                                 />
                                                 <bolt-input
                                                     id="price"
                                                     v-model="addProductForm.price"
                                                     type="number"
-                                                    placeholder="Price"
+                                                    placeholder="0.00"
                                                     class="block w-full"
+                                                    autocomplete="off"
                                                 />
                                                 <bolt-input-error
                                                     :message="addProductForm.errors.price"
@@ -203,15 +202,16 @@
                                             <div class="col-span-6 sm:col-span-2 lg:col-span-2">
                                                 <bolt-label
                                                     for="quantity"
-                                                    value="Quantity"
+                                                    value="Số lượng"
                                                 />
                                                 <bolt-input
                                                     id="quantity"
                                                     v-model="addProductForm.quantity"
                                                     type="number"
                                                     min="1"
-                                                    placeholder="Quantity"
+                                                    placeholder="0"
                                                     class="block w-full"
+                                                    autocomplete="off"
                                                 />
                                                 <bolt-input-error
                                                     :message="addProductForm.errors.quantity"
@@ -225,13 +225,12 @@
                                     <div class="col-span-6 lg:col-span-4">
                                         <bolt-label
                                             for="note"
-                                            value="Note"
+                                            value="Ghi chú"
                                         />
                                         <bolt-input
                                             id="note"
                                             v-model="addProductForm.note"
                                             type="text"
-                                            placeholder="Note"
                                             class="block w-full"
                                         />
                                     </div>
@@ -241,7 +240,7 @@
                             <template #footer>
                                 <div class="text-right">
                                     <bolt-secondary-button @click="addProduct">
-                                        Add to cart
+                                        Thêm vào giỏ hàng
                                     </bolt-secondary-button>
                                 </div>
                             </template>
@@ -251,15 +250,29 @@
                         <!-- Shopping cart -->
                         <bolt-card>
                             <template #title>
-                                Shopping Cart
+                                Giỏ hàng
                             </template>
 
                             <template #actions>
                                 <button
                                     v-if="newOrderForm.products.length > 0"
+                                    class="inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                    aria-label="Hủy giỏ hàng"
                                     @click="clearCart"
                                 >
-                                    clear
+                                    <!-- Heroicon name: solid/plus -->
+                                    <svg
+                                        class="w-3 h-3"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
                                 </button>
                             </template>
 
@@ -270,10 +283,10 @@
                                         class="divide-y divide-gray-200"
                                     >
                                         <li
-                                            v-for="product in newOrderForm.products.slice().reverse()"
+                                            v-for="(product, index) in newOrderForm.products.slice().reverse()"
                                             class="px-4 py-4 sm:px-6"
                                         >
-                                            <div class="flex items-center">
+                                            <div class="flex items-center justify-between">
                                                 <div class="min-w-0 flex-1 flex items-center">
                                                     <div class="flex-shrink-0">
                                                         <img
@@ -317,10 +330,10 @@
                                                             <!-- Price and Quantity -->
                                                             <ul class="mt-1 list-none text-sm text-gray-700">
                                                                 <li class="inline">
-                                                                    Price: <span class="font-semibold">{{ currencyFilter(product.price, 'CNY') }}</span>
+                                                                    Giá: <span class="font-semibold">{{ currencyFilter(product.price, 'CNY') }}</span>
                                                                 </li>
                                                                 <li class="inline ml-3">
-                                                                    Quantity: <span class="font-semibold">{{ product.quantity }}</span>
+                                                                    Số lượng: <span class="font-semibold">{{ product.quantity }}</span>
                                                                 </li>
                                                             </ul>
 
@@ -348,6 +361,28 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="flex-shrink-0">
+                                                    <button
+                                                        type="button"
+                                                        class="inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                                        aria-label="Xóa khỏi giỏ"
+                                                        @click="removeCartItem(index)"
+                                                    >
+                                                        <!-- Heroicon name: solid/plus -->
+                                                        <svg
+                                                            class="w-3 h-3"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 20 20"
+                                                            fill="currentColor"
+                                                        >
+                                                            <path
+                                                                fill-rule="evenodd"
+                                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                clip-rule="evenodd"
+                                                            />
+                                                        </svg>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </li>
                                     </ul>
@@ -355,7 +390,7 @@
                                         v-else
                                         class="px-4 py-5 sm:px-6"
                                     >
-                                        Your cart is empty.
+                                        Chưa có sản phẩm trong giỏ.
                                     </p>
                                 </div>
                             </template>
@@ -364,7 +399,7 @@
                         <!-- Shipping address -->
                         <bolt-card class="mt-6">
                             <template #title>
-                                Shipping Address
+                                Địa chỉ
                             </template>
 
                             <template #content>
@@ -372,7 +407,7 @@
                                     <div class="col-span-2 lg:col-span-1">
                                         <bolt-label
                                             for="shipping_name"
-                                            value="Name"
+                                            value="Họ và Tên"
                                         />
                                         <bolt-input
                                             id="shipping_name"
@@ -390,7 +425,7 @@
                                     <div class="col-span-2 lg:col-span-1">
                                         <bolt-label
                                             for="shipping_phone"
-                                            value="Phone"
+                                            value="Điện thoại"
                                         />
                                         <bolt-input
                                             id="shipping_phone"
@@ -408,7 +443,7 @@
                                     <div class="col-span-2">
                                         <bolt-label
                                             for="shipping_address"
-                                            value="Address"
+                                            value="Địa chỉ"
                                         />
                                         <bolt-input
                                             id="shipping_address"
@@ -432,7 +467,7 @@
                                         :disabled="newOrderForm.products.length < 1"
                                         @click="placeOrder"
                                     >
-                                        Place order
+                                        Tạo đơn hàng
                                     </bolt-primary-button>
                                 </div>
                             </template>
@@ -529,6 +564,9 @@
                 this.addProductForm.quantity = null;
                 this.addProductForm.note = null;
                 this.addProductForm.errors = {};
+            },
+            removeCartItem(index) {
+                this.newOrderForm.products.splice(index, 1);
             },
             clearCart() {
                 return this.newOrderForm.products = [];

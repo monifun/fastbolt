@@ -2,7 +2,7 @@
     <user-layout>
         <template #header>
             <h1 class="font-semibold text-xl text-gray-800 leading-tight">
-                Order #{{ order.id }} - {{ order.status.description }}
+                Đơn hàng #{{ order.id }} - {{ order.status.description }}
             </h1>
         </template>
 
@@ -14,7 +14,7 @@
                         <div class="overflow-hidden bg-white shadow sm:rounded-lg">
                             <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
                                 <h2 class="text-lg leading-6 font-medium text-gray-900">
-                                    Products
+                                    Sản phẩm
                                 </h2>
                             </div>
                             <div class="overflow-hidden overflow-x-auto relative">
@@ -27,33 +27,33 @@
                                             />
                                             <th
                                                 scope="col"
-                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                             >
-                                                Qty
+                                                SL
                                             </th>
                                             <th
                                                 scope="col"
-                                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                             >
-                                                Price
+                                                Đơn giá
                                             </th>
                                             <th
                                                 scope="col"
-                                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                             >
-                                                Subtotal
+                                                Tạm tính
                                             </th>
                                             <th
                                                 scope="col"
-                                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                             >
-                                                Fees
+                                                Phụ phí
                                             </th>
                                             <th
                                                 scope="col"
-                                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap"
                                             >
-                                                Total
+                                                Tổng cộng
                                             </th>
                                         </tr>
                                     </thead>
@@ -155,14 +155,14 @@
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
-                                        General
+                                        Tổng quan
                                     </template>
 
                                     <template #content>
                                         <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Order ID
+                                                    Mã đơn
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.id }}
@@ -171,7 +171,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Exchange rate
+                                                    Tỷ giá
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.currency_rate }}
@@ -180,7 +180,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Market
+                                                    Thị trường
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.vendor.market.name }}
@@ -189,7 +189,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Vendor
+                                                    Cửa hàng
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.vendor.name }}
@@ -198,7 +198,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Created at
+                                                    Ngày tạo đơn
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ dateFilter(order.created_at) }}
@@ -207,7 +207,7 @@
 
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Last update
+                                                    Ngày cập nhật
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ dateFilter(order.updated_at) }}
@@ -222,14 +222,14 @@
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
-                                        Customer
+                                        Khách hàng
                                     </template>
 
                                     <template #content>
                                         <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Name
+                                                    Họ và Tên
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.shipping_name }}
@@ -237,7 +237,7 @@
                                             </div>
                                             <div class="sm:col-span-1">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Phone
+                                                    Điện thoại
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.shipping_phone }}
@@ -245,7 +245,7 @@
                                             </div>
                                             <div class="sm:col-span-2">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Address
+                                                    Địa chỉ
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ order.shipping_address }}
@@ -260,7 +260,7 @@
                             <div class="col-span-2 flex flex-col md:col-span-1 lg:col-span-2">
                                 <bolt-card class="flex-1">
                                     <template #title>
-                                        Payment
+                                        Tài chính
                                     </template>
 
                                     <template #actions>
@@ -269,7 +269,7 @@
                                             class="inline-flex items-center px-2 py-1 border border-transparent text-sm font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition ease-in-out duration-150"
                                             @click="openPaymentModal"
                                         >
-                                            add payment
+                                            Thêm giao dịch
                                         </button>
                                     </template>
 
@@ -277,7 +277,7 @@
                                         <dl class="grid grid-cols-1 gap-4">
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Total product price
+                                                    Tổng tiền hàng
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.product_price_total * order.currency_rate) }}
@@ -285,7 +285,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Total product fees
+                                                    Tổng phụ phí sản phẩm
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.product_charge_total * order.currency_rate) }}
@@ -293,7 +293,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Order fees
+                                                    Tổng phụ phí đơn hàng
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.charge_total * order.currency_rate) }}
@@ -301,7 +301,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Order total
+                                                    Tổng cộng
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.grand_total * order.currency_rate) }}
@@ -309,7 +309,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Total paid
+                                                    Đã thanh toán
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.total_paid) }}
@@ -317,7 +317,7 @@
                                             </div>
                                             <div class="col-span-1 flex justify-between">
                                                 <dt class="text-sm leading-5 font-medium text-gray-500">
-                                                    Total due
+                                                    Dư nợ
                                                 </dt>
                                                 <dd class="mt-1 text-sm leading-5 text-gray-900">
                                                     {{ currencyFilter(order.total_due) }}
@@ -339,15 +339,15 @@
             @close="showPaymentModal = false"
         >
             <template #title>
-                Add new payment
+                Tạo giao dịch mới
             </template>
 
             <template #content>
-                <p>Use wallet to pay for this order, your current wallet balance is: {{ currencyFilter($page.props.auth.user.wallet_balance) }}</p>
+                <p>Sử dụng ví điện tử để thanh toán cho đơn hàng này, số dư hiện tại là: {{ currencyFilter($page.props.auth.user.wallet_balance) }}</p>
                 <div class="mt-3">
                     <bolt-label
                         for="paymentAmount"
-                        :value="'Amount to pay ' + currencyFilter(order.total_due)"
+                        :value="'Số tiền cần thanh toán ' + currencyFilter(order.total_due)"
                     />
                     <bolt-input
                         id="paymentAmount"
@@ -365,21 +365,21 @@
                         v-if="paymentForm.amount > 0"
                         class="mt-2 text-sm text-gray-500"
                     >
-                        You entered: {{ currencyFilter(paymentForm.amount) }}
+                        Bạn đã nhập: {{ currencyFilter(paymentForm.amount) }}
                     </p>
                 </div>
             </template>
 
             <template #footer>
                 <bolt-secondary-button @click="showPaymentModal = false">
-                    Cancel
+                    Hủy bỏ
                 </bolt-secondary-button>
 
                 <bolt-primary-button
                     class="ml-2"
                     @click="makePayment"
                 >
-                    Save
+                    Xác nhận
                 </bolt-primary-button>
             </template>
         </bolt-dialog-model>
