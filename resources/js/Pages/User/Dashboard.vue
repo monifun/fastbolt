@@ -285,7 +285,7 @@
                                         <td class="whitespace-nowrap">
                                             <inertia-link
                                                 :href="route('user.orders.show', order.id)"
-                                                class="px-6 py-4 flex items-center"
+                                                class="px-6 py-4 flex items-center space-x-1 text-gray-500"
                                             >
                                                 <div class="flex flex-shrink-0 -space-x-1">
                                                     <img
