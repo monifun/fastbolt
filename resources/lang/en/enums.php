@@ -19,4 +19,10 @@ return [
         \App\Enums\ShipmentStatus::DELIVERED => 'Delivered',
         \App\Enums\ShipmentStatus::UNDELIVERED => 'Undelivered',
     ],
+    \App\Enums\TransactionType::class => [
+        \App\Enums\TransactionType::DEPOSIT => 'Deposit',
+        \App\Enums\TransactionType::WITHDRAW => 'Withdraw',
+        \App\Enums\TransactionType::PAYMENT => 'Payment',
+        \App\Enums\TransactionType::REFUND => 'Refund',
+    ],
 ];
