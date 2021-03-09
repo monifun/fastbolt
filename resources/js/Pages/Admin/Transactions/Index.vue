@@ -4,7 +4,7 @@
             <div class="md:flex md:items-center md:justify-between">
                 <div class="flex-1 min-w-0">
                     <h1 class="text-2xl font-semibold leading-tight text-gray-800">
-                        Transactions
+                        Giao dịch
                     </h1>
                 </div>
             </div>
@@ -28,25 +28,25 @@
                                             scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            User
+                                            Người dùng
                                         </th>
                                         <th
                                             scope="col"
-                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                            class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            Type
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                        >
-                                            Amount
+                                            Hình thức
                                         </th>
                                         <th
                                             scope="col"
                                             class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
-                                            Date
+                                            Số tiền
+                                        </th>
+                                        <th
+                                            scope="col"
+                                            class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                        >
+                                            Thời gian
                                         </th>
                                     </tr>
                                 </thead>
@@ -75,7 +75,7 @@
                                         <td class="whitespace-nowrap tabular-nums">
                                             <inertia-link
                                                 :href="route('admin.transactions.show', transaction.id)"
-                                                class="px-6 py-4 flex items-center"
+                                                class="px-6 py-4 flex items-center justify-center"
                                             >
                                                 {{ transaction.type.description }}
                                             </inertia-link>
