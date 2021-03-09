@@ -19,6 +19,7 @@ class CreateMarketsTable extends Migration
             $table->string('website')->nullable();
             $table->string('currency_code');
             $table->text('description')->nullable();
+            $table->boolean('is_enabled')->default(true);
             $table->timestamps();
         });
     }
