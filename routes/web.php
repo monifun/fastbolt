@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth', 'can:viewAdmin'], 'prefix' => config('fas
     Route::resource('orders', \App\Http\Controllers\Admin\OrderController::class);
     Route::resource('orders.charges', \App\Http\Controllers\Admin\OrderChargeController::class);
     Route::resource('orders.transactions', \App\Http\Controllers\Admin\OrderTransactionController::class);
+    Route::resource('orders.shipments', \App\Http\Controllers\Admin\OrderShipmentController::class);
     Route::resource('orders.comments', \App\Http\Controllers\Admin\OrderCommentController::class);
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
     Route::resource('products.charges', \App\Http\Controllers\Admin\ProductChargeController::class);
