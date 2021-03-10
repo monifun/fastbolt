@@ -201,7 +201,9 @@
                                                                 </span>
                                                             </div>
                                                             <div class="mt-1 text-sm text-gray-700">
-                                                                <p>{{ comment.content }}</p>
+                                                                <p class="whitespace-pre-line">
+                                                                    {{ comment.content }}
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>

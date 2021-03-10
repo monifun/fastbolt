@@ -34,9 +34,9 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="grid grid-cols-3 gap-6">
-                    <!-- Products -->
                     <div class="col-span-3 lg:col-span-2">
                         <div class="grid grid-cols-1 gap-6">
+                            <!-- Products -->
                             <div class="col-auto">
                                 <div class="overflow-hidden bg-white shadow sm:rounded-lg">
                                     <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
@@ -189,6 +189,7 @@
                                 </div>
                             </div>
 
+                            <!-- Comments -->
                             <div class="col-auto">
                                 <bolt-card>
                                     <template #title>
@@ -236,7 +237,9 @@
                                                                 </span>
                                                             </div>
                                                             <div class="mt-1 text-sm text-gray-700">
-                                                                <p>{{ comment.content }}</p>
+                                                                <p class="whitespace-pre-line">
+                                                                    {{ comment.content }}
+                                                                </p>
                                                             </div>
                                                             <div class="mt-2 flex items-center">
                                                                 <inertia-link
