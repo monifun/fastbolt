@@ -43,7 +43,9 @@ class OrderController extends Controller
         abort_if($order->user_id !== request()->user()->id, 404);
 
         return Inertia::render('User/Orders/Show', [
-            'order' => $order->load('products', 'vendor.market')->append([
+            'order' => $order->load([
+                'products', 'vendor.market', 'comments.user'
+            ])->append([
                 'product_price_total',
                 'product_charge_total',
                 'product_grand_total',

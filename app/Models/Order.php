@@ -82,6 +82,11 @@ class Order extends Model
         return $this->hasMany(Shipment::class);
     }
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
     public function getProductPriceTotalAttribute()
     {
         return $this->products->reduce(function ($total, $product) {
