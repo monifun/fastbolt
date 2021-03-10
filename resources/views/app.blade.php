@@ -5,7 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Fastbolt') }}</title>
+
+        <!-- Favicon -->
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
@@ -24,6 +27,7 @@
 
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
+
     <body class="font-sans antialiased">
         @inertia
     </body>
