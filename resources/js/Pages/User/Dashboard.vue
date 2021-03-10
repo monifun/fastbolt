@@ -316,7 +316,7 @@
                                         <td class="text-right whitespace-nowrap">
                                             <inertia-link
                                                 :href="route('user.orders.show', order.id)"
-                                                class="px-6 py-4 flex items-center justify-end"
+                                                class="px-6 py-4 flex items-center justify-end tabular-nums"
                                             >
                                                 {{ dateFilter(order.created_at) }}
                                             </inertia-link>
