@@ -575,6 +575,7 @@
             <main
                 class="flex-1 relative overflow-y-auto focus:outline-none"
                 tabindex="0"
+                scroll-region
             >
                 <!-- Page header -->
                 <div class="bg-white shadow">
