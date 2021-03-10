@@ -230,7 +230,7 @@
     import AdminLayout from "@/Layouts/AdminLayout";
     import BoltCard from "@/Components/Card";
     import dateFilter from "@/Filters/date";
-
+    import Chart from "chart.js";
     export default {
         name: "Dashboard",
         components: {AdminLayout, BoltCard},
@@ -242,7 +242,7 @@
                 return d.toLocaleDateString('vi-VN');
             }).reverse();
             const ctx = document.getElementById('myChart').getContext('2d');
-            const chart = new Chart(ctx, {
+            new Chart(ctx, {
                 // The type of chart we want to create
                 type: 'line',
                 // The data for our dataset
