@@ -27,6 +27,7 @@ class OrderController extends Controller
                 },
             ])
                 ->where('user_id', request()->user()->id)
+                ->where('is_draft', false)
                 ->filter(request()->all('search'))
                 ->orderByDesc('created_at')->paginate(),
         ]);
