@@ -6,7 +6,7 @@ use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Propaganistas\LaravelPhone\Exceptions\CountryCodeException;
-use Propaganistas\LaravelPhone\Casts\RawPhoneNumberCast;
+use Propaganistas\LaravelPhone\Casts\E164PhoneNumberCast;
 
 class Order extends Model
 {
@@ -18,6 +18,7 @@ class Order extends Model
         'status' => OrderStatus::class,
         'currency_rate' => 'float',
         'shipping_phone' => RawPhoneNumberCast::class.':VN',
+        'shipping_phone' => E164PhoneNumberCast::class.':VN',
     ];
 
     public function scopeFilter($query, array $filters)
