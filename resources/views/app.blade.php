@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Fastbolt') }}</title>
 
         <!-- Favicon -->
-        <link rel="icon" href="{{ asset('favicon.ico') }}">
+        <link rel="icon" href="{{ asset('img/mark.png') }}">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
