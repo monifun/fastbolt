@@ -19,9 +19,9 @@ class CreateOrdersTable extends Migration
             $table->foreignId('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
             $table->string('currency_code', 3);
             $table->decimal('currency_rate', 12, 2);
-            $table->string('shipping_name');
-            $table->string('shipping_phone', 15);
-            $table->text('shipping_address');
+            $table->string('shipping_name')->nullable();
+            $table->string('shipping_phone', 15)->nullable();
+            $table->text('shipping_address')->nullable();
             $table->string('status')->default(\App\Enums\OrderStatus::PENDING);
             $table->timestamps();
         });
