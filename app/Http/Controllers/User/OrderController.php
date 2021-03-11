@@ -42,6 +42,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         abort_if($order->user_id !== request()->user()->id, 404);
+        abort_if($order->user_id !== request()->user()->id or $order->is_draft, 404);
 
         return Inertia::render('User/Orders/Show', [
             'order' => $order->load([
