@@ -6,6 +6,7 @@ use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Propaganistas\LaravelPhone\Exceptions\CountryCodeException;
+use Propaganistas\LaravelPhone\Casts\RawPhoneNumberCast;
 
 class Order extends Model
 {
@@ -16,21 +17,8 @@ class Order extends Model
     protected $casts = [
         'status' => OrderStatus::class,
         'currency_rate' => 'float',
+        'shipping_phone' => RawPhoneNumberCast::class.':VN',
     ];
-
-    public function setShippingPhoneAttribute($value): string
-    {
-        return $this->attributes['shipping_phone'] = (string) phone($value, 'VN');
-    }
-
-    public function getShippingPhoneAttribute($value): string
-    {
-        try {
-            return (string) phone($value)->formatForMobileDialingInCountry('VN');
-        } catch (CountryCodeException $e) {
-            return $value;
-        }
-    }
 
     public function scopeFilter($query, array $filters)
     {
