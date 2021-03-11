@@ -41,7 +41,6 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        abort_if($order->user_id !== request()->user()->id, 404);
         abort_if($order->user_id !== request()->user()->id or $order->is_draft, 404);
 
         return Inertia::render('User/Orders/Show', [
@@ -103,6 +102,7 @@ class OrderController extends Controller
         $order = new Order($validated);
         $order->currency_code = 'CNY';
         $order->currency_rate = 3690;
+        $order->is_draft = false;
         $order->user()->associate($request->user());
         $order->vendor()->associate($vendor);
         $order->save();
