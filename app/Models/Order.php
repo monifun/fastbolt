@@ -16,7 +16,6 @@ class Order extends Model
     protected $casts = [
         'status' => OrderStatus::class,
         'currency_rate' => 'float',
-        'shipping_phone' => RawPhoneNumberCast::class.':VN',
         'shipping_phone' => E164PhoneNumberCast::class.':VN',
     ];
 
