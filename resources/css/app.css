@@ -5,3 +5,11 @@
 html {
     scroll-behavior: smooth;
 }
+
+@layer utilities {
+    input.no-spinners[type=number]::-webkit-inner-spin-button,
+    input.no-spinners[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
