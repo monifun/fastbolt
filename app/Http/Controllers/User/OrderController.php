@@ -17,19 +17,15 @@ class OrderController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render('User/Orders/Index', [
             'filters' => request()->all('search'),
-            'orders' => Order::with([
+            'orders' => $request->user()->orders()->with([
                 'products' => function ($query) {
                     return $query->select(['id', 'order_id', 'name', 'image']);
                 },
-            ])
-                ->where('user_id', request()->user()->id)
-                ->where('is_draft', false)
-                ->filter(request()->all('search'))
-                ->orderByDesc('created_at')->paginate(),
+            ])->filter($request->all('search'))->orderByDesc('created_at')->paginate(),
         ]);
     }
 
@@ -45,7 +41,7 @@ class OrderController extends Controller
 
         return Inertia::render('User/Orders/Show', [
             'order' => $order->load([
-                'products', 'vendor.market', 'comments.user'
+                'products', 'vendor.market', 'comments.user',
             ])->append([
                 'product_price_total',
                 'product_charge_total',
