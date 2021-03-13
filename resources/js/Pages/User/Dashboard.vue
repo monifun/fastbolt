@@ -82,10 +82,10 @@
                     <div class="bg-white overflow-hidden shadow rounded-lg">
                         <div class="p-5">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0">
+                                <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
                                     <!-- Heroicon name: outline/clipboard-list -->
                                     <svg
-                                        class="h-6 w-6 text-gray-400"
+                                        class="w-6 h-6 text-white"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -119,10 +119,10 @@
                     <div class="bg-white overflow-hidden shadow rounded-lg">
                         <div class="p-5">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0">
+                                <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
                                     <!-- Heroicon name: outline/refresh -->
                                     <svg
-                                        class="h-6 w-6 text-gray-400"
+                                        class="h-6 w-6 text-white"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -156,10 +156,10 @@
                     <div class="bg-white overflow-hidden shadow rounded-lg">
                         <div class="p-5">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0">
+                                <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
                                     <!-- Heroicon name: outline/truck -->
                                     <svg
-                                        class="h-6 w-6 text-gray-400"
+                                        class="h-6 w-6 text-white"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -197,10 +197,10 @@
                     <div class="bg-white overflow-hidden shadow rounded-lg">
                         <div class="p-5">
                             <div class="flex items-center">
-                                <div class="flex-shrink-0">
+                                <div class="flex-shrink-0 bg-indigo-500 rounded-md p-3">
                                     <!-- Heroicon name: outline/chat-alt-2 -->
                                     <svg
-                                        class="h-6 w-6 text-gray-400"
+                                        class="h-6 w-6 text-white"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
