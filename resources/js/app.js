@@ -6,6 +6,7 @@ require('alpinejs');
 import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
+import InlineSvg from "vue-inline-svg";
 
 const el = document.getElementById('app');
 
@@ -18,6 +19,7 @@ createApp({
 })
     .mixin({ methods: { route } })
     .use(InertiaPlugin)
+    .component('inline-svg', InlineSvg)
     .mount(el);
 
 InertiaProgress.init({ color: '#4b5563' });
