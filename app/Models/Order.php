@@ -86,28 +86,34 @@ class Order extends Model
 
     public function getProductPriceTotalAttribute()
     {
-        return $this->products->reduce(function ($total, $product) {
+        $total = $this->products->reduce(function ($total, $product) {
             return $total + $product->subtotal;
         }, 0);
+
+        return round($total, 2);
     }
 
     public function getProductChargeTotalAttribute()
     {
-        return $this->products->reduce(function ($total, $product) {
+        $total = $this->products->reduce(function ($total, $product) {
             return $total + $product->charge_total;
         }, 0);
+
+        return round($total, 2);
     }
 
     public function getProductGrandTotalAttribute()
     {
-        return $this->products->reduce(function ($total, $product) {
+        $total = $this->products->reduce(function ($total, $product) {
             return $total + $product->subtotal + $product->charge_total;
         }, 0);
+
+        return round($total, 2);
     }
 
     public function getChargeTotalAttribute()
     {
-        return $this->charges->reduce(function ($total, $charge) {
+        $total = $this->charges->reduce(function ($total, $charge) {
             if ($charge->method === 'fixed') {
                 switch ($charge->target) {
                     case 'subtotal':
@@ -124,6 +130,8 @@ class Order extends Model
                 }
             }
         }, 0);
+
+        return round($total, 2);
     }
 
     public function getGrandTotalAttribute()
