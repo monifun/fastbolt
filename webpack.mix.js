@@ -18,4 +18,5 @@ mix.js('resources/js/app.js', 'public/js').vue()
         require('autoprefixer'),
     ])
     .copy('resources/img', 'public/img')
+    .copy('resources/svg', 'public/svg')
     .webpackConfig(require('./webpack.config'));
