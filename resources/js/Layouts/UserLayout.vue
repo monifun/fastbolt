@@ -29,6 +29,13 @@
                             </nav-link>
 
                             <nav-link
+                                :href="route('user.cart.show')"
+                                :active="route().current('user.cart.*')"
+                            >
+                                Giỏ hàng
+                            </nav-link>
+
+                            <nav-link
                                 :href="route('user.orders.index')"
                                 :active="route().current('user.orders.*')"
                             >
@@ -137,6 +144,13 @@
                         :active="route().current('user.wallet.*')"
                     >
                         Ví điện tử
+                    </responsive-nav-link>
+
+                    <responsive-nav-link
+                        :href="route('user.cart.show')"
+                        :active="route().current('user.cart.*')"
+                    >
+                        Giỏ hàng
                     </responsive-nav-link>
 
                     <responsive-nav-link
