@@ -221,7 +221,7 @@
                                         </dt>
                                         <dd>
                                             <div class="text-lg font-medium text-gray-900">
-                                                0
+                                                {{ comments_count }}
                                             </div>
                                         </dd>
                                     </dl>
@@ -339,7 +339,7 @@
     export default {
         name: "Dashboard",
         components: {UserLayout},
-        props: ['orders_count', 'transactions_count', 'shipments_count', 'recent_orders'],
+        props: ['orders_count', 'transactions_count', 'shipments_count', 'comments_count', 'recent_orders'],
         methods: {
             currencyFilter,
             dateFilter,
