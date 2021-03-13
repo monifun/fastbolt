@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('shipping_phone', 15)->nullable();
             $table->text('shipping_address')->nullable();
             $table->string('status')->default(\App\Enums\OrderStatus::PENDING);
+            $table->boolean('is_draft')->default(true);
             $table->timestamps();
         });
     }

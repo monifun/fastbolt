@@ -17,6 +17,7 @@ class Order extends Model
         'status' => OrderStatus::class,
         'currency_rate' => 'float',
         'shipping_phone' => E164PhoneNumberCast::class.':VN',
+        'is_draft' => 'boolean'
     ];
 
     public function scopeFilter($query, array $filters)
@@ -72,6 +73,15 @@ class Order extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function getCurrencyRateAttribute($value)
+    {
+        if ($this->is_draft) {
+            return config("fastbolt.currency.rates.{$this->currency_code}");
+        }
+
+        return $value;
     }
 
     public function getProductPriceTotalAttribute()
