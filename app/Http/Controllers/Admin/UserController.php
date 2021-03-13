@@ -46,6 +46,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required', 'phone:VN', 'unique:users'],
+            'address' => ['sometimes', 'nullable', 'string'],
             'password' => ['required', 'string', 'confirmed'],
             'email_verified' => ['required', 'boolean'],
         ]);
@@ -54,6 +55,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
             'email_verified_at' => $request->email_verified ? now() : null,
         ]);
@@ -109,6 +111,7 @@ class UserController extends Controller
                 'sometimes', 'required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id),
             ],
             'phone' => ['sometimes', 'required', 'phone:VN', Rule::unique('users')->ignore($user->id)],
+            'address' => ['sometimes', 'nullable', 'string'],
             'password' => ['sometimes', 'required', 'string', 'confirmed'],
             'email_verified' => ['sometimes', 'required', 'boolean'],
         ]);

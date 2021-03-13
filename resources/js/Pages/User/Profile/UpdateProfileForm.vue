@@ -64,6 +64,23 @@
                     class="mt-2"
                 />
             </div>
+
+            <!-- Address -->
+            <div class="col-span-6 sm:col-span-4">
+                <bolt-label
+                    for="address"
+                    value="Địa chỉ"
+                />
+                <bolt-textarea
+                    id="address"
+                    v-model="form.address"
+                    class="mt-1 block w-full"
+                />
+                <bolt-input-error
+                    :message="form.errors.address"
+                    class="mt-2"
+                />
+            </div>
         </template>
 
         <template #actions>
@@ -87,9 +104,10 @@
 <script>
     import BoltPrimaryButton from '@/Components/PrimaryButton';
     import BoltFormSection from '@/Components/FormSection';
-    import BoltInput from '@/Components/Input';
-    import BoltInputError from '@/Components/InputError';
     import BoltLabel from '@/Components/Label';
+    import BoltInput from '@/Components/Input';
+    import BoltTextarea from "@/Components/Textarea";
+    import BoltInputError from '@/Components/InputError';
     import BoltActionMessage from '@/Components/ActionMessage';
 
     export default {
@@ -97,9 +115,10 @@
             BoltActionMessage,
             BoltPrimaryButton,
             BoltFormSection,
-            BoltInput,
-            BoltInputError,
             BoltLabel,
+            BoltInput,
+            BoltTextarea,
+            BoltInputError,
         },
 
         props: ['user'],
@@ -110,6 +129,7 @@
                     name: this.user.name,
                     email: this.user.email,
                     phone: this.user.phone,
+                    address: this.user.address,
                 }),
             };
         },
