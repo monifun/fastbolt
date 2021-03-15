@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Market;
 use App\Models\Vendor;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class VendorSeeder extends Seeder
 {
@@ -15,6 +16,8 @@ class VendorSeeder extends Seeder
      */
     public function run()
     {
-        Vendor::factory()->count(1000)->for(Market::factory())->create();
+        Market::all()->each(function ($market) {
+            Vendor::factory()->for($market)->count(5)->create();
+        });
     }
 }

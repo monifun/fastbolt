@@ -19,16 +19,24 @@ class UserSeeder extends Seeder
         // seed admin user
         DB::table('users')->insert([
             [
-                'name' => 'Duong',
-                'email' => 'duong@fastbolt.dev',
+                'name' => 'Duong Truong',
+                'email' => 'duong@novabolt.dev',
                 'phone' => phone('0888888888', 'VN'),
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
+            ], [
+                'name' => 'Tran Thanh Long',
+                'email' => 'long@novabolt.dev',
+                'phone' => phone('0999999999', 'VN'),
+                'password' => Hash::make('password'),
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
         // insert bulk of users
-        User::factory()->count(1000)->create();
+        User::factory()->count(100)->create();
     }
 }

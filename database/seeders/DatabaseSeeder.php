@@ -2,6 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Market;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\Vendor;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,7 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(10)->create();
-         \App\Models\Market::factory(10)->has(\App\Models\Vendor::factory(10))->create();
+        $this->call([
+            UserSeeder::class,
+            ChargeSeeder::class,
+            WalletSeeder::class,
+            TransactionSeeder::class,
+            MarketSeeder::class,
+            VendorSeeder::class,
+            OrderSeeder::class,
+        ]);
     }
 }
