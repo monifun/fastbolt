@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth', 'can:viewAdmin'], 'prefix' => config('nov
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
     Route::resource('products.charges', \App\Http\Controllers\Admin\ProductChargeController::class);
     Route::resource('transactions', \App\Http\Controllers\Admin\TransactionController::class);
+    Route::resource('shipments', \App\Http\Controllers\Admin\ShipmentController::class);
     Route::resource('comments', \App\Http\Controllers\Admin\CommentController::class);
 });
 
