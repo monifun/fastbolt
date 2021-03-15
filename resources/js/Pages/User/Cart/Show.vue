@@ -12,6 +12,7 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <!-- Cart content -->
                 <div v-if="orders.length > 0">
                     <bolt-card
                         v-for="order in orders"
@@ -205,6 +206,7 @@
                     </bolt-card>
                 </div>
 
+                <!-- Empty cart message-->
                 <div
                     v-else
                     class="sm:max-w-md sm:w-full sm:p-6 mx-auto"
