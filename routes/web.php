@@ -46,6 +46,12 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'user', 'as' => 
     Route::put('profile', [\App\Http\Controllers\User\ProfileController::class, 'update'])->name('profile.update');
     Route::put('password', \App\Http\Controllers\User\PasswordController::class)->name('password.update');
     Route::get('wallet', [\App\Http\Controllers\User\WalletController::class, 'show'])->name('wallet.show');
+    Route::get('cart', [\App\Http\Controllers\User\CartController::class, 'show'])->name('cart.show');
+    Route::post('cart/products', [\App\Http\Controllers\User\CartController::class, 'addProduct'])->name('cart.products.store');
+    Route::put('cart/products/{product}', [\App\Http\Controllers\User\CartController::class, 'updateProduct'])->name('cart.products.update');
+    Route::delete('cart/products/{product}', [\App\Http\Controllers\User\CartController::class, 'destroyProduct'])->name('cart.products.destroy');
+    Route::delete('cart/orders/{order}', [\App\Http\Controllers\User\CartController::class, 'destroyOrder'])->name('cart.orders.destroy');
+    Route::post('cart/orders/{order}', [\App\Http\Controllers\User\CartController::class, 'confirmOrder'])->name('cart.orders.confirm');
     Route::get('orders', [\App\Http\Controllers\User\OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/create', [\App\Http\Controllers\User\OrderController::class, 'create'])->name('orders.create');
     Route::post('orders', [\App\Http\Controllers\User\OrderController::class, 'store'])->name('orders.store');
