@@ -44,7 +44,7 @@ class MarketController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'website' => ['required', 'url', 'unique:markets'],
-            'currency_code' => ['required', Rule::in(collect(config('fastbolt.currency.rates'))->keys())],
+            'currency_code' => ['required', Rule::in(collect(config('novabolt.currency.rates'))->keys())],
             'description' => ['nullable', 'string'],
         ]);
 
@@ -98,7 +98,7 @@ class MarketController extends Controller
         $request->validate([
             'name' => ['required', 'string'],
             'website' => ['sometimes', 'required', 'url', Rule::unique('markets')->ignore($market->id)],
-            'currency_code' => ['required', Rule::in(collect(config('fastbolt.currency.rates'))->keys())],
+            'currency_code' => ['required', Rule::in(collect(config('novabolt.currency.rates'))->keys())],
             'description' => ['nullable', 'string'],
         ]);
 

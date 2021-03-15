@@ -78,7 +78,7 @@ class Order extends Model
     public function getCurrencyRateAttribute($value)
     {
         if ($this->is_draft) {
-            return config("fastbolt.currency.rates.{$this->currency_code}");
+            return config("novabolt.currency.rates.{$this->currency_code}");
         }
 
         return $value;

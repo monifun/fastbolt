@@ -75,7 +75,7 @@ class CartController extends Controller
             'shipping_address' => ['required', 'string']
         ]));
         $order->is_draft = false;
-        $order->currency_rate = config("fastbolt.currency.rates.{$order->currency_code}");
+        $order->currency_rate = config("novabolt.currency.rates.{$order->currency_code}");
         $order->save();
 
         return redirect()->route('user.orders.show', $order);

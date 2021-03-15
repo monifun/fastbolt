@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('viewAdmin', function ($user) {
-            return in_array($user->email, config('fastbolt.admin_emails'));
+            return in_array($user->email, config('novabolt.admin_emails'));
         });
     }
 }

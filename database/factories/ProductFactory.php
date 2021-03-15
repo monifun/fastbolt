@@ -32,7 +32,7 @@ class ProductFactory extends Factory
                     'value' => $this->faker->colorName
                 ]
             ],
-            'image' => $this->faker->imageUrl(400, 400, 'fastbolt', false, null, true),
+            'image' => $this->faker->imageUrl(400, 400, 'novabolt', false, null, true),
             'url' => $this->faker->url,
             'price' => $this->faker->randomFloat(2, 10, 100),
             'quantity' => $this->faker->numberBetween(1, 5),

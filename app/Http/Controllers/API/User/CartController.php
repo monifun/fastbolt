@@ -34,7 +34,7 @@ class CartController extends Controller
             'is_draft' => true,
         ], [
             'currency_code' => $market->currency_code,
-            'currency_rate' => config("fastbolt.currency.rates.{$market->currency_code}"),
+            'currency_rate' => config("novabolt.currency.rates.{$market->currency_code}"),
         ]);
 
         // loop through each products from request

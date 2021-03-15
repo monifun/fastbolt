@@ -61,7 +61,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getIsAdminAttribute(): bool
     {
-        return in_array($this->email, config('fastbolt.admin_emails'));
+        return in_array($this->email, config('novabolt.admin_emails'));
     }
 
     public function getWalletBalanceAttribute()
