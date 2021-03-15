@@ -28,6 +28,15 @@ class Shipment extends Model
         'status' => ShipmentStatus::class
     ];
 
+    protected $appends = [
+        'volume'
+    ];
+
+    public function getVolumeAttribute()
+    {
+        return $this->length * $this->width * $this->height;
+    }
+
     public function order()
     {
         return $this->belongsTo(Order::class);
