@@ -5,17 +5,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ShipmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index()
     {
-        //
+        return Inertia::render('Admin/Shipments/Index', [
+            'shipments' => Shipment::paginate(),
+        ]);
     }
 
     /**
@@ -43,11 +46,13 @@ class ShipmentController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Shipment  $shipment
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function show(Shipment $shipment)
     {
-        //
+        return Inertia::render('Admin/Shipments/Show', [
+            'shipment' => $shipment->load('products'),
+        ]);
     }
 
     /**
