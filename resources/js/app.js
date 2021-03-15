@@ -6,7 +6,9 @@ require('alpinejs');
 import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
-import InlineSvg from "vue-inline-svg";
+import InlineSvg from 'vue-inline-svg';
+import Toast from 'vue-toastification';
+import 'vue-toastification/dist/index.css';
 
 const el = document.getElementById('app');
 
@@ -19,6 +21,7 @@ createApp({
 })
     .mixin({ methods: { route } })
     .use(InertiaPlugin)
+    .use(Toast)
     .component('inline-svg', InlineSvg)
     .mount(el);
 
