@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $totalUsersCount = User::count();
         $last30DaysUsersCount = User::whereBetween('created_at', [
             now()->subDays(30)->startOfDay()->toDateTimeString(),
-            now()->toDateString(),
+            now()->toDateTimeString(),
         ])->count();
 
         $totalTransactionsCount = Transaction::count();
@@ -32,13 +32,13 @@ class DashboardController extends Controller
         $totalOrdersCount = Order::count();
         $last30DaysOrdersCount = Order::whereBetween('created_at', [
             now()->subDays(30)->startOfDay()->toDateTimeString(),
-            now()->toDateString(),
+            now()->toDateTimeString(),
         ])->count();
 
         $totalProductsCount = Product::count();
         $last30DaysProductsCount = Product::whereBetween('created_at', [
             now()->subDays(30)->startOfDay()->toDateTimeString(),
-            now()->toDateString(),
+            now()->toDateTimeString(),
         ])->count();
 
         $recentOrders = Order::with([
