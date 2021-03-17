@@ -33,8 +33,8 @@ class AddProductToCartRequest extends FormRequest
             'products.*.quantity' => ['required', 'numeric', 'min:1'],
             'products.*.url' => ['nullable', 'url'],
             'products.*.image' => ['nullable', 'url'],
-            'products.*.options.*.label' => ['sometimes', 'alpha_dash'],
-            'products.*.options.*.value' => ['sometimes', 'alpha_dash'],
+            'products.*.options.*.label' => ['sometimes', 'string'],
+            'products.*.options.*.value' => ['sometimes', 'string'],
         ];
     }
 }
