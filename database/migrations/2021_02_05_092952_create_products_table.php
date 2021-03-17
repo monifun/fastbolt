@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
             $table->foreignId('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->string('name');
             $table->json('options')->default(new \Illuminate\Database\Query\Expression('(JSON_ARRAY())'));
-            $table->string('image')->nullable();
-            $table->string('url')->nullable();
+            $table->text('image')->nullable();
+            $table->text('url')->nullable();
             $table->integer('quantity')->default(1);
             $table->decimal('price', 12, 2);
             $table->decimal('subtotal', 12, 2)->storedAs('price * quantity');
