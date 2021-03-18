@@ -37,7 +37,7 @@
                     >
                         <div
                             v-show="showingSidebarNavigation"
-                            class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white"
+                            class="relative flex-1 flex flex-col max-w-xs w-full bg-white"
                         >
                             <!-- Close menu button -->
                             <div class="absolute top-0 right-0 -mr-12 pt-2">
@@ -65,18 +65,18 @@
                                 </button>
                             </div>
 
-                            <!-- Application Logo -->
-                            <div class="flex-shrink-0 flex items-center px-4">
-                                <img
-                                    src="/img/logo.png"
-                                    class="h-8 w-auto"
-                                    :alt="$page.props.app.name"
-                                >
-                            </div>
+                            <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
+                                <!-- Application Logo -->
+                                <div class="flex-shrink-0 flex items-center px-4">
+                                    <img
+                                        src="/img/logo.png"
+                                        class="h-8 w-auto"
+                                        :alt="$page.props.app.name"
+                                    >
+                                </div>
 
-                            <!-- Main navigation -->
-                            <div class="mt-5 flex-1 h-0 overflow-y-auto">
-                                <nav class="px-2 space-y-1">
+                                <!-- Main navigation -->
+                                <nav class="mt-5 px-2 space-y-1">
                                     <!-- Dashboard -->
                                     <inertia-link
                                         :href="route('admin.dashboard')"
@@ -299,6 +299,46 @@
                                     </inertia-link>
                                 </nav>
                             </div>
+                            <!-- Sidebar footer -->
+                            <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
+                                <a
+                                    href="javascript:void(0)"
+                                    class="flex-shrink-0 w-full group block"
+                                >
+                                    <div class="flex items-center">
+                                        <div>
+                                            <svg
+                                                class="inline-block h-9 w-9 rounded-full text-gray-500"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                                                />
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <div class="ml-3">
+                                            <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                                Cài đặt
+                                            </p>
+                                            <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                                Thiết lập hệ thống
+                                            </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </transition>
                 </div>
@@ -309,16 +349,19 @@
         <div class="hidden lg:flex lg:flex-shrink-0">
             <div class="flex flex-col w-64">
                 <!-- Sidebar component, swap this element with another sidebar if you like -->
-                <div class="flex flex-col flex-grow border-r border-gray-200 pt-5 pb-4 bg-white overflow-y-auto">
-                    <div class="flex items-center flex-shrink-0 px-4">
-                        <img
-                            src="/img/logo.png"
-                            class="h-8 w-auto"
-                            :alt="$page.props.app.name"
-                        >
-                    </div>
-                    <div class="mt-5 flex-grow flex flex-col">
-                        <nav class="flex-1 px-2 bg-white space-y-1">
+                <div class="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white">
+                    <!-- Sidebar content -->
+                    <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+                        <!-- Application logo -->
+                        <div class="flex items-center flex-shrink-0 px-4">
+                            <img
+                                src="/img/logo.png"
+                                class="h-8 w-auto"
+                                :alt="$page.props.app.name"
+                            >
+                        </div>
+                        <!-- Navigation content -->
+                        <nav class="mt-5 flex-1 px-2 bg-white space-y-1">
                             <!-- Dashboard -->
                             <inertia-link
                                 :href="route('admin.dashboard')"
@@ -540,6 +583,46 @@
                                 Bình luận
                             </inertia-link>
                         </nav>
+                    </div>
+                    <!-- Sidebar footer -->
+                    <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
+                        <a
+                            href="javascript:void(0)"
+                            class="flex-shrink-0 w-full group block"
+                        >
+                            <div class="flex items-center">
+                                <div>
+                                    <svg
+                                        class="inline-block h-9 w-9 rounded-full text-gray-500"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                                        />
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                        Cài đặt
+                                    </p>
+                                    <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
+                                        Thiết lập hệ thống
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
