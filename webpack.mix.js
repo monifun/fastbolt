@@ -21,3 +21,7 @@ mix.js('resources/js/app.js', 'public/js').vue()
     .copy('resources/img', 'public/img')
     .copy('resources/svg', 'public/svg')
     .webpackConfig(require('./webpack.config'));
+
+if (mix.inProduction()) {
+    mix.version();
+}
