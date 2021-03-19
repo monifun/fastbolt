@@ -25,4 +25,4 @@ createApp({
     .component('inline-svg', InlineSvg)
     .mount(el);
 
-InertiaProgress.init({ color: '#4b5563' });
+InertiaProgress.init({ color: '#6366F1' });
