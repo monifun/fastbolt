@@ -9,7 +9,7 @@ module.exports = {
     ],
 
     darkMode: false,
-    
+
     theme: {
         extend: {
             fontFamily: {
