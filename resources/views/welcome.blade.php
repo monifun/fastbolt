@@ -59,13 +59,13 @@
                 <div class="mt-8 bg-white overflow-hidden shadow sm:rounded-lg">
                     <div class="p-6">
                         <h1 class="text-xl font-medium">
-                            Chào mừng đến với Fastbolt!
+                            Chào mừng đến với Novabolt!
                         </h1>
                         <p class="mt-5 text-gray-500">
-                            Fastbolt là dự án mã nguồn mở cung cấp đầy đủ các tính năng cần thiết để bạn có thể bắt đầu
+                            Novabolt là dự án mã nguồn mở cung cấp đầy đủ các tính năng cần thiết để bạn có thể bắt đầu
                             xây dựng một hệ thống dịch vụ mua hàng hộ của riêng mình. Bằng tất cả sự cẩn thận và tỉ mỉ
-                            trong suốt quá trình xây dựng, chúng tôi tin rằng Fastbolt sẽ là điểm khởi đầu hoàn hảo
-                            dành cho bạn. Hy vọng bạn sẽ thích sản phẩm này.
+                            trong suốt quá trình xây dựng, chúng tôi tin rằng Novabolt sẽ là điểm khởi đầu hoàn hảo
+                            dành cho bạn. Hy vọng bạn sẽ thích sản phẩm này!
                         </p>
                     </div>
 
@@ -85,7 +85,7 @@
                             <div class="ml-12">
                                 <div class="mt-2 text-gray-600 text-sm">
                                     Tham khảo tài liệu hướng dẫn chi tiết về quy trình cài đặt và vận hành hệ thống này.
-                                    Cho dù bạn là người mới hay đã có kinh nghiệm với Fastbolt, chúng tôi khuyên bạn nên đọc kỹ hướng dẫn sử dụng trước khi dùng.
+                                    Cho dù bạn là người mới hay đã có kinh nghiệm với Novabolt, chúng tôi khuyên bạn nên đọc kỹ hướng dẫn sử dụng trước khi dùng.
                                 </div>
                             </div>
                         </div>
