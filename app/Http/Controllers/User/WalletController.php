@@ -15,6 +15,7 @@ class WalletController extends Controller
             'wallet' => request()->user()->wallet,
             'transactions' => Transaction::select('id', 'type', 'amount', 'created_at')
                 ->where('wallet_id', request()->user()->wallet->id)
+                ->orderByDesc('created_at')
                 ->paginate()
         ]);
     }
