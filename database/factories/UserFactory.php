@@ -22,12 +22,8 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $first_name_lines = file(database_path('seeders/data/first_name.txt'));
-        $last_name_lines = file(database_path('seeders/data/last_name.txt'));
-        $full_name = trim($this->faker->randomElement($first_name_lines)).' '.trim($this->faker->randomElement($last_name_lines));
-
         return [
-            'name' => $full_name,
+            'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
             'phone' => phone('091'.$this->faker->unique()->randomNumber(7, true), 'VN'),
             'email_verified_at' => now(),
