@@ -1,6 +1,16 @@
 /node_modules
 /public/hot
 /public/storage
+/public/css
+/public/favicons
+/public/fonts
+/public/images
+/public/img
+/public/js
+/public/svg
+/public/mix-manifest.json
+/public/mix.js.map
+/public/sitemap.xml
 /storage/*.key
 /vendor
 .env
@@ -11,3 +21,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.DS_Store
