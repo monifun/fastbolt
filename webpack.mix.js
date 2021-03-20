@@ -20,7 +20,12 @@ mix.js('resources/js/app.js', 'public/js').vue()
     ])
     .copy('resources/img', 'public/img')
     .copy('resources/svg', 'public/svg')
-    .webpackConfig(require('./webpack.config'));
+    .webpackConfig(require('./webpack.config'))
+    .options({
+        terser: {
+            extractComments: false,
+        },
+    });
 
 if (mix.inProduction()) {
     mix.version();
