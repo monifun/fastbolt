@@ -1,7 +1,9 @@
 <template>
     <bolt-authentication-card>
         <template #logo>
-            <bolt-application-logo class="h-20 fill-current text-gray-500" />
+            <a href="/">
+                <bolt-application-logo class="h-20 fill-current text-gray-500" />
+            </a>
         </template>
 
         <div class="mb-4 text-sm text-gray-600">
