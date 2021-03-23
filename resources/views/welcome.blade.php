@@ -7,6 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <meta name="description" content="Novabolt cung cấp đầy đủ các tính năng cần thiết để bạn có thể thiết lập hệ thống quản lý dịch vụ mua hàng hộ của mình một cách nhanh nhất." />
+
         <!-- Favicon -->
         <link rel="icon" href="{{ asset('img/mark.png') }}">
 
@@ -150,7 +152,7 @@
 
                 <div class="flex justify-center mt-4">
                     <div class="text-sm text-gray-500">
-                        MIT Licensed | Copyright &copy; {{ date('Y') }} Duong Truong &amp; <a href="https://www.novabolt.dev" class="hover:underline">Novabolt</a> team.
+                        MIT Licensed | Copyright &copy; {{ date('Y') }} <a href="https://www.novabolt.dev" class="hover:underline">Novabolt</a> team.
                     </div>
                 </div>
             </div>
