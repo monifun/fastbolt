@@ -1,9 +1,9 @@
 <template>
     <bolt-authentication-card>
         <template #logo>
-            <inertia-link href="/">
+            <a href="/">
                 <bolt-application-logo class="h-20 fill-current text-gray-500" />
-            </inertia-link>
+            </a>
         </template>
 
         <bolt-validation-errors class="mb-4" />

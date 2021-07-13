@@ -25,6 +25,9 @@
             @routes
         @endif
 
+        <!-- Polyfill which auto detect browser need of packages for currency filter -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.NumberFormat,Intl.NumberFormat.~locale.en"></script>
+        <!-- Scripts -->
         <script src="{{ mix('js/manifest.js') }}" defer></script>
         <script src="{{ mix('js/vendor.js') }}" defer></script>
         <script src="{{ mix('js/app.js') }}" defer></script>
